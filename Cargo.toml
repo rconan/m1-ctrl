@@ -9,6 +9,7 @@ edition = "2018"
 [dependencies]
 dosio = { git = "https://github.com/rconan/dosio.git", branch = "main" }
 paste = "1.0.5"
+simulink-binder = { path = "../simulink-binder/" }
 simulink-rs = { git = "https://github.com/rconan/simulink-rs.git", branch = "main" }
 
 [build-dependencies]
