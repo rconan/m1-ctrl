@@ -1,7 +1,7 @@
 /*
  * File: rtwtypes.h
  *
- * Code generated for Simulink model 'M1SA_F_Control_S7'.
+ * Code generated for Simulink model 'M1SA_F_Control_CS'.
  *
  * Model version                  : 1.762
  * Simulink Coder version         : 9.0 (R2018b) 24-May-2018
