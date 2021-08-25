@@ -18,6 +18,7 @@ fn main() {
         .compile("m1_hp_load_cells");
     cc::Build::new()
         .file("src/hp_dynamics/M1_HP_Dyn.c")
+        .file("src/hp_dynamics/M1_HP_Dyn_data.c")
         .compile("m1_hp_dynamics");
     cc::Build::new()
         .file("src/local_controller/M1LocalControl.c")
