@@ -14,10 +14,10 @@ macro_rules! impl_dos {
     $(
         paste! {
         impl<'a> IOTags for $crate::actuators::[<segment $sid>]::Controller<'a>   {
-            fn outputs_tags(&self) -> Vec<Tags> {
+            fn inputs_tags(&self) -> Vec<Tags> {
                 ios!([<M1S $sid HPLC>], [<M1S $sid BMcmd>])
             }
-            fn inputs_tags(&self) -> Vec<Tags> {
+            fn outputs_tags(&self) -> Vec<Tags> {
                 vec![ios!([<M1S $sid ACTF>])]
             }
         }}
@@ -214,6 +214,21 @@ impl<'a> Iterator for M1ForceLoops<'a> {
             .collect::<Result<Vec<()>, DOSIOSError>>()
             .ok()
             .map(|_| ())
+    }
+}
+impl<'a> IOTags for M1ForceLoops<'a> {
+    fn outputs_tags(&self) -> Vec<IO<()>> {
+        self.controllers
+            .iter()
+            .flat_map(|controller| controller.outputs_tags())
+            .collect()
+    }
+
+    fn inputs_tags(&self) -> Vec<IO<()>> {
+        self.controllers
+            .iter()
+            .flat_map(|controller| controller.inputs_tags())
+            .collect()
     }
 }
 impl<'a> Dos for M1ForceLoops<'a> {

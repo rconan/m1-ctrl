@@ -8,9 +8,9 @@ r##"
  *
  * Code generated for Simulink model 'M1SA_F_Control_S7'.
  *
- * Model version                  : 1.762
+ * Model version                  : 1.763
  * Simulink Coder version         : 9.0 (R2018b) 24-May-2018
- * C/C++ source code generated on : Fri Jul 23 14:06:06 2021
+ * C/C++ source code generated on : Tue Aug 24 14:53:07 2021
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Intel->x86-64 (Linux 64)
@@ -44,15 +44,15 @@ typedef struct {
   real_T Fxcontroller_DSTATE[3];       /* '<S2>/Fx controller' */
   real_T Fycontroller_DSTATE[3];       /* '<S2>/Fy controller' */
   real_T Fzcontroller_DSTATE[3];       /* '<S2>/Fz controller' */
-  real_T Mxcontroller_DSTATE[5];       /* '<S2>/Mx controller' */
-  real_T Mycontroller_DSTATE[5];       /* '<S2>/My controller' */
+  real_T Mxcontroller_DSTATE[3];       /* '<S2>/Mx controller' */
+  real_T Mycontroller_DSTATE[3];       /* '<S2>/My controller' */
   real_T Mzcontroller_DSTATE[3];       /* '<S2>/Mz controller' */
   real_T SADynamicsS7_states[12];      /* '<S1>/SA Dynamics - S7' */
 } DW_M1SA_F_Control_S7_T;
 
 /* Constant parameters (default storage) */
 typedef struct {
-  /* Expression: m1BM2F_CS
+  /* Expression: m1sys{7}.m1BM2F
    * Referenced by: '<S1>/BM2Forces'
    */
   real_T BM2Forces_Gain[8262];
@@ -62,21 +62,7 @@ typedef struct {
    */
   real_T LC2CG_Gain[36];
 
-  /* Pooled Parameter (Expression: )
-   * Referenced by:
-   *   '<S2>/Mx controller'
-   *   '<S2>/My controller'
-   */
-  real_T pooled8[21];
-
-  /* Pooled Parameter (Expression: )
-   * Referenced by:
-   *   '<S2>/Mx controller'
-   *   '<S2>/My controller'
-   */
-  real_T pooled10[5];
-
-  /* Expression: CS_Kbal
+  /* Expression: m1sys{7}.Kbal
    * Referenced by: '<S1>/Force balance S7'
    */
   real_T ForcebalanceS7_Gain[1836];

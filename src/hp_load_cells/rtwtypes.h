@@ -1,16 +1,14 @@
 /*
  * File: rtwtypes.h
  *
- * Code generated for Simulink model 'M1HPloadcells'.
+ * Code generated for Simulink model 'M1_HP_loadcells'.
  *
- * Model version                  : 1.640
- * Simulink Coder version         : 8.14 (R2018a) 06-Feb-2018
- * C/C++ source code generated on : Thu Jun  4 20:11:24 2020
+ * Model version                  : 1.903
+ * Simulink Coder version         : 9.0 (R2018b) 24-May-2018
+ * C/C++ source code generated on : Tue Aug 24 15:11:16 2021
  *
  * Target selection: ert.tlc
- * Embedded hardware selection: Intel->x86-64 (Windows64)
- * Emulation hardware selection:
- *    Differs from embedded hardware (MATLAB Host)
+ * Embedded hardware selection: Intel->x86-64 (Linux 64)
  * Code generation objectives: Unspecified
  * Validation result: Not run
  */

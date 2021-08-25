@@ -14,8 +14,11 @@ fn main() {
             .compile(&lib_file);
     }
     cc::Build::new()
-        .file("src/hp_load_cells/M1HPloadcells.c")
+        .file("src/hp_load_cells/M1_HP_loadcells.c")
         .compile("m1_hp_load_cells");
+    cc::Build::new()
+        .file("src/hp_dynamics/M1_HP_Dyn.c")
+        .compile("m1_hp_dynamics");
     cc::Build::new()
         .file("src/local_controller/M1LocalControl.c")
         .file("src/local_controller/M1LocalControl_data.c")
