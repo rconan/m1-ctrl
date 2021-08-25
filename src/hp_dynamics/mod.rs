@@ -1,4 +1,4 @@
-use dosio::{io::Tags, ios, DOSIOSError, Dos, IOTags, IO};
+use dosio::{io::Tags, ios, DOSIOSError, Dos, IOTags, IOVec, IO};
 use simulink_binder::import;
 
 import! {M1_HP_Dyn,
@@ -165,28 +165,16 @@ impl<'a> Dos for Controller<'a> {
     type Output = Vec<f64>;
     fn inputs(&mut self, data: Option<Vec<IO<Self::Input>>>) -> Result<&mut Self, DOSIOSError> {
         match data {
-            Some(data) => {
-                if data.into_iter().fold(2, |mut a, io| {
-                    match io {
-                        IO::M1RBMcmd { data: Some(values) } => {
-                            for (k, v) in values.into_iter().enumerate() {
-                                self.m1_rbm_cmd[k] = v;
-                            }
-                            a -= 1;
-                        }
-                        _ => (),
-                    }
-                    if a == 0 {
-                        return a;
-                    }
-                    a
-                }) == 0
+            Some(mut data) => {
+                if let Some(IO::M1RBMcmd { data: Some(values) }) =
+                    <Vec<IO<Vec<f64>>> as IOVec>::pop_this(&mut data, ios!(M1RBMcmd))
                 {
+                    for (k, v) in values.into_iter().enumerate() {
+                        self.m1_rbm_cmd[k] = v;
+                    }
                     Ok(self)
                 } else {
-                    Err(DOSIOSError::Inputs(
-                        "Either HP load cell controller OSSHardpointD or M1HPCmd not found".into(),
-                    ))
+                    Err(DOSIOSError::Inputs("HP dynamics M1RBMcmd not found".into()))
                 }
             }
             None => Err(DOSIOSError::Inputs(
