@@ -1,7 +1,4 @@
-use dosio::{
-    io::{jar, Tags},
-    DOSIOSError, Dos, IOTags, IO,
-};
+use dosio::{io::Tags, ios, DOSIOSError, Dos, IOTags, IO};
 use simulink_binder::import;
 
 import! {M1_HP_loadcells,
@@ -116,10 +113,10 @@ extern RT_MODEL_M1_HP_loadcells_T *const M1_HP_loadcells_M;
 
 impl<'a> IOTags for Controller<'a> {
     fn outputs_tags(&self) -> Vec<Tags> {
-        vec![jar::M1HPLC::io()]
+        vec![ios!(M1HPLC)]
     }
     fn inputs_tags(&self) -> Vec<Tags> {
-        vec![jar::OSSHardpointD::io(), jar::M1HPCmd::io()]
+        ios!(OSSHardpointD, OSSHarpointDeltaF)
     }
 }
 impl<'a> Dos for Controller<'a> {
@@ -136,7 +133,7 @@ impl<'a> Dos for Controller<'a> {
                             }
                             a -= 1;
                         }
-                        IO::M1HPCmd { data: Some(values) } => {
+                        IO::OSSHarpointDeltaF { data: Some(values) } => {
                             for (k, v) in values.into_iter().enumerate() {
                                 self.m1_hp_cmd[k] = v;
                             }
@@ -163,8 +160,6 @@ impl<'a> Dos for Controller<'a> {
         }
     }
     fn outputs(&mut self) -> Option<Vec<IO<Self::Output>>> {
-        Some(vec![IO::M1HPLC {
-            data: Some(Vec::<f64>::from(&self.m1_hp_lc)),
-        }])
+        Some(vec![ios!(M1HPLC(Vec::<f64>::from(&self.m1_hp_lc)))])
     }
 }

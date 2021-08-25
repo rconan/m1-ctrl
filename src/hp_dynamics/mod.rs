@@ -154,7 +154,7 @@ extern RT_MODEL_M1_HP_Dyn_T *const M1_HP_Dyn_M;
 
 impl<'a> IOTags for Controller<'a> {
     fn outputs_tags(&self) -> Vec<Tags> {
-        vec![ios!(HPFcmd)]
+        vec![ios!(OSSHarpointDeltaF)]
     }
     fn inputs_tags(&self) -> Vec<Tags> {
         vec![ios!(M1RBMcmd)]
@@ -195,8 +195,8 @@ impl<'a> Dos for Controller<'a> {
         }
     }
     fn outputs(&mut self) -> Option<Vec<IO<Self::Output>>> {
-        Some(vec![IO::HPFcmd {
-            data: Some(Vec::<f64>::from(&self.hp_f_cmd)),
-        }])
+        Some(vec![ios!(OSSHarpointDeltaF(Vec::<f64>::from(
+            &self.hp_f_cmd
+        )))])
     }
 }
