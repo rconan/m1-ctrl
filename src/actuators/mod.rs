@@ -36,7 +36,7 @@ macro_rules! impl_dos {
                             IO::[<M1S $sid BMcmd>] { data: Some(bm_cmd) },
                         ) => {
                             Self::dispatch(&mut self.hp_lc, hp_lc);
-                            Self::dispatch(&mut self.bm_cmd, bm_cmd);
+                            Self::dispatch(&mut self.sa_offsetf_cmd, bm_cmd);
                             Ok(self)
                         }
                         _ => Err(DOSIOSError::Inputs(

@@ -8,9 +8,9 @@ r##"
  *
  * Code generated for Simulink model 'M1SA_F_Control_S4'.
  *
- * Model version                  : 1.763
+ * Model version                  : 1.766
  * Simulink Coder version         : 9.0 (R2018b) 24-May-2018
- * C/C++ source code generated on : Tue Aug 24 14:52:27 2021
+ * C/C++ source code generated on : Mon Sep 20 17:27:17 2021
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Intel->x86-64 (Linux 64)
@@ -40,23 +40,17 @@ r##"
 
 /* Block states (default storage) for system '<Root>' */
 typedef struct {
-  real_T SADynamics_states[54];        /* '<S1>/SA Dynamics' */
   real_T Fxcontroller_DSTATE[3];       /* '<S2>/Fx controller' */
   real_T Fycontroller_DSTATE[3];       /* '<S2>/Fy controller' */
   real_T Fzcontroller_DSTATE[3];       /* '<S2>/Fz controller' */
   real_T Mxcontroller_DSTATE[3];       /* '<S2>/Mx controller' */
   real_T Mycontroller_DSTATE[3];       /* '<S2>/My controller' */
   real_T Mzcontroller_DSTATE[3];       /* '<S2>/Mz controller' */
-  real_T SADynamicsS1_states[12];      /* '<S1>/SA Dynamics - S1' */
+  real_T SADynamicsS1_states[335];     /* '<S1>/SA Dynamics - S1' */
 } DW_M1SA_F_Control_S4_T;
 
 /* Constant parameters (default storage) */
 typedef struct {
-  /* Expression: m1sys{1}.m1BM2F
-   * Referenced by: '<S1>/BM2Forces'
-   */
-  real_T BM2Forces_Gain[9045];
-
   /* Expression: m1sys{1}.LC2CG
    * Referenced by: '<S1>/LC2CG'
    */
@@ -71,7 +65,7 @@ typedef struct {
 /* External inputs (root inport signals with default storage) */
 typedef struct {
   real_T HP_LC[6];                     /* '<Root>/HP_LC' */
-  real_T BM_cmd[27];                   /* '<Root>/BM_cmd' */
+  real_T SA_offsetF_cmd[335];          /* '<Root>/SA_offsetF_cmd' */
 } ExtU_M1SA_F_Control_S4_T;
 
 /* External outputs (root outports fed by signals with default storage) */

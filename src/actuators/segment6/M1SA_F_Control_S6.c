@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'M1SA_F_Control_S6'.
  *
- * Model version                  : 1.763
+ * Model version                  : 1.766
  * Simulink Coder version         : 9.0 (R2018b) 24-May-2018
- * C/C++ source code generated on : Tue Aug 24 14:52:27 2021
+ * C/C++ source code generated on : Mon Sep 20 17:27:17 2021
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Intel->x86-64 (Linux 64)
@@ -40,47 +40,24 @@ void M1SA_F_Control_S6_step(void)
   real_T rtb_Mxcontroller;
   real_T rtb_Mycontroller;
   real_T rtb_Mzcontroller;
-  int32_T k;
   real_T denAccum;
-  real_T rtb_TmpSignalConversionAtSADynamicsS1Inport1[6];
-  real_T rtb_SADynamics[27];
-  real_T rtb_SADynamicsS1[6];
-  real_T tmp[335];
-  real_T tmp_0[335];
+  real_T rtb_SADynamicsS1[335];
+  real_T tmp[6];
   int32_T i;
-  real_T SADynamics_tmp[27];
-  real_T SADynamicsS1_tmp[6];
-  real_T denAccum_tmp;
-  int32_T memOffset_tmp;
-
-  /* DiscreteTransferFcn: '<S1>/SA Dynamics' incorporates:
-   *  Inport: '<Root>/BM_cmd'
-   */
-  for (k = 0; k < 27; k++) {
-    memOffset_tmp = k << 1;
-    denAccum_tmp = M1SA_F_Control_S6_DW.SADynamics_states[memOffset_tmp + 1];
-    denAccum = (M1SA_F_Control_S6_U.BM_cmd[k] - -0.77932227475069393 *
-                M1SA_F_Control_S6_DW.SADynamics_states[memOffset_tmp]) -
-      denAccum_tmp * 0.15183580198064905;
-    SADynamics_tmp[k] = denAccum;
-    denAccum *= 0.094481844738029327;
-    denAccum += 0.24121577940998443 *
-      M1SA_F_Control_S6_DW.SADynamics_states[memOffset_tmp];
-    rtb_SADynamics[k] = denAccum_tmp * 0.036815903081941416 + denAccum;
-  }
-
-  /* End of DiscreteTransferFcn: '<S1>/SA Dynamics' */
+  int32_T i_0;
+  real_T SADynamicsS1_tmp[335];
+  int32_T i_1;
 
   /* Gain: '<S1>/LC2CG' incorporates:
    *  Inport: '<Root>/HP_LC'
    */
-  for (k = 0; k < 6; k++) {
-    rtb_LC2CG[k] = 0.0;
-    memOffset_tmp = 0;
-    for (i = 0; i < 6; i++) {
-      rtb_LC2CG[k] += M1SA_F_Control_S6_ConstP.LC2CG_Gain[memOffset_tmp + k] *
-        M1SA_F_Control_S6_U.HP_LC[i];
-      memOffset_tmp += 6;
+  for (i = 0; i < 6; i++) {
+    rtb_LC2CG[i] = 0.0;
+    i_1 = 0;
+    for (i_0 = 0; i_0 < 6; i_0++) {
+      rtb_LC2CG[i] += M1SA_F_Control_S6_ConstP.LC2CG_Gain[i_1 + i] *
+        M1SA_F_Control_S6_U.HP_LC[i_0];
+      i_1 += 6;
     }
   }
 
@@ -140,64 +117,40 @@ void M1SA_F_Control_S6_step(void)
     rtb_Mzcontroller += 0.022969235998287645*rtb_LC2CG[5];
   }
 
-  /* SignalConversion: '<S1>/TmpSignal ConversionAtSA Dynamics - S1Inport1' */
-  rtb_TmpSignalConversionAtSADynamicsS1Inport1[0] = rtb_Fxcontroller;
-  rtb_TmpSignalConversionAtSADynamicsS1Inport1[1] = rtb_Fycontroller;
-  rtb_TmpSignalConversionAtSADynamicsS1Inport1[2] = rtb_Fzcontroller;
-  rtb_TmpSignalConversionAtSADynamicsS1Inport1[3] = rtb_Mxcontroller;
-  rtb_TmpSignalConversionAtSADynamicsS1Inport1[4] = rtb_Mycontroller;
-  rtb_TmpSignalConversionAtSADynamicsS1Inport1[5] = rtb_Mzcontroller;
-
-  /* DiscreteTransferFcn: '<S1>/SA Dynamics - S1' */
-  for (k = 0; k < 6; k++) {
-    memOffset_tmp = k << 1;
-    denAccum_tmp = M1SA_F_Control_S6_DW.SADynamicsS1_states[memOffset_tmp + 1];
-    denAccum = (rtb_TmpSignalConversionAtSADynamicsS1Inport1[k] -
-                -0.77932227475069393 *
-                M1SA_F_Control_S6_DW.SADynamicsS1_states[memOffset_tmp]) -
-      denAccum_tmp * 0.15183580198064905;
-    SADynamicsS1_tmp[k] = denAccum;
-    denAccum *= 0.094481844738029327;
-    denAccum += 0.24121577940998443 *
-      M1SA_F_Control_S6_DW.SADynamicsS1_states[memOffset_tmp];
-    rtb_SADynamicsS1[k] = denAccum_tmp * 0.036815903081941416 + denAccum;
-  }
-
-  /* End of DiscreteTransferFcn: '<S1>/SA Dynamics - S1' */
-  for (k = 0; k < 335; k++) {
+  /* SignalConversion: '<S1>/TmpSignal ConversionAtForce balance S1Inport1' */
+  tmp[0] = rtb_Fxcontroller;
+  tmp[1] = rtb_Fycontroller;
+  tmp[2] = rtb_Fzcontroller;
+  tmp[3] = rtb_Mxcontroller;
+  tmp[4] = rtb_Mycontroller;
+  tmp[5] = rtb_Mzcontroller;
+  for (i_0 = 0; i_0 < 335; i_0++) {
     /* Gain: '<S1>/Force balance S1' */
-    tmp[k] = 0.0;
-    for (memOffset_tmp = 0; memOffset_tmp < 6; memOffset_tmp++) {
-      tmp[k] += M1SA_F_Control_S6_ConstP.ForcebalanceS1_Gain[335 * memOffset_tmp
-        + k] * rtb_SADynamicsS1[memOffset_tmp];
+    rtb_SADynamicsS1[i_0] = 0.0;
+    i = 0;
+    for (i_1 = 0; i_1 < 6; i_1++) {
+      rtb_SADynamicsS1[i_0] += M1SA_F_Control_S6_ConstP.ForcebalanceS1_Gain[i +
+        i_0] * tmp[i_1];
+      i += 335;
     }
 
-    /* End of Gain: '<S1>/Force balance S1' */
-
-    /* Gain: '<S1>/BM2Forces' */
-    tmp_0[k] = 0.0;
-    for (memOffset_tmp = 0; memOffset_tmp < 27; memOffset_tmp++) {
-      tmp_0[k] += M1SA_F_Control_S6_ConstP.BM2Forces_Gain[335 * memOffset_tmp +
-        k] * rtb_SADynamics[memOffset_tmp];
-    }
-
-    /* End of Gain: '<S1>/BM2Forces' */
-
-    /* Outport: '<Root>/M1_ACT_F' incorporates:
+    /* DiscreteTransferFcn: '<S1>/SA Dynamics - S1' incorporates:
+     *  Gain: '<S1>/Force balance S1'
+     *  Inport: '<Root>/SA_offsetF_cmd'
      *  Sum: '<S1>/Add'
      */
-    M1SA_F_Control_S6_Y.M1_ACT_F[k] = tmp[k] + tmp_0[k];
-  }
+    denAccum = (rtb_SADynamicsS1[i_0] + M1SA_F_Control_S6_U.SA_offsetF_cmd[i_0])
+      - -0.53348809109110329 * M1SA_F_Control_S6_DW.SADynamicsS1_states[i_0];
+    SADynamicsS1_tmp[i_0] = denAccum;
+    denAccum *= 0.25752323685913081;
+    rtb_SADynamicsS1[i_0] = 0.20898867204976596 *
+      M1SA_F_Control_S6_DW.SADynamicsS1_states[i_0] + denAccum;
 
-  /* Update for DiscreteTransferFcn: '<S1>/SA Dynamics' */
-  for (k = 0; k < 27; k++) {
-    memOffset_tmp = k << 1;
-    M1SA_F_Control_S6_DW.SADynamics_states[memOffset_tmp - -1] =
-      M1SA_F_Control_S6_DW.SADynamics_states[memOffset_tmp];
-    M1SA_F_Control_S6_DW.SADynamics_states[memOffset_tmp] = SADynamics_tmp[k];
+    /* Outport: '<Root>/M1_ACT_F' incorporates:
+     *  Gain: '<S1>/Force balance S1'
+     */
+    M1SA_F_Control_S6_Y.M1_ACT_F[i_0] = rtb_SADynamicsS1[i_0];
   }
-
-  /* End of Update for DiscreteTransferFcn: '<S1>/SA Dynamics' */
 
   /* Update for DiscreteStateSpace: '<S2>/Fx controller' */
   {
@@ -305,14 +258,8 @@ void M1SA_F_Control_S6_step(void)
   }
 
   /* Update for DiscreteTransferFcn: '<S1>/SA Dynamics - S1' */
-  for (k = 0; k < 6; k++) {
-    memOffset_tmp = k << 1;
-    M1SA_F_Control_S6_DW.SADynamicsS1_states[memOffset_tmp - -1] =
-      M1SA_F_Control_S6_DW.SADynamicsS1_states[memOffset_tmp];
-    M1SA_F_Control_S6_DW.SADynamicsS1_states[memOffset_tmp] = SADynamicsS1_tmp[k];
-  }
-
-  /* End of Update for DiscreteTransferFcn: '<S1>/SA Dynamics - S1' */
+  memcpy(&M1SA_F_Control_S6_DW.SADynamicsS1_states[0], &SADynamicsS1_tmp[0],
+         335U * sizeof(real_T));
 }
 
 /* Model initialize function */
