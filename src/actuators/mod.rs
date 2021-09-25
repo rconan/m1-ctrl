@@ -218,10 +218,15 @@ impl<'a> Iterator for M1ForceLoops<'a> {
 }
 impl<'a> IOTags for M1ForceLoops<'a> {
     fn outputs_tags(&self) -> Vec<IO<()>> {
-        self.controllers
-            .iter()
-            .flat_map(|controller| controller.outputs_tags())
-            .collect()
+        ios!(
+            M1ActuatorsSegment1,
+            M1ActuatorsSegment2,
+            M1ActuatorsSegment3,
+            M1ActuatorsSegment4,
+            M1ActuatorsSegment5,
+            M1ActuatorsSegment6,
+            M1ActuatorsSegment7
+        )
     }
 
     fn inputs_tags(&self) -> Vec<IO<()>> {
