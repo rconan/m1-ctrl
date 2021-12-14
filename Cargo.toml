@@ -7,7 +7,7 @@ edition = "2018"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-dosio = { git = "https://github.com/rconan/dosio.git", branch = "ns-opm-im" }
+dosio = "^0.1.2"
 paste = "1.0.5"
 seq-macro = "0.2.2"
 simulink-binder = { git = "https://github.com/rconan/simulink-binder.git", branch = "main" }
