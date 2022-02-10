@@ -1,15 +1,16 @@
-#define NPY_NO_DEPRECATED_API NPY_1_7_API_VERSION
 /*
  * File: M1_HP_loadcells.h
  *
  * Code generated for Simulink model 'M1_HP_loadcells'.
  *
- * Model version                  : 1.903
+ * Model version                  : 1.788
  * Simulink Coder version         : 9.0 (R2018b) 24-May-2018
- * C/C++ source code generated on : Tue Aug 24 15:11:16 2021
+ * C/C++ source code generated on : Thu Feb 10 11:47:20 2022
  *
  * Target selection: ert.tlc
- * Embedded hardware selection: Intel->x86-64 (Linux 64)
+ * Embedded hardware selection: Intel->x86-64 (Windows64)
+ * Emulation hardware selection:
+ *    Differs from embedded hardware (MATLAB Host)
  * Code generation objectives: Unspecified
  * Validation result: Not run
  */
@@ -56,6 +57,36 @@ extern ExtU_M1_HP_loadcells_T M1_HP_loadcells_U;
 /* External outputs (root outports fed by signals with default storage) */
 extern ExtY_M1_HP_loadcells_T M1_HP_loadcells_Y;
 
+/*
+ * Exported Global Parameters
+ *
+ * Note: Exported global parameters are tunable parameters with an exported
+ * global storage class designation.  Code generation will declare the memory for
+ * these parameters and exports their symbols.
+ *
+ */
+extern real_T S1_HPstiff;              /* Variable: S1_HPstiff
+                                        * Referenced by: '<S2>/HpK'
+                                        */
+extern real_T S2_HPstiff;              /* Variable: S2_HPstiff
+                                        * Referenced by: '<S3>/HpK'
+                                        */
+extern real_T S3_HPstiff;              /* Variable: S3_HPstiff
+                                        * Referenced by: '<S4>/HpK'
+                                        */
+extern real_T S4_HPstiff;              /* Variable: S4_HPstiff
+                                        * Referenced by: '<S5>/HpK'
+                                        */
+extern real_T S5_HPstiff;              /* Variable: S5_HPstiff
+                                        * Referenced by: '<S6>/HpK'
+                                        */
+extern real_T S6_HPstiff;              /* Variable: S6_HPstiff
+                                        * Referenced by: '<S7>/HpK'
+                                        */
+extern real_T S7_HPstiff;              /* Variable: S7_HPstiff
+                                        * Referenced by: '<S8>/HpK'
+                                        */
+
 /* Model entry point functions */
 extern void M1_HP_loadcells_initialize(void);
 extern void M1_HP_loadcells_step(void);
@@ -63,12 +94,6 @@ extern void M1_HP_loadcells_terminate(void);
 
 /* Real-time Model object */
 extern RT_MODEL_M1_HP_loadcells_T *const M1_HP_loadcells_M;
-
-/*-
- * These blocks were eliminated from the model due to optimizations:
- *
- * Block '<S1>/Scope' : Unused code path elimination
- */
 
 /*-
  * The generated code includes comments that allow you to trace directly
@@ -82,20 +107,20 @@ extern RT_MODEL_M1_HP_loadcells_T *const M1_HP_loadcells_M;
  * MATLAB hilite_system command to trace the generated code back
  * to the parent model.  For example,
  *
- * hilite_system('ims_Build5pt1e/M1_HP_loadcells')    - opens subsystem ims_Build5pt1e/M1_HP_loadcells
- * hilite_system('ims_Build5pt1e/M1_HP_loadcells/Kp') - opens and selects block Kp
+ * hilite_system('M1DCS/M1_HP_loadcells')    - opens subsystem M1DCS/M1_HP_loadcells
+ * hilite_system('M1DCS/M1_HP_loadcells/Kp') - opens and selects block Kp
  *
  * Here is the system hierarchy for this model
  *
- * '<Root>' : 'ims_Build5pt1e'
- * '<S1>'   : 'ims_Build5pt1e/M1_HP_loadcells'
- * '<S2>'   : 'ims_Build5pt1e/M1_HP_loadcells/M1S1 Loadcell'
- * '<S3>'   : 'ims_Build5pt1e/M1_HP_loadcells/M1S2 Loadcell'
- * '<S4>'   : 'ims_Build5pt1e/M1_HP_loadcells/M1S3 Loadcell'
- * '<S5>'   : 'ims_Build5pt1e/M1_HP_loadcells/M1S4 Loadcell'
- * '<S6>'   : 'ims_Build5pt1e/M1_HP_loadcells/M1S5 Loadcell'
- * '<S7>'   : 'ims_Build5pt1e/M1_HP_loadcells/M1S6 Loadcell'
- * '<S8>'   : 'ims_Build5pt1e/M1_HP_loadcells/M1S7 Control'
+ * '<Root>' : 'M1DCS'
+ * '<S1>'   : 'M1DCS/M1_HP_loadcells'
+ * '<S2>'   : 'M1DCS/M1_HP_loadcells/M1S1 Loadcell'
+ * '<S3>'   : 'M1DCS/M1_HP_loadcells/M1S2 Loadcell'
+ * '<S4>'   : 'M1DCS/M1_HP_loadcells/M1S3 Loadcell'
+ * '<S5>'   : 'M1DCS/M1_HP_loadcells/M1S4 Loadcell'
+ * '<S6>'   : 'M1DCS/M1_HP_loadcells/M1S5 Loadcell'
+ * '<S7>'   : 'M1DCS/M1_HP_loadcells/M1S6 Loadcell'
+ * '<S8>'   : 'M1DCS/M1_HP_loadcells/M1S7 Control'
  */
 #endif                                 /* RTW_HEADER_M1_HP_loadcells_h_ */
 
