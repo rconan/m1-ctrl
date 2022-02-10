@@ -3,12 +3,14 @@
  *
  * Code generated for Simulink model 'M1SA_F_Control_CS'.
  *
- * Model version                  : 1.766
+ * Model version                  : 1.785
  * Simulink Coder version         : 9.0 (R2018b) 24-May-2018
- * C/C++ source code generated on : Mon Sep 20 17:25:16 2021
+ * C/C++ source code generated on : Thu Feb 10 11:20:29 2022
  *
  * Target selection: ert.tlc
- * Embedded hardware selection: Intel->x86-64 (Linux 64)
+ * Embedded hardware selection: Intel->x86-64 (Windows64)
+ * Emulation hardware selection:
+ *    Differs from embedded hardware (MATLAB Host)
  * Code generation objectives: Unspecified
  * Validation result: Not run
  */
@@ -18,24 +20,8 @@
 
 /* Constant parameters (default storage) */
 const ConstP_M1SA_F_Control_CS_T M1SA_F_Control_CS_ConstP = {
-  /* Expression: m1sys{7}.LC2CG
-   * Referenced by: '<S1>/LC2CG'
-   */
-  { -0.35307603986945896, -0.40497221157961549, -0.566849450809656,
-    1.328287233302347, 1.0602494184892355, -1.5872454989309575,
-    0.3528088365662298, -0.40481668897613887, -0.56793494743371786,
-    1.3280232118027286, -1.0617961697846821, 1.5867622085419106,
-    -0.17266395851193236, 0.50938702072302455, -0.563798064757241,
-    0.24685316588761241, -1.6781648775661029, -1.5856238081822385,
-    -0.52477835054123323, -0.10494029698604471, -0.56925963214407926,
-    -1.5809557602352218, -0.61827383880882836, 1.5833258551048905,
-    0.524574442049351, -0.10520273230770387, -0.56851499359509727,
-    -1.5797085666160036, 0.61714714060421016, -1.5842871100611431,
-    0.17249645162446881, 0.50893506434614877, -0.56352468192791949,
-    0.24789842558994055, 1.6776684443041976, 1.584778627652655 },
-
   /* Expression: m1sys{7}.Kbal
-   * Referenced by: '<S1>/Force balance S7'
+   * Referenced by: '<S1>/CSseg_Kbal'
    */
   { 0.00053499497347404574, 0.003401910714119283, -9.4778882976882291E-5,
     0.0034334334851266577, -0.00064782852678143556, -0.000556821142243168,
