@@ -3,14 +3,12 @@
  *
  * Code generated for Simulink model 'M1_HP_Dyn'.
  *
- * Model version                  : 1.788
+ * Model version                  : 1.960
  * Simulink Coder version         : 9.0 (R2018b) 24-May-2018
- * C/C++ source code generated on : Thu Feb 10 11:49:55 2022
+ * C/C++ source code generated on : Fri Feb 11 10:27:20 2022
  *
  * Target selection: ert.tlc
- * Embedded hardware selection: Intel->x86-64 (Windows64)
- * Emulation hardware selection:
- *    Differs from embedded hardware (MATLAB Host)
+ * Embedded hardware selection: Intel->x86-64 (Linux 64)
  * Code generation objectives: Unspecified
  * Validation result: Not run
  */
@@ -149,6 +147,9 @@ real_T S7_M1RBM2HP[36] = { 0.45244396288532968, -0.45244566289302363,
                                         * Referenced by: '<S1>/CG2Hp5'
                                         */
 
+/* Block states (default storage) */
+DW_M1_HP_Dyn_T M1_HP_Dyn_DW;
+
 /* External inputs (root inport signals with default storage) */
 ExtU_M1_HP_Dyn_T M1_HP_Dyn_U;
 
@@ -163,300 +164,374 @@ RT_MODEL_M1_HP_Dyn_T *const M1_HP_Dyn_M = &M1_HP_Dyn_M_;
 void M1_HP_Dyn_step(void)
 {
   real_T denAccum;
-  real_T denAccum_0;
-  real_T denAccum_1;
-  real_T denAccum_2;
-  real_T denAccum_3;
-  real_T denAccum_4;
-  real_T denAccum_5;
+  int32_T memOffset;
   real_T rtb_CG2Hp6[6];
+  real_T rtb_HpK8[6];
+  real_T rtb_HpK1[6];
+  real_T rtb_HpK2[6];
+  real_T rtb_HpK5[6];
+  real_T rtb_HpK3[6];
+  real_T rtb_HpK4[6];
   int32_T k;
-  int32_T i;
-  int32_T memOffset_tmp;
+  real_T S1HP_dyn_dTF_tmp[6];
+  real_T S2HP_dyn_dTF_tmp[6];
+  real_T S3HP_dyn_dTF_tmp[6];
+  real_T S4HP_dyn_dTF_tmp[6];
+  real_T S5HP_dyn_dTF_tmp[6];
+  real_T S6HP_dyn_dTF_tmp[6];
+  real_T S7HP_dyn_dTF_tmp[6];
   real_T denAccum_tmp;
   real_T denAccum_tmp_0;
   real_T denAccum_tmp_1;
-  real_T denAccum_tmp_2;
-  real_T denAccum_tmp_3;
-  real_T denAccum_tmp_4;
-  real_T denAccum_tmp_5;
-  real_T denAccum_tmp_6;
-  real_T denAccum_tmp_7;
-  real_T denAccum_tmp_8;
-  real_T denAccum_tmp_9;
-  real_T denAccum_tmp_a;
-  real_T denAccum_tmp_b;
-  real_T denAccum_tmp_c;
-  real_T denAccum_tmp_d;
-  real_T denAccum_tmp_e;
-  real_T denAccum_tmp_f;
-  real_T denAccum_tmp_g;
-  real_T denAccum_tmp_h;
-  real_T denAccum_tmp_i;
-  real_T denAccum_tmp_j;
   for (k = 0; k < 6; k++) {
     /* Gain: '<S1>/CG2Hp6' incorporates:
      *  Inport: '<Root>/M1_RBM_cmd'
      */
     rtb_CG2Hp6[k] = 0.0;
-    for (i = 0; i < 6; i++) {
-      rtb_CG2Hp6[k] += S1_M1RBM2HP[6 * i + k] * M1_HP_Dyn_U.M1_RBM_cmd[i];
+    for (memOffset = 0; memOffset < 6; memOffset++) {
+      rtb_CG2Hp6[k] += S1_M1RBM2HP[6 * memOffset + k] *
+        M1_HP_Dyn_U.M1_RBM_cmd[memOffset];
     }
 
     /* End of Gain: '<S1>/CG2Hp6' */
 
-    /* DiscreteTransferFcn: '<S1>/S1HP_dyn_dTF' incorporates:
-     *  DiscreteTransferFcn: '<S1>/S2HP_dyn_dTF'
-     *  DiscreteTransferFcn: '<S1>/S2HP_dyn_dTF'
-     *  DiscreteTransferFcn: '<S1>/S3HP_dyn_dTF'
-     *  DiscreteTransferFcn: '<S1>/S3HP_dyn_dTF'
-     *  DiscreteTransferFcn: '<S1>/S4HP_dyn_dTF'
-     *  DiscreteTransferFcn: '<S1>/S4HP_dyn_dTF'
-     *  DiscreteTransferFcn: '<S1>/S5HP_dyn_dTF'
-     *  DiscreteTransferFcn: '<S1>/S5HP_dyn_dTF'
-     *  DiscreteTransferFcn: '<S1>/S6HP_dyn_dTF'
-     *  DiscreteTransferFcn: '<S1>/S6HP_dyn_dTF'
-     *  DiscreteTransferFcn: '<S1>/S7HP_dyn_dTF'
-     *  DiscreteTransferFcn: '<S1>/S7HP_dyn_dTF'
-     */
-    memOffset_tmp = k << 2;
-    denAccum_tmp = M1_HP_Dyn_S1HP_dyn_dTF_states[memOffset_tmp + 1];
-    denAccum_tmp_0 = M1_HP_Dyn_S1HP_dyn_dTF_states[memOffset_tmp + 2];
-    denAccum_tmp_1 = M1_HP_Dyn_S1HP_dyn_dTF_states[memOffset_tmp + 3];
+    /* DiscreteTransferFcn: '<S1>/S1HP_dyn_dTF' */
+    memOffset = k << 2;
+    denAccum_tmp = M1_HP_Dyn_DW.S1HP_dyn_dTF_states[memOffset + 1];
+    denAccum_tmp_0 = M1_HP_Dyn_DW.S1HP_dyn_dTF_states[memOffset + 2];
+    denAccum_tmp_1 = M1_HP_Dyn_DW.S1HP_dyn_dTF_states[memOffset + 3];
     denAccum = (((rtb_CG2Hp6[k] - -3.9324030529437657 *
-                  M1_HP_Dyn_S1HP_dyn_dTF_states[memOffset_tmp]) - denAccum_tmp *
+                  M1_HP_Dyn_DW.S1HP_dyn_dTF_states[memOffset]) - denAccum_tmp *
                  5.7980159366164923) - denAccum_tmp_0 * -3.7988189837355097) -
       denAccum_tmp_1 * 0.93320610759369726;
+    S1HP_dyn_dTF_tmp[k] = denAccum;
+    denAccum *= 0.00010538306295552853;
+    denAccum += 9.3078381572247558E-7 *
+      M1_HP_Dyn_DW.S1HP_dyn_dTF_states[memOffset];
+    denAccum += denAccum_tmp * -0.00020983345936705571;
+    denAccum += denAccum_tmp_0 * -9.27018359164759E-7;
+    denAccum += denAccum_tmp_1 * 0.00010445416186808491;
 
     /* Gain: '<S1>/CG2Hp8' incorporates:
      *  Inport: '<Root>/M1_RBM_cmd'
      */
     rtb_CG2Hp6[k] = 0.0;
-    for (i = 0; i < 6; i++) {
-      rtb_CG2Hp6[k] += S2_M1RBM2HP[6 * i + k] * M1_HP_Dyn_U.M1_RBM_cmd[6 + i];
+    for (memOffset = 0; memOffset < 6; memOffset++) {
+      rtb_CG2Hp6[k] += S2_M1RBM2HP[6 * memOffset + k] * M1_HP_Dyn_U.M1_RBM_cmd[6
+        + memOffset];
     }
 
     /* End of Gain: '<S1>/CG2Hp8' */
 
+    /* DiscreteTransferFcn: '<S1>/S1HP_dyn_dTF' incorporates:
+     *  Gain: '<S1>/HpK8'
+     */
+    rtb_HpK8[k] = S1_HPstiff * denAccum;
+  }
+
+  for (k = 0; k < 6; k++) {
     /* DiscreteTransferFcn: '<S1>/S2HP_dyn_dTF' */
-    denAccum_tmp_2 = M1_HP_Dyn_S2HP_dyn_dTF_states[memOffset_tmp + 1];
-    denAccum_tmp_3 = M1_HP_Dyn_S2HP_dyn_dTF_states[memOffset_tmp + 2];
-    denAccum_tmp_4 = M1_HP_Dyn_S2HP_dyn_dTF_states[memOffset_tmp + 3];
-    denAccum_0 = (((rtb_CG2Hp6[k] - -3.9324030529437657 *
-                    M1_HP_Dyn_S2HP_dyn_dTF_states[memOffset_tmp]) -
-                   denAccum_tmp_2 * 5.7980159366164923) - denAccum_tmp_3 *
-                  -3.7988189837355097) - denAccum_tmp_4 * 0.93320610759369726;
+    memOffset = k << 2;
+    denAccum_tmp = M1_HP_Dyn_DW.S2HP_dyn_dTF_states[memOffset + 1];
+    denAccum_tmp_0 = M1_HP_Dyn_DW.S2HP_dyn_dTF_states[memOffset + 2];
+    denAccum_tmp_1 = M1_HP_Dyn_DW.S2HP_dyn_dTF_states[memOffset + 3];
+    denAccum = (((rtb_CG2Hp6[k] - -3.9324030529437657 *
+                  M1_HP_Dyn_DW.S2HP_dyn_dTF_states[memOffset]) - denAccum_tmp *
+                 5.7980159366164923) - denAccum_tmp_0 * -3.7988189837355097) -
+      denAccum_tmp_1 * 0.93320610759369726;
+    S2HP_dyn_dTF_tmp[k] = denAccum;
+    denAccum *= 0.00010538306295552853;
+    denAccum += 9.3078381572247558E-7 *
+      M1_HP_Dyn_DW.S2HP_dyn_dTF_states[memOffset];
+    denAccum += denAccum_tmp * -0.00020983345936705571;
+    denAccum += denAccum_tmp_0 * -9.27018359164759E-7;
+    denAccum += denAccum_tmp_1 * 0.00010445416186808491;
 
     /* Gain: '<S1>/CG2Hp1' incorporates:
      *  Inport: '<Root>/M1_RBM_cmd'
      */
     rtb_CG2Hp6[k] = 0.0;
-    for (i = 0; i < 6; i++) {
-      rtb_CG2Hp6[k] += S3_M1RBM2HP[6 * i + k] * M1_HP_Dyn_U.M1_RBM_cmd[12 + i];
+    for (memOffset = 0; memOffset < 6; memOffset++) {
+      rtb_CG2Hp6[k] += S3_M1RBM2HP[6 * memOffset + k] * M1_HP_Dyn_U.M1_RBM_cmd
+        [12 + memOffset];
     }
 
     /* End of Gain: '<S1>/CG2Hp1' */
 
+    /* DiscreteTransferFcn: '<S1>/S2HP_dyn_dTF' incorporates:
+     *  Gain: '<S1>/HpK1'
+     */
+    rtb_HpK1[k] = S2_HPstiff * denAccum;
+  }
+
+  for (k = 0; k < 6; k++) {
     /* DiscreteTransferFcn: '<S1>/S3HP_dyn_dTF' */
-    denAccum_tmp_5 = M1_HP_Dyn_S3HP_dyn_dTF_states[memOffset_tmp + 1];
-    denAccum_tmp_6 = M1_HP_Dyn_S3HP_dyn_dTF_states[memOffset_tmp + 2];
-    denAccum_tmp_7 = M1_HP_Dyn_S3HP_dyn_dTF_states[memOffset_tmp + 3];
-    denAccum_1 = (((rtb_CG2Hp6[k] - -3.9324030529437657 *
-                    M1_HP_Dyn_S3HP_dyn_dTF_states[memOffset_tmp]) -
-                   denAccum_tmp_5 * 5.7980159366164923) - denAccum_tmp_6 *
-                  -3.7988189837355097) - denAccum_tmp_7 * 0.93320610759369726;
+    memOffset = k << 2;
+    denAccum_tmp = M1_HP_Dyn_DW.S3HP_dyn_dTF_states[memOffset + 1];
+    denAccum_tmp_0 = M1_HP_Dyn_DW.S3HP_dyn_dTF_states[memOffset + 2];
+    denAccum_tmp_1 = M1_HP_Dyn_DW.S3HP_dyn_dTF_states[memOffset + 3];
+    denAccum = (((rtb_CG2Hp6[k] - -3.9324030529437657 *
+                  M1_HP_Dyn_DW.S3HP_dyn_dTF_states[memOffset]) - denAccum_tmp *
+                 5.7980159366164923) - denAccum_tmp_0 * -3.7988189837355097) -
+      denAccum_tmp_1 * 0.93320610759369726;
+    S3HP_dyn_dTF_tmp[k] = denAccum;
+    denAccum *= 0.00010538306295552853;
+    denAccum += 9.3078381572247558E-7 *
+      M1_HP_Dyn_DW.S3HP_dyn_dTF_states[memOffset];
+    denAccum += denAccum_tmp * -0.00020983345936705571;
+    denAccum += denAccum_tmp_0 * -9.27018359164759E-7;
+    denAccum += denAccum_tmp_1 * 0.00010445416186808491;
 
     /* Gain: '<S1>/CG2Hp2' incorporates:
      *  Inport: '<Root>/M1_RBM_cmd'
      */
     rtb_CG2Hp6[k] = 0.0;
-    for (i = 0; i < 6; i++) {
-      rtb_CG2Hp6[k] += S4_M1RBM2HP[6 * i + k] * M1_HP_Dyn_U.M1_RBM_cmd[18 + i];
+    for (memOffset = 0; memOffset < 6; memOffset++) {
+      rtb_CG2Hp6[k] += S4_M1RBM2HP[6 * memOffset + k] * M1_HP_Dyn_U.M1_RBM_cmd
+        [18 + memOffset];
     }
 
     /* End of Gain: '<S1>/CG2Hp2' */
 
+    /* DiscreteTransferFcn: '<S1>/S3HP_dyn_dTF' incorporates:
+     *  Gain: '<S1>/HpK2'
+     */
+    rtb_HpK2[k] = S3_HPstiff * denAccum;
+  }
+
+  for (k = 0; k < 6; k++) {
     /* DiscreteTransferFcn: '<S1>/S4HP_dyn_dTF' */
-    denAccum_tmp_8 = M1_HP_Dyn_S4HP_dyn_dTF_states[memOffset_tmp + 1];
-    denAccum_tmp_9 = M1_HP_Dyn_S4HP_dyn_dTF_states[memOffset_tmp + 2];
-    denAccum_tmp_a = M1_HP_Dyn_S4HP_dyn_dTF_states[memOffset_tmp + 3];
-    denAccum_2 = (((rtb_CG2Hp6[k] - -3.9324030529437657 *
-                    M1_HP_Dyn_S4HP_dyn_dTF_states[memOffset_tmp]) -
-                   denAccum_tmp_8 * 5.7980159366164923) - denAccum_tmp_9 *
-                  -3.7988189837355097) - denAccum_tmp_a * 0.93320610759369726;
+    memOffset = k << 2;
+    denAccum_tmp = M1_HP_Dyn_DW.S4HP_dyn_dTF_states[memOffset + 1];
+    denAccum_tmp_0 = M1_HP_Dyn_DW.S4HP_dyn_dTF_states[memOffset + 2];
+    denAccum_tmp_1 = M1_HP_Dyn_DW.S4HP_dyn_dTF_states[memOffset + 3];
+    denAccum = (((rtb_CG2Hp6[k] - -3.9324030529437657 *
+                  M1_HP_Dyn_DW.S4HP_dyn_dTF_states[memOffset]) - denAccum_tmp *
+                 5.7980159366164923) - denAccum_tmp_0 * -3.7988189837355097) -
+      denAccum_tmp_1 * 0.93320610759369726;
+    S4HP_dyn_dTF_tmp[k] = denAccum;
+    denAccum *= 0.00010538306295552853;
+    denAccum += 9.3078381572247558E-7 *
+      M1_HP_Dyn_DW.S4HP_dyn_dTF_states[memOffset];
+    denAccum += denAccum_tmp * -0.00020983345936705571;
+    denAccum += denAccum_tmp_0 * -9.27018359164759E-7;
+    denAccum += denAccum_tmp_1 * 0.00010445416186808491;
 
     /* Gain: '<S1>/CG2Hp3' incorporates:
      *  Inport: '<Root>/M1_RBM_cmd'
      */
     rtb_CG2Hp6[k] = 0.0;
-    for (i = 0; i < 6; i++) {
-      rtb_CG2Hp6[k] += S5_M1RBM2HP[6 * i + k] * M1_HP_Dyn_U.M1_RBM_cmd[24 + i];
+    for (memOffset = 0; memOffset < 6; memOffset++) {
+      rtb_CG2Hp6[k] += S5_M1RBM2HP[6 * memOffset + k] * M1_HP_Dyn_U.M1_RBM_cmd
+        [24 + memOffset];
     }
 
     /* End of Gain: '<S1>/CG2Hp3' */
 
+    /* DiscreteTransferFcn: '<S1>/S4HP_dyn_dTF' incorporates:
+     *  Gain: '<S1>/HpK5'
+     */
+    rtb_HpK5[k] = S4_HPstiff * denAccum;
+  }
+
+  for (k = 0; k < 6; k++) {
     /* DiscreteTransferFcn: '<S1>/S5HP_dyn_dTF' */
-    denAccum_tmp_b = M1_HP_Dyn_S5HP_dyn_dTF_states[memOffset_tmp + 1];
-    denAccum_tmp_c = M1_HP_Dyn_S5HP_dyn_dTF_states[memOffset_tmp + 2];
-    denAccum_tmp_d = M1_HP_Dyn_S5HP_dyn_dTF_states[memOffset_tmp + 3];
-    denAccum_3 = (((rtb_CG2Hp6[k] - -3.9324030529437657 *
-                    M1_HP_Dyn_S5HP_dyn_dTF_states[memOffset_tmp]) -
-                   denAccum_tmp_b * 5.7980159366164923) - denAccum_tmp_c *
-                  -3.7988189837355097) - denAccum_tmp_d * 0.93320610759369726;
+    memOffset = k << 2;
+    denAccum_tmp = M1_HP_Dyn_DW.S5HP_dyn_dTF_states[memOffset + 1];
+    denAccum_tmp_0 = M1_HP_Dyn_DW.S5HP_dyn_dTF_states[memOffset + 2];
+    denAccum_tmp_1 = M1_HP_Dyn_DW.S5HP_dyn_dTF_states[memOffset + 3];
+    denAccum = (((rtb_CG2Hp6[k] - -3.9324030529437657 *
+                  M1_HP_Dyn_DW.S5HP_dyn_dTF_states[memOffset]) - denAccum_tmp *
+                 5.7980159366164923) - denAccum_tmp_0 * -3.7988189837355097) -
+      denAccum_tmp_1 * 0.93320610759369726;
+    S5HP_dyn_dTF_tmp[k] = denAccum;
+    denAccum *= 0.00010538306295552853;
+    denAccum += 9.3078381572247558E-7 *
+      M1_HP_Dyn_DW.S5HP_dyn_dTF_states[memOffset];
+    denAccum += denAccum_tmp * -0.00020983345936705571;
+    denAccum += denAccum_tmp_0 * -9.27018359164759E-7;
+    denAccum += denAccum_tmp_1 * 0.00010445416186808491;
 
     /* Gain: '<S1>/CG2Hp4' incorporates:
      *  Inport: '<Root>/M1_RBM_cmd'
      */
     rtb_CG2Hp6[k] = 0.0;
-    for (i = 0; i < 6; i++) {
-      rtb_CG2Hp6[k] += S6_M1RBM2HP[6 * i + k] * M1_HP_Dyn_U.M1_RBM_cmd[30 + i];
+    for (memOffset = 0; memOffset < 6; memOffset++) {
+      rtb_CG2Hp6[k] += S6_M1RBM2HP[6 * memOffset + k] * M1_HP_Dyn_U.M1_RBM_cmd
+        [30 + memOffset];
     }
 
     /* End of Gain: '<S1>/CG2Hp4' */
 
+    /* DiscreteTransferFcn: '<S1>/S5HP_dyn_dTF' incorporates:
+     *  Gain: '<S1>/HpK3'
+     */
+    rtb_HpK3[k] = S5_HPstiff * denAccum;
+  }
+
+  for (k = 0; k < 6; k++) {
     /* DiscreteTransferFcn: '<S1>/S6HP_dyn_dTF' */
-    denAccum_tmp_e = M1_HP_Dyn_S6HP_dyn_dTF_states[memOffset_tmp + 1];
-    denAccum_tmp_f = M1_HP_Dyn_S6HP_dyn_dTF_states[memOffset_tmp + 2];
-    denAccum_tmp_g = M1_HP_Dyn_S6HP_dyn_dTF_states[memOffset_tmp + 3];
-    denAccum_4 = (((rtb_CG2Hp6[k] - -3.9324030529437657 *
-                    M1_HP_Dyn_S6HP_dyn_dTF_states[memOffset_tmp]) -
-                   denAccum_tmp_e * 5.7980159366164923) - denAccum_tmp_f *
-                  -3.7988189837355097) - denAccum_tmp_g * 0.93320610759369726;
+    memOffset = k << 2;
+    denAccum_tmp = M1_HP_Dyn_DW.S6HP_dyn_dTF_states[memOffset + 1];
+    denAccum_tmp_0 = M1_HP_Dyn_DW.S6HP_dyn_dTF_states[memOffset + 2];
+    denAccum_tmp_1 = M1_HP_Dyn_DW.S6HP_dyn_dTF_states[memOffset + 3];
+    denAccum = (((rtb_CG2Hp6[k] - -3.9324030529437657 *
+                  M1_HP_Dyn_DW.S6HP_dyn_dTF_states[memOffset]) - denAccum_tmp *
+                 5.7980159366164923) - denAccum_tmp_0 * -3.7988189837355097) -
+      denAccum_tmp_1 * 0.93320610759369726;
+    S6HP_dyn_dTF_tmp[k] = denAccum;
+    denAccum *= 0.00010538306295552853;
+    denAccum += 9.3078381572247558E-7 *
+      M1_HP_Dyn_DW.S6HP_dyn_dTF_states[memOffset];
+    denAccum += denAccum_tmp * -0.00020983345936705571;
+    denAccum += denAccum_tmp_0 * -9.27018359164759E-7;
+    denAccum += denAccum_tmp_1 * 0.00010445416186808491;
 
     /* Gain: '<S1>/CG2Hp5' incorporates:
      *  Inport: '<Root>/M1_RBM_cmd'
      */
     rtb_CG2Hp6[k] = 0.0;
-    for (i = 0; i < 6; i++) {
-      rtb_CG2Hp6[k] += S7_M1RBM2HP[6 * i + k] * M1_HP_Dyn_U.M1_RBM_cmd[36 + i];
+    for (memOffset = 0; memOffset < 6; memOffset++) {
+      rtb_CG2Hp6[k] += S7_M1RBM2HP[6 * memOffset + k] * M1_HP_Dyn_U.M1_RBM_cmd
+        [36 + memOffset];
     }
 
     /* End of Gain: '<S1>/CG2Hp5' */
 
+    /* DiscreteTransferFcn: '<S1>/S6HP_dyn_dTF' incorporates:
+     *  Gain: '<S1>/HpK4'
+     */
+    rtb_HpK4[k] = S6_HPstiff * denAccum;
+  }
+
+  for (k = 0; k < 6; k++) {
     /* DiscreteTransferFcn: '<S1>/S7HP_dyn_dTF' */
-    denAccum_tmp_h = M1_HP_Dyn_S7HP_dyn_dTF_states[memOffset_tmp + 1];
-    denAccum_tmp_i = M1_HP_Dyn_S7HP_dyn_dTF_states[memOffset_tmp + 2];
-    denAccum_tmp_j = M1_HP_Dyn_S7HP_dyn_dTF_states[memOffset_tmp + 3];
-    denAccum_5 = (((rtb_CG2Hp6[k] - -3.9324030529437657 *
-                    M1_HP_Dyn_S7HP_dyn_dTF_states[memOffset_tmp]) -
-                   denAccum_tmp_h * 5.7980159366164923) - denAccum_tmp_i *
-                  -3.7988189837355097) - denAccum_tmp_j * 0.93320610759369726;
+    memOffset = k << 2;
+    denAccum_tmp = M1_HP_Dyn_DW.S7HP_dyn_dTF_states[memOffset + 1];
+    denAccum_tmp_0 = M1_HP_Dyn_DW.S7HP_dyn_dTF_states[memOffset + 2];
+    denAccum_tmp_1 = M1_HP_Dyn_DW.S7HP_dyn_dTF_states[memOffset + 3];
+    denAccum = (((rtb_CG2Hp6[k] - -3.9324030529437657 *
+                  M1_HP_Dyn_DW.S7HP_dyn_dTF_states[memOffset]) - denAccum_tmp *
+                 5.7980159366164923) - denAccum_tmp_0 * -3.7988189837355097) -
+      denAccum_tmp_1 * 0.93320610759369726;
+    S7HP_dyn_dTF_tmp[k] = denAccum;
+    denAccum *= 0.00010538306295552853;
+    denAccum += 9.3078381572247558E-7 *
+      M1_HP_Dyn_DW.S7HP_dyn_dTF_states[memOffset];
+    denAccum += denAccum_tmp * -0.00020983345936705571;
+    denAccum += denAccum_tmp_0 * -9.27018359164759E-7;
+    denAccum += denAccum_tmp_1 * 0.00010445416186808491;
 
     /* Outport: '<Root>/HP_F_cmd' incorporates:
-     *  DiscreteTransferFcn: '<S1>/S1HP_dyn_dTF'
-     *  DiscreteTransferFcn: '<S1>/S2HP_dyn_dTF'
-     *  DiscreteTransferFcn: '<S1>/S3HP_dyn_dTF'
-     *  DiscreteTransferFcn: '<S1>/S4HP_dyn_dTF'
-     *  DiscreteTransferFcn: '<S1>/S5HP_dyn_dTF'
-     *  DiscreteTransferFcn: '<S1>/S6HP_dyn_dTF'
      *  DiscreteTransferFcn: '<S1>/S7HP_dyn_dTF'
-     *  Gain: '<S1>/HpK1'
-     *  Gain: '<S1>/HpK2'
-     *  Gain: '<S1>/HpK3'
-     *  Gain: '<S1>/HpK4'
-     *  Gain: '<S1>/HpK5'
      *  Gain: '<S1>/HpK6'
-     *  Gain: '<S1>/HpK8'
      */
-    M1_HP_Dyn_Y.HP_F_cmd[k] = ((((0.00010538306295552853 * denAccum +
-      9.3078381572247558E-7 * M1_HP_Dyn_S1HP_dyn_dTF_states[memOffset_tmp]) +
-      denAccum_tmp * -0.00020983345936705571) + denAccum_tmp_0 *
-      -9.27018359164759E-7) + denAccum_tmp_1 * 0.00010445416186808491) *
-      S1_HPstiff;
-    M1_HP_Dyn_Y.HP_F_cmd[k + 6] = ((((0.00010538306295552853 * denAccum_0 +
-      9.3078381572247558E-7 * M1_HP_Dyn_S2HP_dyn_dTF_states[memOffset_tmp]) +
-      denAccum_tmp_2 * -0.00020983345936705571) + denAccum_tmp_3 *
-      -9.27018359164759E-7) + denAccum_tmp_4 * 0.00010445416186808491) *
-      S2_HPstiff;
-    M1_HP_Dyn_Y.HP_F_cmd[k + 12] = ((((0.00010538306295552853 * denAccum_1 +
-      9.3078381572247558E-7 * M1_HP_Dyn_S3HP_dyn_dTF_states[memOffset_tmp]) +
-      denAccum_tmp_5 * -0.00020983345936705571) + denAccum_tmp_6 *
-      -9.27018359164759E-7) + denAccum_tmp_7 * 0.00010445416186808491) *
-      S3_HPstiff;
-    M1_HP_Dyn_Y.HP_F_cmd[k + 18] = ((((0.00010538306295552853 * denAccum_2 +
-      9.3078381572247558E-7 * M1_HP_Dyn_S4HP_dyn_dTF_states[memOffset_tmp]) +
-      denAccum_tmp_8 * -0.00020983345936705571) + denAccum_tmp_9 *
-      -9.27018359164759E-7) + denAccum_tmp_a * 0.00010445416186808491) *
-      S4_HPstiff;
-    M1_HP_Dyn_Y.HP_F_cmd[k + 24] = ((((0.00010538306295552853 * denAccum_3 +
-      9.3078381572247558E-7 * M1_HP_Dyn_S5HP_dyn_dTF_states[memOffset_tmp]) +
-      denAccum_tmp_b * -0.00020983345936705571) + denAccum_tmp_c *
-      -9.27018359164759E-7) + denAccum_tmp_d * 0.00010445416186808491) *
-      S5_HPstiff;
-    M1_HP_Dyn_Y.HP_F_cmd[k + 30] = ((((0.00010538306295552853 * denAccum_4 +
-      9.3078381572247558E-7 * M1_HP_Dyn_S6HP_dyn_dTF_states[memOffset_tmp]) +
-      denAccum_tmp_e * -0.00020983345936705571) + denAccum_tmp_f *
-      -9.27018359164759E-7) + denAccum_tmp_g * 0.00010445416186808491) *
-      S6_HPstiff;
-    M1_HP_Dyn_Y.HP_F_cmd[k + 36] = ((((0.00010538306295552853 * denAccum_5 +
-      9.3078381572247558E-7 * M1_HP_Dyn_S7HP_dyn_dTF_states[memOffset_tmp]) +
-      denAccum_tmp_h * -0.00020983345936705571) + denAccum_tmp_i *
-      -9.27018359164759E-7) + denAccum_tmp_j * 0.00010445416186808491) *
-      S7_HPstiff;
-
-    /* Update for DiscreteTransferFcn: '<S1>/S1HP_dyn_dTF' */
-    M1_HP_Dyn_S1HP_dyn_dTF_states[memOffset_tmp + 3] =
-      M1_HP_Dyn_S1HP_dyn_dTF_states[memOffset_tmp + 2];
-    M1_HP_Dyn_S1HP_dyn_dTF_states[memOffset_tmp + 2] =
-      M1_HP_Dyn_S1HP_dyn_dTF_states[memOffset_tmp + 1];
-    M1_HP_Dyn_S1HP_dyn_dTF_states[memOffset_tmp + 1] =
-      M1_HP_Dyn_S1HP_dyn_dTF_states[memOffset_tmp];
-    M1_HP_Dyn_S1HP_dyn_dTF_states[memOffset_tmp] = denAccum;
-
-    /* Update for DiscreteTransferFcn: '<S1>/S2HP_dyn_dTF' */
-    M1_HP_Dyn_S2HP_dyn_dTF_states[memOffset_tmp + 3] =
-      M1_HP_Dyn_S2HP_dyn_dTF_states[memOffset_tmp + 2];
-    M1_HP_Dyn_S2HP_dyn_dTF_states[memOffset_tmp + 2] =
-      M1_HP_Dyn_S2HP_dyn_dTF_states[memOffset_tmp + 1];
-    M1_HP_Dyn_S2HP_dyn_dTF_states[memOffset_tmp + 1] =
-      M1_HP_Dyn_S2HP_dyn_dTF_states[memOffset_tmp];
-    M1_HP_Dyn_S2HP_dyn_dTF_states[memOffset_tmp] = denAccum_0;
-
-    /* Update for DiscreteTransferFcn: '<S1>/S3HP_dyn_dTF' */
-    M1_HP_Dyn_S3HP_dyn_dTF_states[memOffset_tmp + 3] =
-      M1_HP_Dyn_S3HP_dyn_dTF_states[memOffset_tmp + 2];
-    M1_HP_Dyn_S3HP_dyn_dTF_states[memOffset_tmp + 2] =
-      M1_HP_Dyn_S3HP_dyn_dTF_states[memOffset_tmp + 1];
-    M1_HP_Dyn_S3HP_dyn_dTF_states[memOffset_tmp + 1] =
-      M1_HP_Dyn_S3HP_dyn_dTF_states[memOffset_tmp];
-    M1_HP_Dyn_S3HP_dyn_dTF_states[memOffset_tmp] = denAccum_1;
-
-    /* Update for DiscreteTransferFcn: '<S1>/S4HP_dyn_dTF' */
-    M1_HP_Dyn_S4HP_dyn_dTF_states[memOffset_tmp + 3] =
-      M1_HP_Dyn_S4HP_dyn_dTF_states[memOffset_tmp + 2];
-    M1_HP_Dyn_S4HP_dyn_dTF_states[memOffset_tmp + 2] =
-      M1_HP_Dyn_S4HP_dyn_dTF_states[memOffset_tmp + 1];
-    M1_HP_Dyn_S4HP_dyn_dTF_states[memOffset_tmp + 1] =
-      M1_HP_Dyn_S4HP_dyn_dTF_states[memOffset_tmp];
-    M1_HP_Dyn_S4HP_dyn_dTF_states[memOffset_tmp] = denAccum_2;
-
-    /* Update for DiscreteTransferFcn: '<S1>/S5HP_dyn_dTF' */
-    M1_HP_Dyn_S5HP_dyn_dTF_states[memOffset_tmp + 3] =
-      M1_HP_Dyn_S5HP_dyn_dTF_states[memOffset_tmp + 2];
-    M1_HP_Dyn_S5HP_dyn_dTF_states[memOffset_tmp + 2] =
-      M1_HP_Dyn_S5HP_dyn_dTF_states[memOffset_tmp + 1];
-    M1_HP_Dyn_S5HP_dyn_dTF_states[memOffset_tmp + 1] =
-      M1_HP_Dyn_S5HP_dyn_dTF_states[memOffset_tmp];
-    M1_HP_Dyn_S5HP_dyn_dTF_states[memOffset_tmp] = denAccum_3;
-
-    /* Update for DiscreteTransferFcn: '<S1>/S6HP_dyn_dTF' */
-    M1_HP_Dyn_S6HP_dyn_dTF_states[memOffset_tmp + 3] =
-      M1_HP_Dyn_S6HP_dyn_dTF_states[memOffset_tmp + 2];
-    M1_HP_Dyn_S6HP_dyn_dTF_states[memOffset_tmp + 2] =
-      M1_HP_Dyn_S6HP_dyn_dTF_states[memOffset_tmp + 1];
-    M1_HP_Dyn_S6HP_dyn_dTF_states[memOffset_tmp + 1] =
-      M1_HP_Dyn_S6HP_dyn_dTF_states[memOffset_tmp];
-    M1_HP_Dyn_S6HP_dyn_dTF_states[memOffset_tmp] = denAccum_4;
-
-    /* Update for DiscreteTransferFcn: '<S1>/S7HP_dyn_dTF' */
-    M1_HP_Dyn_S7HP_dyn_dTF_states[memOffset_tmp + 3] =
-      M1_HP_Dyn_S7HP_dyn_dTF_states[memOffset_tmp + 2];
-    M1_HP_Dyn_S7HP_dyn_dTF_states[memOffset_tmp + 2] =
-      M1_HP_Dyn_S7HP_dyn_dTF_states[memOffset_tmp + 1];
-    M1_HP_Dyn_S7HP_dyn_dTF_states[memOffset_tmp + 1] =
-      M1_HP_Dyn_S7HP_dyn_dTF_states[memOffset_tmp];
-    M1_HP_Dyn_S7HP_dyn_dTF_states[memOffset_tmp] = denAccum_5;
+    M1_HP_Dyn_Y.HP_F_cmd[k] = rtb_HpK8[k];
+    M1_HP_Dyn_Y.HP_F_cmd[k + 6] = rtb_HpK1[k];
+    M1_HP_Dyn_Y.HP_F_cmd[k + 12] = rtb_HpK2[k];
+    M1_HP_Dyn_Y.HP_F_cmd[k + 18] = rtb_HpK5[k];
+    M1_HP_Dyn_Y.HP_F_cmd[k + 24] = rtb_HpK3[k];
+    M1_HP_Dyn_Y.HP_F_cmd[k + 30] = rtb_HpK4[k];
+    M1_HP_Dyn_Y.HP_F_cmd[k + 36] = S7_HPstiff * denAccum;
   }
+
+  /* Update for DiscreteTransferFcn: '<S1>/S1HP_dyn_dTF' */
+  for (k = 0; k < 6; k++) {
+    memOffset = k << 2;
+    M1_HP_Dyn_DW.S1HP_dyn_dTF_states[memOffset + 3] =
+      M1_HP_Dyn_DW.S1HP_dyn_dTF_states[memOffset + 2];
+    M1_HP_Dyn_DW.S1HP_dyn_dTF_states[memOffset + 2] =
+      M1_HP_Dyn_DW.S1HP_dyn_dTF_states[memOffset + 1];
+    M1_HP_Dyn_DW.S1HP_dyn_dTF_states[memOffset + 1] =
+      M1_HP_Dyn_DW.S1HP_dyn_dTF_states[memOffset];
+    M1_HP_Dyn_DW.S1HP_dyn_dTF_states[memOffset] = S1HP_dyn_dTF_tmp[k];
+  }
+
+  /* End of Update for DiscreteTransferFcn: '<S1>/S1HP_dyn_dTF' */
+
+  /* Update for DiscreteTransferFcn: '<S1>/S2HP_dyn_dTF' */
+  for (k = 0; k < 6; k++) {
+    memOffset = k << 2;
+    M1_HP_Dyn_DW.S2HP_dyn_dTF_states[memOffset + 3] =
+      M1_HP_Dyn_DW.S2HP_dyn_dTF_states[memOffset + 2];
+    M1_HP_Dyn_DW.S2HP_dyn_dTF_states[memOffset + 2] =
+      M1_HP_Dyn_DW.S2HP_dyn_dTF_states[memOffset + 1];
+    M1_HP_Dyn_DW.S2HP_dyn_dTF_states[memOffset + 1] =
+      M1_HP_Dyn_DW.S2HP_dyn_dTF_states[memOffset];
+    M1_HP_Dyn_DW.S2HP_dyn_dTF_states[memOffset] = S2HP_dyn_dTF_tmp[k];
+  }
+
+  /* End of Update for DiscreteTransferFcn: '<S1>/S2HP_dyn_dTF' */
+
+  /* Update for DiscreteTransferFcn: '<S1>/S3HP_dyn_dTF' */
+  for (k = 0; k < 6; k++) {
+    memOffset = k << 2;
+    M1_HP_Dyn_DW.S3HP_dyn_dTF_states[memOffset + 3] =
+      M1_HP_Dyn_DW.S3HP_dyn_dTF_states[memOffset + 2];
+    M1_HP_Dyn_DW.S3HP_dyn_dTF_states[memOffset + 2] =
+      M1_HP_Dyn_DW.S3HP_dyn_dTF_states[memOffset + 1];
+    M1_HP_Dyn_DW.S3HP_dyn_dTF_states[memOffset + 1] =
+      M1_HP_Dyn_DW.S3HP_dyn_dTF_states[memOffset];
+    M1_HP_Dyn_DW.S3HP_dyn_dTF_states[memOffset] = S3HP_dyn_dTF_tmp[k];
+  }
+
+  /* End of Update for DiscreteTransferFcn: '<S1>/S3HP_dyn_dTF' */
+
+  /* Update for DiscreteTransferFcn: '<S1>/S4HP_dyn_dTF' */
+  for (k = 0; k < 6; k++) {
+    memOffset = k << 2;
+    M1_HP_Dyn_DW.S4HP_dyn_dTF_states[memOffset + 3] =
+      M1_HP_Dyn_DW.S4HP_dyn_dTF_states[memOffset + 2];
+    M1_HP_Dyn_DW.S4HP_dyn_dTF_states[memOffset + 2] =
+      M1_HP_Dyn_DW.S4HP_dyn_dTF_states[memOffset + 1];
+    M1_HP_Dyn_DW.S4HP_dyn_dTF_states[memOffset + 1] =
+      M1_HP_Dyn_DW.S4HP_dyn_dTF_states[memOffset];
+    M1_HP_Dyn_DW.S4HP_dyn_dTF_states[memOffset] = S4HP_dyn_dTF_tmp[k];
+  }
+
+  /* End of Update for DiscreteTransferFcn: '<S1>/S4HP_dyn_dTF' */
+
+  /* Update for DiscreteTransferFcn: '<S1>/S5HP_dyn_dTF' */
+  for (k = 0; k < 6; k++) {
+    memOffset = k << 2;
+    M1_HP_Dyn_DW.S5HP_dyn_dTF_states[memOffset + 3] =
+      M1_HP_Dyn_DW.S5HP_dyn_dTF_states[memOffset + 2];
+    M1_HP_Dyn_DW.S5HP_dyn_dTF_states[memOffset + 2] =
+      M1_HP_Dyn_DW.S5HP_dyn_dTF_states[memOffset + 1];
+    M1_HP_Dyn_DW.S5HP_dyn_dTF_states[memOffset + 1] =
+      M1_HP_Dyn_DW.S5HP_dyn_dTF_states[memOffset];
+    M1_HP_Dyn_DW.S5HP_dyn_dTF_states[memOffset] = S5HP_dyn_dTF_tmp[k];
+  }
+
+  /* End of Update for DiscreteTransferFcn: '<S1>/S5HP_dyn_dTF' */
+
+  /* Update for DiscreteTransferFcn: '<S1>/S6HP_dyn_dTF' */
+  for (k = 0; k < 6; k++) {
+    memOffset = k << 2;
+    M1_HP_Dyn_DW.S6HP_dyn_dTF_states[memOffset + 3] =
+      M1_HP_Dyn_DW.S6HP_dyn_dTF_states[memOffset + 2];
+    M1_HP_Dyn_DW.S6HP_dyn_dTF_states[memOffset + 2] =
+      M1_HP_Dyn_DW.S6HP_dyn_dTF_states[memOffset + 1];
+    M1_HP_Dyn_DW.S6HP_dyn_dTF_states[memOffset + 1] =
+      M1_HP_Dyn_DW.S6HP_dyn_dTF_states[memOffset];
+    M1_HP_Dyn_DW.S6HP_dyn_dTF_states[memOffset] = S6HP_dyn_dTF_tmp[k];
+  }
+
+  /* End of Update for DiscreteTransferFcn: '<S1>/S6HP_dyn_dTF' */
+
+  /* Update for DiscreteTransferFcn: '<S1>/S7HP_dyn_dTF' */
+  for (k = 0; k < 6; k++) {
+    memOffset = k << 2;
+    M1_HP_Dyn_DW.S7HP_dyn_dTF_states[memOffset + 3] =
+      M1_HP_Dyn_DW.S7HP_dyn_dTF_states[memOffset + 2];
+    M1_HP_Dyn_DW.S7HP_dyn_dTF_states[memOffset + 2] =
+      M1_HP_Dyn_DW.S7HP_dyn_dTF_states[memOffset + 1];
+    M1_HP_Dyn_DW.S7HP_dyn_dTF_states[memOffset + 1] =
+      M1_HP_Dyn_DW.S7HP_dyn_dTF_states[memOffset];
+    M1_HP_Dyn_DW.S7HP_dyn_dTF_states[memOffset] = S7HP_dyn_dTF_tmp[k];
+  }
+
+  /* End of Update for DiscreteTransferFcn: '<S1>/S7HP_dyn_dTF' */
 }
 
 /* Model initialize function */
@@ -466,6 +541,10 @@ void M1_HP_Dyn_initialize(void)
 
   /* initialize error status */
   rtmSetErrorStatus(M1_HP_Dyn_M, (NULL));
+
+  /* states (dwork) */
+  (void) memset((void *)&M1_HP_Dyn_DW, 0,
+                sizeof(DW_M1_HP_Dyn_T));
 
   /* external inputs */
   (void)memset(&M1_HP_Dyn_U, 0, sizeof(ExtU_M1_HP_Dyn_T));
