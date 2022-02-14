@@ -3,14 +3,12 @@
  *
  * Code generated for Simulink model 'M1_HP_loadcells'.
  *
- * Model version                  : 1.788
+ * Model version                  : 1.964
  * Simulink Coder version         : 9.0 (R2018b) 24-May-2018
- * C/C++ source code generated on : Thu Feb 10 11:47:20 2022
+ * C/C++ source code generated on : Mon Feb 14 14:54:13 2022
  *
  * Target selection: ert.tlc
- * Embedded hardware selection: Intel->x86-64 (Windows64)
- * Emulation hardware selection:
- *    Differs from embedded hardware (MATLAB Host)
+ * Embedded hardware selection: Intel->x86-64 (Linux 64)
  * Code generation objectives: Unspecified
  * Validation result: Not run
  */
@@ -19,25 +17,25 @@
 #include "M1_HP_loadcells_private.h"
 
 /* Exported block parameters */
-real_T S1_HPstiff = 1.4293878534590691E+8;/* Variable: S1_HPstiff
+real_T S1_HPstiff = 2.6043836850140852E+8;/* Variable: S1_HPstiff
                                            * Referenced by: '<S2>/HpK'
                                            */
-real_T S2_HPstiff = 1.4293878534590691E+8;/* Variable: S2_HPstiff
+real_T S2_HPstiff = 2.6043836850140852E+8;/* Variable: S2_HPstiff
                                            * Referenced by: '<S3>/HpK'
                                            */
-real_T S3_HPstiff = 1.4293878534590691E+8;/* Variable: S3_HPstiff
+real_T S3_HPstiff = 2.6043836850140852E+8;/* Variable: S3_HPstiff
                                            * Referenced by: '<S4>/HpK'
                                            */
-real_T S4_HPstiff = 1.4293878534590691E+8;/* Variable: S4_HPstiff
+real_T S4_HPstiff = 2.6043836850140852E+8;/* Variable: S4_HPstiff
                                            * Referenced by: '<S5>/HpK'
                                            */
-real_T S5_HPstiff = 1.4293878534590691E+8;/* Variable: S5_HPstiff
+real_T S5_HPstiff = 2.6043836850140852E+8;/* Variable: S5_HPstiff
                                            * Referenced by: '<S6>/HpK'
                                            */
-real_T S6_HPstiff = 1.4293878534590691E+8;/* Variable: S6_HPstiff
+real_T S6_HPstiff = 2.6043836850140852E+8;/* Variable: S6_HPstiff
                                            * Referenced by: '<S7>/HpK'
                                            */
-real_T S7_HPstiff = 1.4293878534590691E+8;/* Variable: S7_HPstiff
+real_T S7_HPstiff = 2.6043836850140852E+8;/* Variable: S7_HPstiff
                                            * Referenced by: '<S8>/HpK'
                                            */
 

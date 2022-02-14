@@ -3,14 +3,12 @@
  *
  * Code generated for Simulink model 'M1SA_F_Control_CS'.
  *
- * Model version                  : 1.785
+ * Model version                  : 1.964
  * Simulink Coder version         : 9.0 (R2018b) 24-May-2018
- * C/C++ source code generated on : Thu Feb 10 11:20:29 2022
+ * C/C++ source code generated on : Mon Feb 14 14:46:45 2022
  *
  * Target selection: ert.tlc
- * Embedded hardware selection: Intel->x86-64 (Windows64)
- * Emulation hardware selection:
- *    Differs from embedded hardware (MATLAB Host)
+ * Embedded hardware selection: Intel->x86-64 (Linux 64)
  * Code generation objectives: Unspecified
  * Validation result: Not run
  */
@@ -34,6 +32,17 @@
 #ifndef rtmSetErrorStatus
 # define rtmSetErrorStatus(rtm, val)   ((rtm)->errorStatus = (val))
 #endif
+
+/* Block states (default storage) for system '<Root>' */
+typedef struct {
+  real_T Fxcontroller_DSTATE[3];       /* '<S2>/Fx controller' */
+  real_T Fycontroller_DSTATE[3];       /* '<S2>/Fy controller' */
+  real_T Fzcontroller_DSTATE[3];       /* '<S2>/Fz controller' */
+  real_T Mxcontroller_DSTATE[3];       /* '<S2>/Mx controller' */
+  real_T Mycontroller_DSTATE[3];       /* '<S2>/My controller' */
+  real_T Mzcontroller_DSTATE[3];       /* '<S2>/Mz controller' */
+  real_T CSseg_SA_dyn_states[306];     /* '<S1>/CSseg_SA_dyn' */
+} DW_M1SA_F_Control_CS_T;
 
 /* Constant parameters (default storage) */
 typedef struct {
@@ -59,6 +68,9 @@ struct tag_RTM_M1SA_F_Control_CS_T {
   const char_T * volatile errorStatus;
 };
 
+/* Block states (default storage) */
+extern DW_M1SA_F_Control_CS_T M1SA_F_Control_CS_DW;
+
 /* External inputs (root inport signals with default storage) */
 extern ExtU_M1SA_F_Control_CS_T M1SA_F_Control_CS_U;
 
@@ -79,10 +91,10 @@ extern const ConstP_M1SA_F_Control_CS_T M1SA_F_Control_CS_ConstP;
 extern real_T CSseg_LC2CG[36];         /* Variable: CSseg_LC2CG
                                         * Referenced by: '<S1>/CSseg_LC2CG'
                                         */
-extern real_T OAseg_SA_dynDen[2];      /* Variable: OAseg_SA_dynDen
+extern real_T CSseg_SA_dynDen[2];      /* Variable: CSseg_SA_dynDen
                                         * Referenced by: '<S1>/CSseg_SA_dyn'
                                         */
-extern real_T OAseg_SA_dynNum[2];      /* Variable: OAseg_SA_dynNum
+extern real_T CSseg_SA_dynNum[2];      /* Variable: CSseg_SA_dynNum
                                         * Referenced by: '<S1>/CSseg_SA_dyn'
                                         */
 
