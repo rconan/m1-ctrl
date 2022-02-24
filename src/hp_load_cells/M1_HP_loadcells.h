@@ -65,25 +65,25 @@ extern ExtY_M1_HP_loadcells_T M1_HP_loadcells_Y;
  * these parameters and exports their symbols.
  *
  */
-extern real_T S1_HPstiff;              /* Variable: S1_HPstiff
+extern real_T S1_HPstiff_LC;              /* Variable: S1_HPstiff
                                         * Referenced by: '<S2>/HpK'
                                         */
-extern real_T S2_HPstiff;              /* Variable: S2_HPstiff
+extern real_T S2_HPstiff_LC;              /* Variable: S2_HPstiff
                                         * Referenced by: '<S3>/HpK'
                                         */
-extern real_T S3_HPstiff;              /* Variable: S3_HPstiff
+extern real_T S3_HPstiff_LC;              /* Variable: S3_HPstiff
                                         * Referenced by: '<S4>/HpK'
                                         */
-extern real_T S4_HPstiff;              /* Variable: S4_HPstiff
+extern real_T S4_HPstiff_LC;              /* Variable: S4_HPstiff
                                         * Referenced by: '<S5>/HpK'
                                         */
-extern real_T S5_HPstiff;              /* Variable: S5_HPstiff
+extern real_T S5_HPstiff_LC;              /* Variable: S5_HPstiff
                                         * Referenced by: '<S6>/HpK'
                                         */
-extern real_T S6_HPstiff;              /* Variable: S6_HPstiff
+extern real_T S6_HPstiff_LC;              /* Variable: S6_HPstiff
                                         * Referenced by: '<S7>/HpK'
                                         */
-extern real_T S7_HPstiff;              /* Variable: S7_HPstiff
+extern real_T S7_HPstiff_LC;              /* Variable: S7_HPstiff
                                         * Referenced by: '<S8>/HpK'
                                         */
 
