@@ -17,25 +17,25 @@
 #include "M1_HP_loadcells_private.h"
 
 /* Exported block parameters */
-real_T S1_HPstiff = 2.6043836850140852E+8;/* Variable: S1_HPstiff
+real_T S1_HPstiff_LC = 2.6043836850140852E+8;/* Variable: S1_HPstiff
                                            * Referenced by: '<S2>/HpK'
                                            */
-real_T S2_HPstiff = 2.6043836850140852E+8;/* Variable: S2_HPstiff
+real_T S2_HPstiff_LC = 2.6043836850140852E+8;/* Variable: S2_HPstiff
                                            * Referenced by: '<S3>/HpK'
                                            */
-real_T S3_HPstiff = 2.6043836850140852E+8;/* Variable: S3_HPstiff
+real_T S3_HPstiff_LC = 2.6043836850140852E+8;/* Variable: S3_HPstiff
                                            * Referenced by: '<S4>/HpK'
                                            */
-real_T S4_HPstiff = 2.6043836850140852E+8;/* Variable: S4_HPstiff
+real_T S4_HPstiff_LC = 2.6043836850140852E+8;/* Variable: S4_HPstiff
                                            * Referenced by: '<S5>/HpK'
                                            */
-real_T S5_HPstiff = 2.6043836850140852E+8;/* Variable: S5_HPstiff
+real_T S5_HPstiff_LC = 2.6043836850140852E+8;/* Variable: S5_HPstiff
                                            * Referenced by: '<S6>/HpK'
                                            */
-real_T S6_HPstiff = 2.6043836850140852E+8;/* Variable: S6_HPstiff
+real_T S6_HPstiff_LC = 2.6043836850140852E+8;/* Variable: S6_HPstiff
                                            * Referenced by: '<S7>/HpK'
                                            */
-real_T S7_HPstiff = 2.6043836850140852E+8;/* Variable: S7_HPstiff
+real_T S7_HPstiff_LC = 2.6043836850140852E+8;/* Variable: S7_HPstiff
                                            * Referenced by: '<S8>/HpK'
                                            */
 

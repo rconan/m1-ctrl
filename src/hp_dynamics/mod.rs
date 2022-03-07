@@ -1,4 +1,3 @@
-use dosio::{io::Tags, ios, DOSIOSError, Dos, IOTags, IOVec, IO};
 use simulink_binder::import;
 
 import! {M1_HP_Dyn,
@@ -160,40 +159,3 @@ extern RT_MODEL_M1_HP_Dyn_T *const M1_HP_Dyn_M;
  * [EOF]
  */
 "##}
-
-impl<'a> IOTags for Controller<'a> {
-    fn outputs_tags(&self) -> Vec<Tags> {
-        vec![ios!(OSSHarpointDeltaF)]
-    }
-    fn inputs_tags(&self) -> Vec<Tags> {
-        vec![ios!(M1RBMcmd)]
-    }
-}
-impl<'a> Dos for Controller<'a> {
-    type Input = Vec<f64>;
-    type Output = Vec<f64>;
-    fn inputs(&mut self, data: Option<Vec<IO<Self::Input>>>) -> Result<&mut Self, DOSIOSError> {
-        match data {
-            Some(mut data) => {
-                if let Some(IO::M1RBMcmd { data: Some(values) }) =
-                    <Vec<IO<Vec<f64>>> as IOVec>::pop_this(&mut data, ios!(M1RBMcmd))
-                {
-                    for (k, v) in values.into_iter().enumerate() {
-                        self.m1_rbm_cmd[k] = v;
-                    }
-                    Ok(self)
-                } else {
-                    Err(DOSIOSError::Inputs("HP dynamics M1RBMcmd not found".into()))
-                }
-            }
-            None => Err(DOSIOSError::Inputs(
-                "None data passed to HP load cell controller".into(),
-            )),
-        }
-    }
-    fn outputs(&mut self) -> Option<Vec<IO<Self::Output>>> {
-        Some(vec![ios!(OSSHarpointDeltaF(Vec::<f64>::from(
-            &self.hp_f_cmd
-        )))])
-    }
-}

@@ -1,10 +1,11 @@
-use dosio::{ios, DOSIOSError, Dos, IOTags, IOVec, IO};
+//use dosio::{ios, DOSIOSError, Dos, IOTags, IOVec, IO};
 pub mod actuators;
 pub mod cg_controller;
 pub mod hp_dynamics;
 pub mod hp_load_cells;
 pub mod local_controller;
 
+/*
 pub struct MacroController<'a> {
     hardpoints_load_cells: hp_load_cells::Controller<'a>,
     hardpoints_dynamics: hp_dynamics::Controller<'a>,
@@ -79,3 +80,4 @@ impl<'a> Dos for MacroController<'a> {
         }
     }
 }
+*/
