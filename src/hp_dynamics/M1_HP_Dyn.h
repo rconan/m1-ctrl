@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'M1_HP_Dyn'.
  *
- * Model version                  : 1.964
+ * Model version                  : 1.960
  * Simulink Coder version         : 9.0 (R2018b) 24-May-2018
- * C/C++ source code generated on : Mon Feb 14 14:52:11 2022
+ * C/C++ source code generated on : Fri Feb 11 10:27:20 2022
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Intel->x86-64 (Linux 64)
@@ -139,13 +139,13 @@ extern RT_MODEL_M1_HP_Dyn_T *const M1_HP_Dyn_M;
  * MATLAB hilite_system command to trace the generated code back
  * to the parent model.  For example,
  *
- * hilite_system('M1DCS/M1_HP_Dyn')    - opens subsystem M1DCS/M1_HP_Dyn
- * hilite_system('M1DCS/M1_HP_Dyn/Kp') - opens and selects block Kp
+ * hilite_system('ims_Build5pt1f/M1_HP_Dyn')    - opens subsystem ims_Build5pt1f/M1_HP_Dyn
+ * hilite_system('ims_Build5pt1f/M1_HP_Dyn/Kp') - opens and selects block Kp
  *
  * Here is the system hierarchy for this model
  *
- * '<Root>' : 'M1DCS'
- * '<S1>'   : 'M1DCS/M1_HP_Dyn'
+ * '<Root>' : 'ims_Build5pt1f'
+ * '<S1>'   : 'ims_Build5pt1f/M1_HP_Dyn'
  */
 #endif                                 /* RTW_HEADER_M1_HP_Dyn_h_ */
 

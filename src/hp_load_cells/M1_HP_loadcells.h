@@ -3,12 +3,14 @@
  *
  * Code generated for Simulink model 'M1_HP_loadcells'.
  *
- * Model version                  : 1.964
+ * Model version                  : 1.788
  * Simulink Coder version         : 9.0 (R2018b) 24-May-2018
- * C/C++ source code generated on : Mon Feb 14 14:54:13 2022
+ * C/C++ source code generated on : Thu Feb 10 11:47:20 2022
  *
  * Target selection: ert.tlc
- * Embedded hardware selection: Intel->x86-64 (Linux 64)
+ * Embedded hardware selection: Intel->x86-64 (Windows64)
+ * Emulation hardware selection:
+ *    Differs from embedded hardware (MATLAB Host)
  * Code generation objectives: Unspecified
  * Validation result: Not run
  */
@@ -63,25 +65,25 @@ extern ExtY_M1_HP_loadcells_T M1_HP_loadcells_Y;
  * these parameters and exports their symbols.
  *
  */
-extern real_T S1_HPstiff_LC;              /* Variable: S1_HPstiff
+extern real_T S1_LC_HPstiff;              /* Variable: S1_HPstiff
                                         * Referenced by: '<S2>/HpK'
                                         */
-extern real_T S2_HPstiff_LC;              /* Variable: S2_HPstiff
+extern real_T S2_LC_HPstiff;              /* Variable: S2_HPstiff
                                         * Referenced by: '<S3>/HpK'
                                         */
-extern real_T S3_HPstiff_LC;              /* Variable: S3_HPstiff
+extern real_T S3_LC_HPstiff;              /* Variable: S3_HPstiff
                                         * Referenced by: '<S4>/HpK'
                                         */
-extern real_T S4_HPstiff_LC;              /* Variable: S4_HPstiff
+extern real_T S4_LC_HPstiff;              /* Variable: S4_HPstiff
                                         * Referenced by: '<S5>/HpK'
                                         */
-extern real_T S5_HPstiff_LC;              /* Variable: S5_HPstiff
+extern real_T S5_LC_HPstiff;              /* Variable: S5_HPstiff
                                         * Referenced by: '<S6>/HpK'
                                         */
-extern real_T S6_HPstiff_LC;              /* Variable: S6_HPstiff
+extern real_T S6_LC_HPstiff;              /* Variable: S6_HPstiff
                                         * Referenced by: '<S7>/HpK'
                                         */
-extern real_T S7_HPstiff_LC;              /* Variable: S7_HPstiff
+extern real_T S7_LC_HPstiff;              /* Variable: S7_HPstiff
                                         * Referenced by: '<S8>/HpK'
                                         */
 

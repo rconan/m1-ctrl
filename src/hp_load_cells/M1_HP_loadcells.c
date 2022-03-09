@@ -3,12 +3,14 @@
  *
  * Code generated for Simulink model 'M1_HP_loadcells'.
  *
- * Model version                  : 1.964
+ * Model version                  : 1.788
  * Simulink Coder version         : 9.0 (R2018b) 24-May-2018
- * C/C++ source code generated on : Mon Feb 14 14:54:13 2022
+ * C/C++ source code generated on : Thu Feb 10 11:47:20 2022
  *
  * Target selection: ert.tlc
- * Embedded hardware selection: Intel->x86-64 (Linux 64)
+ * Embedded hardware selection: Intel->x86-64 (Windows64)
+ * Emulation hardware selection:
+ *    Differs from embedded hardware (MATLAB Host)
  * Code generation objectives: Unspecified
  * Validation result: Not run
  */
@@ -17,25 +19,25 @@
 #include "M1_HP_loadcells_private.h"
 
 /* Exported block parameters */
-real_T S1_HPstiff_LC = 2.6043836850140852E+8;/* Variable: S1_HPstiff
+real_T S1_LC_HPstiff = 1.4293878534590691E+8;/* Variable: S1_HPstiff
                                            * Referenced by: '<S2>/HpK'
                                            */
-real_T S2_HPstiff_LC = 2.6043836850140852E+8;/* Variable: S2_HPstiff
+real_T S2_LC_HPstiff = 1.4293878534590691E+8;/* Variable: S2_HPstiff
                                            * Referenced by: '<S3>/HpK'
                                            */
-real_T S3_HPstiff_LC = 2.6043836850140852E+8;/* Variable: S3_HPstiff
+real_T S3_LC_HPstiff = 1.4293878534590691E+8;/* Variable: S3_HPstiff
                                            * Referenced by: '<S4>/HpK'
                                            */
-real_T S4_HPstiff_LC = 2.6043836850140852E+8;/* Variable: S4_HPstiff
+real_T S4_LC_HPstiff = 1.4293878534590691E+8;/* Variable: S4_HPstiff
                                            * Referenced by: '<S5>/HpK'
                                            */
-real_T S5_HPstiff_LC = 2.6043836850140852E+8;/* Variable: S5_HPstiff
+real_T S5_LC_HPstiff = 1.4293878534590691E+8;/* Variable: S5_HPstiff
                                            * Referenced by: '<S6>/HpK'
                                            */
-real_T S6_HPstiff_LC = 2.6043836850140852E+8;/* Variable: S6_HPstiff
+real_T S6_LC_HPstiff = 1.4293878534590691E+8;/* Variable: S6_HPstiff
                                            * Referenced by: '<S7>/HpK'
                                            */
-real_T S7_HPstiff_LC = 2.6043836850140852E+8;/* Variable: S7_HPstiff
+real_T S7_LC_HPstiff = 1.4293878534590691E+8;/* Variable: S7_HPstiff
                                            * Referenced by: '<S8>/HpK'
                                            */
 
@@ -81,24 +83,24 @@ void M1_HP_loadcells_step(void)
    */
   for (i = 0; i < 6; i++) {
     M1_HP_loadcells_Y.M1_HP_LC[i] = (M1_HP_loadcells_U.M1_HP_D[i + 6] -
-      M1_HP_loadcells_U.M1_HP_D[i]) * S1_HPstiff_LC - M1_HP_loadcells_U.M1_HP_cmd[i];
+      M1_HP_loadcells_U.M1_HP_D[i]) * S1_LC_HPstiff - M1_HP_loadcells_U.M1_HP_cmd[i];
     M1_HP_loadcells_Y.M1_HP_LC[i + 6] = (M1_HP_loadcells_U.M1_HP_D[i + 18] -
-      M1_HP_loadcells_U.M1_HP_D[i + 12]) * S2_HPstiff_LC -
+      M1_HP_loadcells_U.M1_HP_D[i + 12]) * S2_LC_HPstiff -
       M1_HP_loadcells_U.M1_HP_cmd[i + 6];
     M1_HP_loadcells_Y.M1_HP_LC[i + 12] = (M1_HP_loadcells_U.M1_HP_D[i + 30] -
-      M1_HP_loadcells_U.M1_HP_D[i + 24]) * S3_HPstiff_LC -
+      M1_HP_loadcells_U.M1_HP_D[i + 24]) * S3_LC_HPstiff -
       M1_HP_loadcells_U.M1_HP_cmd[i + 12];
     M1_HP_loadcells_Y.M1_HP_LC[i + 18] = (M1_HP_loadcells_U.M1_HP_D[i + 42] -
-      M1_HP_loadcells_U.M1_HP_D[i + 36]) * S4_HPstiff_LC -
+      M1_HP_loadcells_U.M1_HP_D[i + 36]) * S4_LC_HPstiff -
       M1_HP_loadcells_U.M1_HP_cmd[i + 18];
     M1_HP_loadcells_Y.M1_HP_LC[i + 24] = (M1_HP_loadcells_U.M1_HP_D[i + 54] -
-      M1_HP_loadcells_U.M1_HP_D[i + 48]) * S5_HPstiff_LC -
+      M1_HP_loadcells_U.M1_HP_D[i + 48]) * S5_LC_HPstiff -
       M1_HP_loadcells_U.M1_HP_cmd[i + 24];
     M1_HP_loadcells_Y.M1_HP_LC[i + 30] = (M1_HP_loadcells_U.M1_HP_D[i + 66] -
-      M1_HP_loadcells_U.M1_HP_D[i + 60]) * S6_HPstiff_LC -
+      M1_HP_loadcells_U.M1_HP_D[i + 60]) * S6_LC_HPstiff -
       M1_HP_loadcells_U.M1_HP_cmd[i + 30];
     M1_HP_loadcells_Y.M1_HP_LC[i + 36] = (M1_HP_loadcells_U.M1_HP_D[i + 78] -
-      M1_HP_loadcells_U.M1_HP_D[i + 72]) * S7_HPstiff_LC -
+      M1_HP_loadcells_U.M1_HP_D[i + 72]) * S7_LC_HPstiff -
       M1_HP_loadcells_U.M1_HP_cmd[i + 36];
   }
 
