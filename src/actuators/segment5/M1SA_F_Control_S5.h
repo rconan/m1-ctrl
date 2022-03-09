@@ -3,14 +3,12 @@
  *
  * Code generated for Simulink model 'M1SA_F_Control_S5'.
  *
- * Model version                  : 1.779
+ * Model version                  : 1.966
  * Simulink Coder version         : 9.0 (R2018b) 24-May-2018
- * C/C++ source code generated on : Thu Feb 10 10:43:30 2022
+ * C/C++ source code generated on : Wed Mar  9 10:39:46 2022
  *
  * Target selection: ert.tlc
- * Embedded hardware selection: Intel->x86-64 (Windows64)
- * Emulation hardware selection:
- *    Differs from embedded hardware (MATLAB Host)
+ * Embedded hardware selection: Intel->x86-64 (Linux 64)
  * Code generation objectives: Unspecified
  * Validation result: Not run
  */
@@ -26,6 +24,7 @@
 
 #include "M1SA_F_Control_S5_types.h"
 
+
 /* Macros for accessing real-time model data structure */
 #ifndef rtmGetErrorStatus
 # define rtmGetErrorStatus(rtm)        ((rtm)->errorStatus)
@@ -34,6 +33,17 @@
 #ifndef rtmSetErrorStatus
 # define rtmSetErrorStatus(rtm, val)   ((rtm)->errorStatus = (val))
 #endif
+
+/* Block states (default storage) for system '<Root>' */
+typedef struct {
+  real_T Fxcontroller_DSTATE[3];       /* '<S3>/Fx controller' */
+  real_T Fycontroller_DSTATE[3];       /* '<S3>/Fy controller' */
+  real_T Fzcontroller_DSTATE[3];       /* '<S3>/Fz controller' */
+  real_T Mxcontroller_DSTATE[3];       /* '<S3>/Mx controller' */
+  real_T Mycontroller_DSTATE[3];       /* '<S3>/My controller' */
+  real_T Mzcontroller_DSTATE[3];       /* '<S3>/Mz controller' */
+  real_T OAseg_SA_dyn_states[335];     /* '<S1>/OAseg_SA_dyn' */
+} DW_M1SA_F_Control_S5_T;
 
 /* Constant parameters (default storage) */
 typedef struct {
@@ -58,6 +68,9 @@ typedef struct {
 struct tag_RTM_M1SA_F_Control_S5_T {
   const char_T * volatile errorStatus;
 };
+
+/* Block states (default storage) */
+extern DW_M1SA_F_Control_S5_T M1SA_F_Control_S5_DW;
 
 /* External inputs (root inport signals with default storage) */
 extern ExtU_M1SA_F_Control_S5_T M1SA_F_Control_S5_U;

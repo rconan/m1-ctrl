@@ -24,6 +24,7 @@
 
 #include "M1SA_F_Control_OA_types.h"
 
+
 /* Macros for accessing real-time model data structure */
 #ifndef rtmGetErrorStatus
 # define rtmGetErrorStatus(rtm)        ((rtm)->errorStatus)

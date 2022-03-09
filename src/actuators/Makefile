@@ -24,8 +24,8 @@ else
 	sed 's/M1SA_F_Control_OA/M1SA_F_Control_S$(ID)/g' outer/rtwtypes.h > $(SEGMENT)/rtwtypes.h
 	sed 's/M1SA_F_Control_OA/M1SA_F_Control_S$(ID)/g' outer/M1SA_F_Control_OA.c > $(SEGMENT)/M1SA_F_Control_S$(ID).c
 	sed 's/M1SA_F_Control_OA/M1SA_F_Control_S$(ID)/g' outer/M1SA_F_Control_OA_data.c > $(SEGMENT)/M1SA_F_Control_S$(ID)_data.c
-	sed -i 's/LC2CG/LC2CG_S$(ID)/g' $(SEGMENT)/M1SA_F_Control_S$(ID).h
-	sed -i 's/LC2CG/LC2CG_S$(ID)/g' $(SEGMENT)/M1SA_F_Control_S$(ID).c
+	sed -i 's/OAseg_LC2CG/OAseg_LC2CG_S$(ID)/g' $(SEGMENT)/M1SA_F_Control_S$(ID).h
+	sed -i 's/OAseg_LC2CG/OAseg_LC2CG_S$(ID)/g' $(SEGMENT)/M1SA_F_Control_S$(ID).c
 	sed -i 's/OAseg_SA_dynDen/OAseg_SA_dynDen_S$(ID)/g' $(SEGMENT)/M1SA_F_Control_S$(ID).h
 	sed -i 's/OAseg_SA_dynDen/OAseg_SA_dynDen_S$(ID)/g' $(SEGMENT)/M1SA_F_Control_S$(ID).c
 	sed -i 's/OAseg_SA_dynNum/OAseg_SA_dynNum_S$(ID)/g' $(SEGMENT)/M1SA_F_Control_S$(ID).h

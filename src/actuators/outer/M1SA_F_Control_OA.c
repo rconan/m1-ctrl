@@ -70,6 +70,7 @@ void M1SA_F_Control_OA_step(void)
   int32_T i;
   int32_T i_0;
   real_T OAseg_SA_dyn_tmp[335];
+  real_T OFL_act_Fcmd[335];
   int32_T i_1;
 
   /* Gain: '<S1>/OAseg_LC2CG' incorporates:

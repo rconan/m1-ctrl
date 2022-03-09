@@ -3,14 +3,12 @@
  *
  * Code generated for Simulink model 'M1SA_F_Control_S3'.
  *
- * Model version                  : 1.779
+ * Model version                  : 1.966
  * Simulink Coder version         : 9.0 (R2018b) 24-May-2018
- * C/C++ source code generated on : Thu Feb 10 10:43:30 2022
+ * C/C++ source code generated on : Wed Mar  9 10:39:46 2022
  *
  * Target selection: ert.tlc
- * Embedded hardware selection: Intel->x86-64 (Windows64)
- * Emulation hardware selection:
- *    Differs from embedded hardware (MATLAB Host)
+ * Embedded hardware selection: Intel->x86-64 (Linux 64)
  * Code generation objectives: Unspecified
  * Validation result: Not run
  */
@@ -43,6 +41,9 @@ real_T OAseg_SA_dynNum_S3[2] = { 0.25752323685913081, 0.20898867204976596 } ;/* 
                                                                       * Referenced by: '<S1>/OAseg_SA_dyn'
                                                                       */
 
+/* Block states (default storage) */
+DW_M1SA_F_Control_S3_T M1SA_F_Control_S3_DW;
+
 /* External inputs (root inport signals with default storage) */
 ExtU_M1SA_F_Control_S3_T M1SA_F_Control_S3_U;
 
@@ -68,16 +69,19 @@ void M1SA_F_Control_S3_step(void)
   real_T tmp[6];
   int32_T i;
   int32_T i_0;
-  real_T M1SA_F_Control_S3_OAseg_SA_dyn_tmp_p[335];
+  real_T OAseg_SA_dyn_tmp[335];
+  real_T OFL_act_Fcmd[335];
+  int32_T i_1;
 
   /* Gain: '<S1>/OAseg_LC2CG_S3' incorporates:
    *  Inport: '<Root>/HP_LC'
    */
   for (i = 0; i < 6; i++) {
     rtb_OAseg_LC2CG_S3[i] = 0.0;
+    i_1 = 0;
     for (i_0 = 0; i_0 < 6; i_0++) {
-      rtb_OAseg_LC2CG_S3[i] += OAseg_LC2CG_S3[6 * i_0 + i] *
-        M1SA_F_Control_S3_U.HP_LC[i_0];
+      rtb_OAseg_LC2CG_S3[i] += OAseg_LC2CG_S3[i_1 + i] * M1SA_F_Control_S3_U.HP_LC[i_0];
+      i_1 += 6;
     }
   }
 
@@ -86,53 +90,54 @@ void M1SA_F_Control_S3_step(void)
   /* DiscreteStateSpace: '<S3>/Fx controller' */
   {
     rtb_Fxcontroller = (-6.8610656930319749)*
-      M1SA_F_Control_S3_Fxcontroller_DSTATE[0]
-      + (8.7455483888425327)*M1SA_F_Control_S3_Fxcontroller_DSTATE[1]
-      + (1.8)*M1SA_F_Control_S3_Fxcontroller_DSTATE[2];
+      M1SA_F_Control_S3_DW.Fxcontroller_DSTATE[0]
+      + (8.7455483888425327)*M1SA_F_Control_S3_DW.Fxcontroller_DSTATE[1]
+      + (1.8)*M1SA_F_Control_S3_DW.Fxcontroller_DSTATE[2];
     rtb_Fxcontroller += 0.024370329855613257*rtb_OAseg_LC2CG_S3[0];
   }
 
   /* DiscreteStateSpace: '<S3>/Fy controller' */
   {
     rtb_Fycontroller = (-6.8610656930319749)*
-      M1SA_F_Control_S3_Fycontroller_DSTATE[0]
-      + (8.7455483888425327)*M1SA_F_Control_S3_Fycontroller_DSTATE[1]
-      + (1.8)*M1SA_F_Control_S3_Fycontroller_DSTATE[2];
+      M1SA_F_Control_S3_DW.Fycontroller_DSTATE[0]
+      + (8.7455483888425327)*M1SA_F_Control_S3_DW.Fycontroller_DSTATE[1]
+      + (1.8)*M1SA_F_Control_S3_DW.Fycontroller_DSTATE[2];
     rtb_Fycontroller += 0.024370329855613257*rtb_OAseg_LC2CG_S3[1];
   }
 
   /* DiscreteStateSpace: '<S3>/Fz controller' */
   {
     rtb_Fzcontroller = (-11.022867857707155)*
-      M1SA_F_Control_S3_Fzcontroller_DSTATE[0]
-      + (14.667973716577512)*M1SA_F_Control_S3_Fzcontroller_DSTATE[1]
-      + (2.4)*M1SA_F_Control_S3_Fzcontroller_DSTATE[2];
+      M1SA_F_Control_S3_DW.Fzcontroller_DSTATE[0]
+      + (14.667973716577512)*M1SA_F_Control_S3_DW.Fzcontroller_DSTATE[1]
+      + (2.4)*M1SA_F_Control_S3_DW.Fzcontroller_DSTATE[2];
     rtb_Fzcontroller += 0.025354461628138772*rtb_OAseg_LC2CG_S3[2];
   }
 
   /* DiscreteStateSpace: '<S3>/Mx controller' */
   {
     rtb_Mxcontroller = (-10.04307867717106)*
-      M1SA_F_Control_S3_Mxcontroller_DSTATE[0]
-      + (10.41998468921483)*M1SA_F_Control_S3_Mxcontroller_DSTATE[1]
-      + (2.0)*M1SA_F_Control_S3_Mxcontroller_DSTATE[2];
+      M1SA_F_Control_S3_DW.Mxcontroller_DSTATE[0]
+      + (10.41998468921483)*M1SA_F_Control_S3_DW.Mxcontroller_DSTATE[1]
+      + (2.0)*M1SA_F_Control_S3_DW.Mxcontroller_DSTATE[2];
     rtb_Mxcontroller += 0.024505707216075836*rtb_OAseg_LC2CG_S3[3];
   }
 
   /* DiscreteStateSpace: '<S3>/My controller' */
   {
     rtb_Mycontroller = (-10.04307867717106)*
-      M1SA_F_Control_S3_Mycontroller_DSTATE[0]
-      + (10.41998468921483)*M1SA_F_Control_S3_Mycontroller_DSTATE[1]
-      + (2.0)*M1SA_F_Control_S3_Mycontroller_DSTATE[2];
+      M1SA_F_Control_S3_DW.Mycontroller_DSTATE[0]
+      + (10.41998468921483)*M1SA_F_Control_S3_DW.Mycontroller_DSTATE[1]
+      + (2.0)*M1SA_F_Control_S3_DW.Mycontroller_DSTATE[2];
     rtb_Mycontroller += 0.024505707216075836*rtb_OAseg_LC2CG_S3[4];
   }
 
   /* DiscreteStateSpace: '<S3>/Mz controller' */
   {
-    rtb_Mzcontroller = (-9.4551745922133)*M1SA_F_Control_S3_Mzcontroller_DSTATE
-      [0] + (11.4653232391471)*M1SA_F_Control_S3_Mzcontroller_DSTATE[1]
-      + (2.0)*M1SA_F_Control_S3_Mzcontroller_DSTATE[2];
+    rtb_Mzcontroller = (-9.4551745922133)*
+      M1SA_F_Control_S3_DW.Mzcontroller_DSTATE[0]
+      + (11.4653232391471)*M1SA_F_Control_S3_DW.Mzcontroller_DSTATE[1]
+      + (2.0)*M1SA_F_Control_S3_DW.Mzcontroller_DSTATE[2];
     rtb_Mzcontroller += 0.022969235998287645*rtb_OAseg_LC2CG_S3[5];
   }
 
@@ -146,129 +151,139 @@ void M1SA_F_Control_S3_step(void)
   for (i_0 = 0; i_0 < 335; i_0++) {
     /* Gain: '<S1>/OAseg_Kbal' */
     OFL_act_Fcmd[i_0] = 0.0;
-    for (i = 0; i < 6; i++) {
-      OFL_act_Fcmd[i_0] += M1SA_F_Control_S3_ConstP.OAseg_Kbal_Gain[335 * i +
-        i_0] * tmp[i];
+    i = 0;
+    for (i_1 = 0; i_1 < 6; i_1++) {
+      OFL_act_Fcmd[i_0] += M1SA_F_Control_S3_ConstP.OAseg_Kbal_Gain[i + i_0] *
+        tmp[i_1];
+      i += 335;
     }
 
-    /* End of Gain: '<S1>/OAseg_Kbal' */
-
     /* DiscreteTransferFcn: '<S1>/OAseg_SA_dyn' incorporates:
+     *  Gain: '<S1>/OAseg_Kbal'
      *  Inport: '<Root>/SA_offsetF_cmd'
      *  Sum: '<S1>/Add'
      */
     denAccum = (OFL_act_Fcmd[i_0] + M1SA_F_Control_S3_U.SA_offsetF_cmd[i_0]) -
-      OAseg_SA_dynDen_S3[1] * M1SA_F_Control_S3_OAseg_SA_dyn_states[i_0];
-    M1SA_F_Control_S3_Y.Res_Act_F[i_0] = OAseg_SA_dynNum_S3[0] * denAccum +
-      OAseg_SA_dynNum_S3[1] * M1SA_F_Control_S3_OAseg_SA_dyn_states[i_0];
-    M1SA_F_Control_S3_OAseg_SA_dyn_tmp_p[i_0] = denAccum;
+      OAseg_SA_dynDen_S3[1] * M1SA_F_Control_S3_DW.OAseg_SA_dyn_states[i_0];
+    OAseg_SA_dyn_tmp[i_0] = denAccum;
+    denAccum *= OAseg_SA_dynNum_S3[0];
+
+    /* Outport: '<Root>/Res_Act_F' incorporates:
+     *  DiscreteTransferFcn: '<S1>/OAseg_SA_dyn'
+     *  Gain: '<S1>/OAseg_Kbal'
+     */
+    M1SA_F_Control_S3_Y.Res_Act_F[i_0] = OAseg_SA_dynNum_S3[1] *
+      M1SA_F_Control_S3_DW.OAseg_SA_dyn_states[i_0] + denAccum;
   }
 
   /* Update for DiscreteStateSpace: '<S3>/Fx controller' */
   {
     real_T xnew[3];
-    xnew[0] = (0.569006949265765)*M1SA_F_Control_S3_Fxcontroller_DSTATE[0] +
-      (-0.01008281122133318)*M1SA_F_Control_S3_Fxcontroller_DSTATE[1]
-      + (0.10624490391424918)*M1SA_F_Control_S3_Fxcontroller_DSTATE[2];
+    xnew[0] = (0.569006949265765)*M1SA_F_Control_S3_DW.Fxcontroller_DSTATE[0]
+      + (-0.01008281122133318)*M1SA_F_Control_S3_DW.Fxcontroller_DSTATE[1]
+      + (0.10624490391424918)*M1SA_F_Control_S3_DW.Fxcontroller_DSTATE[2];
     xnew[0] += (0.0041005206649182965)*rtb_OAseg_LC2CG_S3[0];
-    xnew[1] = (0.69153586838988734)*M1SA_F_Control_S3_Fxcontroller_DSTATE[0]
-      + (0.40200245095801357)*M1SA_F_Control_S3_Fxcontroller_DSTATE[1]
-      + (-0.053834780381561045)*M1SA_F_Control_S3_Fxcontroller_DSTATE[2];
+    xnew[1] = (0.69153586838988734)*M1SA_F_Control_S3_DW.Fxcontroller_DSTATE[0]
+      + (0.40200245095801357)*M1SA_F_Control_S3_DW.Fxcontroller_DSTATE[1]
+      + (-0.053834780381561045)*M1SA_F_Control_S3_DW.Fxcontroller_DSTATE[2];
     xnew[1] += (-0.0018292791104672016)*rtb_OAseg_LC2CG_S3[0];
-    xnew[2] = (1.0)*M1SA_F_Control_S3_Fxcontroller_DSTATE[2];
+    xnew[2] = (1.0)*M1SA_F_Control_S3_DW.Fxcontroller_DSTATE[2];
     xnew[2] += (0.039999999999999994)*rtb_OAseg_LC2CG_S3[0];
-    (void) memcpy(&M1SA_F_Control_S3_Fxcontroller_DSTATE[0], xnew,
+    (void) memcpy(&M1SA_F_Control_S3_DW.Fxcontroller_DSTATE[0], xnew,
                   sizeof(real_T)*3);
   }
 
   /* Update for DiscreteStateSpace: '<S3>/Fy controller' */
   {
     real_T xnew[3];
-    xnew[0] = (0.569006949265765)*M1SA_F_Control_S3_Fycontroller_DSTATE[0] +
-      (-0.01008281122133318)*M1SA_F_Control_S3_Fycontroller_DSTATE[1]
-      + (0.10624490391424918)*M1SA_F_Control_S3_Fycontroller_DSTATE[2];
+    xnew[0] = (0.569006949265765)*M1SA_F_Control_S3_DW.Fycontroller_DSTATE[0]
+      + (-0.01008281122133318)*M1SA_F_Control_S3_DW.Fycontroller_DSTATE[1]
+      + (0.10624490391424918)*M1SA_F_Control_S3_DW.Fycontroller_DSTATE[2];
     xnew[0] += (0.0041005206649182965)*rtb_OAseg_LC2CG_S3[1];
-    xnew[1] = (0.69153586838988734)*M1SA_F_Control_S3_Fycontroller_DSTATE[0]
-      + (0.40200245095801357)*M1SA_F_Control_S3_Fycontroller_DSTATE[1]
-      + (-0.053834780381561045)*M1SA_F_Control_S3_Fycontroller_DSTATE[2];
+    xnew[1] = (0.69153586838988734)*M1SA_F_Control_S3_DW.Fycontroller_DSTATE[0]
+      + (0.40200245095801357)*M1SA_F_Control_S3_DW.Fycontroller_DSTATE[1]
+      + (-0.053834780381561045)*M1SA_F_Control_S3_DW.Fycontroller_DSTATE[2];
     xnew[1] += (-0.0018292791104672016)*rtb_OAseg_LC2CG_S3[1];
-    xnew[2] = (1.0)*M1SA_F_Control_S3_Fycontroller_DSTATE[2];
+    xnew[2] = (1.0)*M1SA_F_Control_S3_DW.Fycontroller_DSTATE[2];
     xnew[2] += (0.039999999999999994)*rtb_OAseg_LC2CG_S3[1];
-    (void) memcpy(&M1SA_F_Control_S3_Fycontroller_DSTATE[0], xnew,
+    (void) memcpy(&M1SA_F_Control_S3_DW.Fycontroller_DSTATE[0], xnew,
                   sizeof(real_T)*3);
   }
 
   /* Update for DiscreteStateSpace: '<S3>/Fz controller' */
   {
     real_T xnew[3];
-    xnew[0] = (0.3222450105115563)*M1SA_F_Control_S3_Fzcontroller_DSTATE[0]
-      + (-0.013311547842537916)*M1SA_F_Control_S3_Fzcontroller_DSTATE[1]
-      + (0.13664330677325981)*M1SA_F_Control_S3_Fzcontroller_DSTATE[2];
+    xnew[0] = (0.3222450105115563)*M1SA_F_Control_S3_DW.Fzcontroller_DSTATE[0]
+      + (-0.013311547842537916)*M1SA_F_Control_S3_DW.Fzcontroller_DSTATE[1]
+      + (0.13664330677325981)*M1SA_F_Control_S3_DW.Fzcontroller_DSTATE[2];
     xnew[0] += (0.005170012950170496)*rtb_OAseg_LC2CG_S3[2];
-    xnew[1] = (0.66124884843011622)*M1SA_F_Control_S3_Fzcontroller_DSTATE[0]
-      + (0.13460444259831861)*M1SA_F_Control_S3_Fzcontroller_DSTATE[1]
-      + (-0.0021677560864410391)*M1SA_F_Control_S3_Fzcontroller_DSTATE[2];
+    xnew[1] = (0.66124884843011622)*M1SA_F_Control_S3_DW.Fzcontroller_DSTATE[0]
+      + (0.13460444259831861)*M1SA_F_Control_S3_DW.Fzcontroller_DSTATE[1]
+      + (-0.0021677560864410391)*M1SA_F_Control_S3_DW.Fzcontroller_DSTATE[2];
     xnew[1] += (6.2680779829774611E-5)*rtb_OAseg_LC2CG_S3[2];
-    xnew[2] = (1.0)*M1SA_F_Control_S3_Fzcontroller_DSTATE[2];
+    xnew[2] = (1.0)*M1SA_F_Control_S3_DW.Fzcontroller_DSTATE[2];
     xnew[2] += (0.039999999999999994)*rtb_OAseg_LC2CG_S3[2];
-    (void) memcpy(&M1SA_F_Control_S3_Fzcontroller_DSTATE[0], xnew,
+    (void) memcpy(&M1SA_F_Control_S3_DW.Fzcontroller_DSTATE[0], xnew,
                   sizeof(real_T)*3);
   }
 
   /* Update for DiscreteStateSpace: '<S3>/Mx controller' */
   {
     real_T xnew[3];
-    xnew[0] = (0.29778010884776307)*M1SA_F_Control_S3_Mxcontroller_DSTATE[0]
-      + (0.71505921377142712)*M1SA_F_Control_S3_Mxcontroller_DSTATE[1]
-      + (-0.0021601236457374955)*M1SA_F_Control_S3_Mxcontroller_DSTATE[2];
+    xnew[0] = (0.29778010884776307)*M1SA_F_Control_S3_DW.Mxcontroller_DSTATE[0]
+      + (0.71505921377142712)*M1SA_F_Control_S3_DW.Mxcontroller_DSTATE[1]
+      + (-0.0021601236457374955)*M1SA_F_Control_S3_DW.Mxcontroller_DSTATE[2];
     xnew[0] += (-0.00026117608623345441)*rtb_OAseg_LC2CG_S3[3];
-    xnew[1] = (-0.00024258661738509195)*M1SA_F_Control_S3_Mxcontroller_DSTATE[0]
-      + (0.27143897782429549)*M1SA_F_Control_S3_Mxcontroller_DSTATE[1]
-      + (-0.11649383326807114)*M1SA_F_Control_S3_Mxcontroller_DSTATE[2];
+    xnew[1] = (-0.00024258661738509195)*
+      M1SA_F_Control_S3_DW.Mxcontroller_DSTATE[0]
+      + (0.27143897782429549)*M1SA_F_Control_S3_DW.Mxcontroller_DSTATE[1]
+      + (-0.11649383326807114)*M1SA_F_Control_S3_DW.Mxcontroller_DSTATE[2];
     xnew[1] += (-0.0043992827840101858)*rtb_OAseg_LC2CG_S3[3];
-    xnew[2] = (1.0)*M1SA_F_Control_S3_Mxcontroller_DSTATE[2];
+    xnew[2] = (1.0)*M1SA_F_Control_S3_DW.Mxcontroller_DSTATE[2];
     xnew[2] += (0.039999999999999994)*rtb_OAseg_LC2CG_S3[3];
-    (void) memcpy(&M1SA_F_Control_S3_Mxcontroller_DSTATE[0], xnew,
+    (void) memcpy(&M1SA_F_Control_S3_DW.Mxcontroller_DSTATE[0], xnew,
                   sizeof(real_T)*3);
   }
 
   /* Update for DiscreteStateSpace: '<S3>/My controller' */
   {
     real_T xnew[3];
-    xnew[0] = (0.29778010884776307)*M1SA_F_Control_S3_Mycontroller_DSTATE[0]
-      + (0.71505921377142712)*M1SA_F_Control_S3_Mycontroller_DSTATE[1]
-      + (-0.0021601236457374955)*M1SA_F_Control_S3_Mycontroller_DSTATE[2];
+    xnew[0] = (0.29778010884776307)*M1SA_F_Control_S3_DW.Mycontroller_DSTATE[0]
+      + (0.71505921377142712)*M1SA_F_Control_S3_DW.Mycontroller_DSTATE[1]
+      + (-0.0021601236457374955)*M1SA_F_Control_S3_DW.Mycontroller_DSTATE[2];
     xnew[0] += (-0.00026117608623345441)*rtb_OAseg_LC2CG_S3[4];
-    xnew[1] = (-0.00024258661738509195)*M1SA_F_Control_S3_Mycontroller_DSTATE[0]
-      + (0.27143897782429549)*M1SA_F_Control_S3_Mycontroller_DSTATE[1]
-      + (-0.11649383326807114)*M1SA_F_Control_S3_Mycontroller_DSTATE[2];
+    xnew[1] = (-0.00024258661738509195)*
+      M1SA_F_Control_S3_DW.Mycontroller_DSTATE[0]
+      + (0.27143897782429549)*M1SA_F_Control_S3_DW.Mycontroller_DSTATE[1]
+      + (-0.11649383326807114)*M1SA_F_Control_S3_DW.Mycontroller_DSTATE[2];
     xnew[1] += (-0.0043992827840101858)*rtb_OAseg_LC2CG_S3[4];
-    xnew[2] = (1.0)*M1SA_F_Control_S3_Mycontroller_DSTATE[2];
+    xnew[2] = (1.0)*M1SA_F_Control_S3_DW.Mycontroller_DSTATE[2];
     xnew[2] += (0.039999999999999994)*rtb_OAseg_LC2CG_S3[4];
-    (void) memcpy(&M1SA_F_Control_S3_Mycontroller_DSTATE[0], xnew,
+    (void) memcpy(&M1SA_F_Control_S3_DW.Mycontroller_DSTATE[0], xnew,
                   sizeof(real_T)*3);
   }
 
   /* Update for DiscreteStateSpace: '<S3>/Mz controller' */
   {
     real_T xnew[3];
-    xnew[0] = (0.38195738947508884)*M1SA_F_Control_S3_Mzcontroller_DSTATE[0]
-      + (0.72039580968966876)*M1SA_F_Control_S3_Mzcontroller_DSTATE[1]
-      + (-0.0047245815737020904)*M1SA_F_Control_S3_Mzcontroller_DSTATE[2];
+    xnew[0] = (0.38195738947508884)*M1SA_F_Control_S3_DW.Mzcontroller_DSTATE[0]
+      + (0.72039580968966876)*M1SA_F_Control_S3_DW.Mzcontroller_DSTATE[1]
+      + (-0.0047245815737020904)*M1SA_F_Control_S3_DW.Mzcontroller_DSTATE[2];
     xnew[0] += (-0.00039049368346384173)*rtb_OAseg_LC2CG_S3[5];
-    xnew[1] = (-0.0066509471364728252)*M1SA_F_Control_S3_Mzcontroller_DSTATE[0]
-      + (0.24351874678335261)*M1SA_F_Control_S3_Mzcontroller_DSTATE[1]
-      + (-0.12438032071830714)*M1SA_F_Control_S3_Mzcontroller_DSTATE[2];
+    xnew[1] = (-0.0066509471364728252)*M1SA_F_Control_S3_DW.Mzcontroller_DSTATE
+      [0]
+      + (0.24351874678335261)*M1SA_F_Control_S3_DW.Mzcontroller_DSTATE[1]
+      + (-0.12438032071830714)*M1SA_F_Control_S3_DW.Mzcontroller_DSTATE[2];
     xnew[1] += (-0.0046882022587151594)*rtb_OAseg_LC2CG_S3[5];
-    xnew[2] = (1.0)*M1SA_F_Control_S3_Mzcontroller_DSTATE[2];
+    xnew[2] = (1.0)*M1SA_F_Control_S3_DW.Mzcontroller_DSTATE[2];
     xnew[2] += (0.039999999999999994)*rtb_OAseg_LC2CG_S3[5];
-    (void) memcpy(&M1SA_F_Control_S3_Mzcontroller_DSTATE[0], xnew,
+    (void) memcpy(&M1SA_F_Control_S3_DW.Mzcontroller_DSTATE[0], xnew,
                   sizeof(real_T)*3);
   }
 
   /* Update for DiscreteTransferFcn: '<S1>/OAseg_SA_dyn' */
-  memcpy((&(M1SA_F_Control_S3_OAseg_SA_dyn_states[0])),
-         &M1SA_F_Control_S3_OAseg_SA_dyn_tmp_p[0], 335U * sizeof(real_T));
+  memcpy(&M1SA_F_Control_S3_DW.OAseg_SA_dyn_states[0], &OAseg_SA_dyn_tmp[0],
+         335U * sizeof(real_T));
 }
 
 /* Model initialize function */
@@ -278,6 +293,10 @@ void M1SA_F_Control_S3_initialize(void)
 
   /* initialize error status */
   rtmSetErrorStatus(M1SA_F_Control_S3_M, (NULL));
+
+  /* states (dwork) */
+  (void) memset((void *)&M1SA_F_Control_S3_DW, 0,
+                sizeof(DW_M1SA_F_Control_S3_T));
 
   /* external inputs */
   (void)memset(&M1SA_F_Control_S3_U, 0, sizeof(ExtU_M1SA_F_Control_S3_T));
