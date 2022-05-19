@@ -1,8 +1,8 @@
 [package]
 name = "m1-ctrl"
-version = "0.1.1"
+version = "0.1.2"
 authors = ["Rod Conan <rconan@gmto.org>"]
-edition = "2018"
+edition = "2021"
 license = "MIT"
 description = "Giant Magellan Telescope primary mirror control system"
 repository = "https://github.com/rconan/m1-ctrl"
