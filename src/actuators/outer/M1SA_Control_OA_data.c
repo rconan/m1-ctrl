@@ -1,11 +1,11 @@
 /*
- * File: M1SA_F_Control_OA_data.c
+ * File: M1SA_Control_OA_data.c
  *
- * Code generated for Simulink model 'M1SA_F_Control_OA'.
+ * Code generated for Simulink model 'M1SA_Control_OA'.
  *
- * Model version                  : 1.966
- * Simulink Coder version         : 9.0 (R2018b) 24-May-2018
- * C/C++ source code generated on : Wed Mar  9 10:39:46 2022
+ * Model version                  : 5.17
+ * Simulink Coder version         : 9.4 (R2020b) 29-Jul-2020
+ * C/C++ source code generated on : Fri Jan 20 16:36:46 2023
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Intel->x86-64 (Linux 64)
@@ -13,11 +13,11 @@
  * Validation result: Not run
  */
 
-#include "M1SA_F_Control_OA.h"
-#include "M1SA_F_Control_OA_private.h"
+#include "M1SA_Control_OA.h"
+#include "M1SA_Control_OA_private.h"
 
 /* Constant parameters (default storage) */
-const ConstP_M1SA_F_Control_OA_T M1SA_F_Control_OA_ConstP = {
+const ConstP_M1SA_Control_OA_T M1SA_Control_OA_ConstP = {
   /* Expression: m1sys{1}.Kbal
    * Referenced by: '<S1>/OAseg_Kbal'
    */

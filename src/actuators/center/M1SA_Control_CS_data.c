@@ -1,11 +1,11 @@
 /*
- * File: M1SA_F_Control_CS_data.c
+ * File: M1SA_Control_CS_data.c
  *
- * Code generated for Simulink model 'M1SA_F_Control_CS'.
+ * Code generated for Simulink model 'M1SA_Control_CS'.
  *
- * Model version                  : 1.966
- * Simulink Coder version         : 9.0 (R2018b) 24-May-2018
- * C/C++ source code generated on : Wed Mar  9 10:44:51 2022
+ * Model version                  : 5.17
+ * Simulink Coder version         : 9.4 (R2020b) 29-Jul-2020
+ * C/C++ source code generated on : Fri Jan 20 16:37:55 2023
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Intel->x86-64 (Linux 64)
@@ -13,13 +13,13 @@
  * Validation result: Not run
  */
 
-#include "M1SA_F_Control_CS.h"
-#include "M1SA_F_Control_CS_private.h"
+#include "M1SA_Control_CS.h"
+#include "M1SA_Control_CS_private.h"
 
 /* Constant parameters (default storage) */
-const ConstP_M1SA_F_Control_CS_T M1SA_F_Control_CS_ConstP = {
+const ConstP_M1SA_Control_CS_T M1SA_Control_CS_ConstP = {
   /* Expression: m1sys{7}.Kbal
-   * Referenced by: '<S1>/CSseg_Kbal'
+   * Referenced by: '<S1>/CS_Kbal'
    */
   { 0.00053499497347404574, 0.003401910714119283, -9.4778882976882291E-5,
     0.0034334334851266577, -0.00064782852678143556, -0.000556821142243168,
