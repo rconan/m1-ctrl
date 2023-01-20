@@ -1,10 +1,10 @@
 //use dosio::{ios, DOSIOSError, Dos, IOTags, IOVec, IO};
 mod actors_interface;
 pub mod actuators;
-pub mod cg_controller;
+//pub mod cg_controller;
 pub mod hp_dynamics;
 pub mod hp_load_cells;
-pub mod local_controller;
+//pub mod local_controller;
 pub use actors_interface::*;
 
 /*
