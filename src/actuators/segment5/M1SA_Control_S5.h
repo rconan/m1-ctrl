@@ -1,7 +1,3 @@
-use simulink_binder::import;
-
-import!{M1SA_Control_S5,
-r##"
 /*
  * File: M1SA_Control_S5.h
  *
@@ -120,4 +116,3 @@ extern RT_MODEL_M1SA_Control_S5_T *const M1SA_Control_S5_M;
  *
  * [EOF]
  */
-"##}
