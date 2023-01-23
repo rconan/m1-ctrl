@@ -1,15 +1,15 @@
 use simulink_binder::import;
 
-import!{M1SA_F_Control_S7,
+import!{M1SA_Control_S7,
 r##"
 /*
- * File: M1SA_F_Control_S7.h
+ * File: M1SA_Control_S7.h
  *
- * Code generated for Simulink model 'M1SA_F_Control_S7'.
+ * Code generated for Simulink model 'M1SA_Control_S7'.
  *
- * Model version                  : 1.966
- * Simulink Coder version         : 9.0 (R2018b) 24-May-2018
- * C/C++ source code generated on : Wed Mar  9 10:44:51 2022
+ * Model version                  : 5.17
+ * Simulink Coder version         : 9.4 (R2020b) 29-Jul-2020
+ * C/C++ source code generated on : Fri Jan 20 16:37:55 2023
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Intel->x86-64 (Linux 64)
@@ -17,24 +17,24 @@ r##"
  * Validation result: Not run
  */
 
-#ifndef RTW_HEADER_M1SA_F_Control_S7_h_
-#define RTW_HEADER_M1SA_F_Control_S7_h_
+#ifndef RTW_HEADER_M1SA_Control_S7_h_
+#define RTW_HEADER_M1SA_Control_S7_h_
 #include <string.h>
 #include <stddef.h>
-#ifndef M1SA_F_Control_S7_COMMON_INCLUDES_
-# define M1SA_F_Control_S7_COMMON_INCLUDES_
+#ifndef M1SA_Control_S7_COMMON_INCLUDES_
+#define M1SA_Control_S7_COMMON_INCLUDES_
 #include "rtwtypes.h"
-#endif                                 /* M1SA_F_Control_S7_COMMON_INCLUDES_ */
+#endif                                 /* M1SA_Control_S7_COMMON_INCLUDES_ */
 
-#include "M1SA_F_Control_S7_types.h"
+#include "M1SA_Control_S7_types.h"
 
 /* Macros for accessing real-time model data structure */
 #ifndef rtmGetErrorStatus
-# define rtmGetErrorStatus(rtm)        ((rtm)->errorStatus)
+#define rtmGetErrorStatus(rtm)         ((rtm)->errorStatus)
 #endif
 
 #ifndef rtmSetErrorStatus
-# define rtmSetErrorStatus(rtm, val)   ((rtm)->errorStatus = (val))
+#define rtmSetErrorStatus(rtm, val)    ((rtm)->errorStatus = (val))
 #endif
 
 /* Block states (default storage) for system '<Root>' */
@@ -45,70 +45,52 @@ typedef struct {
   real_T Mxcontroller_DSTATE[3];       /* '<S2>/Mx controller' */
   real_T Mycontroller_DSTATE[3];       /* '<S2>/My controller' */
   real_T Mzcontroller_DSTATE[3];       /* '<S2>/Mz controller' */
-  real_T CSseg_SA_dyn_states[306];     /* '<S1>/CSseg_SA_dyn' */
-} DW_M1SA_F_Control_S7_T;
+  real_T CS_SA_dyn_states[306];        /* '<S1>/CS_SA_dyn' */
+} DW_M1SA_Control_S7_T;
 
 /* Constant parameters (default storage) */
 typedef struct {
   /* Expression: m1sys{7}.Kbal
-   * Referenced by: '<S1>/CSseg_Kbal'
+   * Referenced by: '<S1>/CS_Kbal'
    */
-  real_T CSseg_Kbal_Gain[1836];
-} ConstP_M1SA_F_Control_S7_T;
+  real_T CS_Kbal_Gain[1836];
+} ConstP_M1SA_Control_S7_T;
 
 /* External inputs (root inport signals with default storage) */
 typedef struct {
-  real_T HP_LC[6];                     /* '<Root>/HP_LC' */
+  real_T LC_FxyzMxyz_CG[6];            /* '<Root>/LC_FxyzMxyz_CG' */
   real_T SA_offsetF_cmd[306];          /* '<Root>/SA_offsetF_cmd' */
-} ExtU_M1SA_F_Control_S7_T;
+} ExtU_M1SA_Control_S7_T;
 
 /* External outputs (root outports fed by signals with default storage) */
 typedef struct {
   real_T Res_Act_F[306];               /* '<Root>/Res_Act_F' */
-} ExtY_M1SA_F_Control_S7_T;
+} ExtY_M1SA_Control_S7_T;
 
 /* Real-time Model Data Structure */
-struct tag_RTM_M1SA_F_Control_S7_T {
+struct tag_RTM_M1SA_Control_S7_T {
   const char_T * volatile errorStatus;
 };
 
 /* Block states (default storage) */
-extern DW_M1SA_F_Control_S7_T M1SA_F_Control_S7_DW;
+extern DW_M1SA_Control_S7_T M1SA_Control_S7_DW;
 
 /* External inputs (root inport signals with default storage) */
-extern ExtU_M1SA_F_Control_S7_T M1SA_F_Control_S7_U;
+extern ExtU_M1SA_Control_S7_T M1SA_Control_S7_U;
 
 /* External outputs (root outports fed by signals with default storage) */
-extern ExtY_M1SA_F_Control_S7_T M1SA_F_Control_S7_Y;
+extern ExtY_M1SA_Control_S7_T M1SA_Control_S7_Y;
 
 /* Constant parameters (default storage) */
-extern const ConstP_M1SA_F_Control_S7_T M1SA_F_Control_S7_ConstP;
-
-/*
- * Exported Global Parameters
- *
- * Note: Exported global parameters are tunable parameters with an exported
- * global storage class designation.  Code generation will declare the memory for
- * these parameters and exports their symbols.
- *
- */
-extern real_T CSseg_LC2CG[36];         /* Variable: CSseg_LC2CG
-                                        * Referenced by: '<S1>/CSseg_LC2CG'
-                                        */
-extern real_T CSseg_SA_dynDen[2];      /* Variable: CSseg_SA_dynDen
-                                        * Referenced by: '<S1>/CSseg_SA_dyn'
-                                        */
-extern real_T CSseg_SA_dynNum[2];      /* Variable: CSseg_SA_dynNum
-                                        * Referenced by: '<S1>/CSseg_SA_dyn'
-                                        */
+extern const ConstP_M1SA_Control_S7_T M1SA_Control_S7_ConstP;
 
 /* Model entry point functions */
-extern void M1SA_F_Control_S7_initialize(void);
-extern void M1SA_F_Control_S7_step(void);
-extern void M1SA_F_Control_S7_terminate(void);
+extern void M1SA_Control_S7_initialize(void);
+extern void M1SA_Control_S7_step(void);
+extern void M1SA_Control_S7_terminate(void);
 
 /* Real-time Model object */
-extern RT_MODEL_M1SA_F_Control_S7_T *const M1SA_F_Control_S7_M;
+extern RT_MODEL_M1SA_Control_S7_T *const M1SA_Control_S7_M;
 
 /*-
  * The generated code includes comments that allow you to trace directly
@@ -122,16 +104,16 @@ extern RT_MODEL_M1SA_F_Control_S7_T *const M1SA_F_Control_S7_M;
  * MATLAB hilite_system command to trace the generated code back
  * to the parent model.  For example,
  *
- * hilite_system('M1DCS/M1SA_F_Control_S7')    - opens subsystem M1DCS/M1SA_F_Control_S7
- * hilite_system('M1DCS/M1SA_F_Control_S7/Kp') - opens and selects block Kp
+ * hilite_system('M1DCS_2_rust/M1SA_Control_S7')    - opens subsystem M1DCS_2_rust/M1SA_Control_S7
+ * hilite_system('M1DCS_2_rust/M1SA_Control_S7/Kp') - opens and selects block Kp
  *
  * Here is the system hierarchy for this model
  *
- * '<Root>' : 'M1DCS'
- * '<S1>'   : 'M1DCS/M1SA_F_Control_S7'
- * '<S2>'   : 'M1DCS/M1SA_F_Control_S7/CSseg_ofl_SSdtC_'
+ * '<Root>' : 'M1DCS_2_rust'
+ * '<S1>'   : 'M1DCS_2_rust/M1SA_Control_S7'
+ * '<S2>'   : 'M1DCS_2_rust/M1SA_Control_S7/CS_ofl_SSdtC'
  */
-#endif                                 /* RTW_HEADER_M1SA_F_Control_S7_h_ */
+#endif                                 /* RTW_HEADER_M1SA_Control_S7_h_ */
 
 /*
  * File trailer for generated code.

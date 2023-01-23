@@ -1,11 +1,11 @@
 /*
  * File: rtwtypes.h
  *
- * Code generated for Simulink model 'M1SA_Control_S7'.
+ * Code generated for Simulink model 'M1SA_Control_S'.
  *
  * Model version                  : 5.17
  * Simulink Coder version         : 9.4 (R2020b) 29-Jul-2020
- * C/C++ source code generated on : Fri Jan 20 16:37:55 2023
+ * C/C++ source code generated on : Fri Jan 20 16:36:46 2023
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Intel->x86-64 (Linux 64)
