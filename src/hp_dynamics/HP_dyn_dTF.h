@@ -1,7 +1,3 @@
-use simulink_binder::import;
-
-import! {HP_dyn_dTF,
-r##"	 
 /*
  * File: HP_dyn_dTF.h
  *
@@ -101,4 +97,3 @@ extern RT_MODEL_HP_dyn_dTF_T *const HP_dyn_dTF_M;
  *
  * [EOF]
  */
-"##}
