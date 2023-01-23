@@ -1,11 +1,11 @@
 /*
  * File: rtwtypes.h
  *
- * Code generated for Simulink model 'HP_dyn_dTF'.
+ * Code generated for Simulink model 'M1_HP_Dyn'.
  *
- * Model version                  : 5.25
- * Simulink Coder version         : 9.4 (R2020b) 29-Jul-2020
- * C/C++ source code generated on : Fri Jan 20 17:27:31 2023
+ * Model version                  : 1.960
+ * Simulink Coder version         : 9.0 (R2018b) 24-May-2018
+ * C/C++ source code generated on : Fri Feb 11 10:27:20 2022
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Intel->x86-64 (Linux 64)
@@ -18,13 +18,13 @@
 
 /* Logical type definitions */
 #if (!defined(__cplusplus))
-#ifndef false
-#define false                          (0U)
-#endif
+#  ifndef false
+#   define false                       (0U)
+#  endif
 
-#ifndef true
-#define true                           (1U)
-#endif
+#  ifndef true
+#   define true                        (1U)
+#  endif
 #endif
 
 /*=======================================================================*

@@ -2,9 +2,9 @@ use cc;
 
 fn main() {
     for sid in 1..=7 {
-        let c_file = format!("src/actuators/segment{id}/M1SA_Control_S{id}.c", id = sid);
+        let c_file = format!("src/actuators/segment{id}/M1SA_F_Control_S{id}.c", id = sid);
         let c_data_file = format!(
-            "src/actuators/segment{id}/M1SA_Control_S{id}_data.c",
+            "src/actuators/segment{id}/M1SA_F_Control_S{id}_data.c",
             id = sid
         );
         let lib_file = format!("m1sa_f_control_s{}", sid);
@@ -13,7 +13,6 @@ fn main() {
             .file(c_data_file)
             .compile(&lib_file);
     }
-    /*
     cc::Build::new()
         .file("src/hp_load_cells/M1_HP_loadcells.c")
         .compile("m1_hp_load_cells");
@@ -27,5 +26,5 @@ fn main() {
     cc::Build::new()
         .file("src/cg_controller/M1OFL_Control.c")
         .file("src/cg_controller/M1OFL_Control_data.c")
-        .compile("m1_cg_controller"); */
+        .compile("m1_cg_controller");
 }
