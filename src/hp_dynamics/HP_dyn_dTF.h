@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'HP_dyn_dTF'.
  *
- * Model version                  : 5.25
+ * Model version                  : 5.28
  * Simulink Coder version         : 9.4 (R2020b) 29-Jul-2020
- * C/C++ source code generated on : Fri Jan 20 17:27:31 2023
+ * C/C++ source code generated on : Tue Jan 24 16:35:10 2023
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Intel->x86-64 (Linux 64)
@@ -16,22 +16,15 @@
 #ifndef RTW_HEADER_HP_dyn_dTF_h_
 #define RTW_HEADER_HP_dyn_dTF_h_
 #include <string.h>
-#include <stddef.h>
 #ifndef HP_dyn_dTF_COMMON_INCLUDES_
 #define HP_dyn_dTF_COMMON_INCLUDES_
 #include "rtwtypes.h"
 #endif                                 /* HP_dyn_dTF_COMMON_INCLUDES_ */
 
 #include "HP_dyn_dTF_types.h"
+#include "rt_defines.h"
 
 /* Macros for accessing real-time model data structure */
-#ifndef rtmGetErrorStatus
-#define rtmGetErrorStatus(rtm)         ((rtm)->errorStatus)
-#endif
-
-#ifndef rtmSetErrorStatus
-#define rtmSetErrorStatus(rtm, val)    ((rtm)->errorStatus = (val))
-#endif
 
 /* Block states (default storage) for system '<Root>' */
 typedef struct {
@@ -50,25 +43,15 @@ typedef struct {
 
 /* Real-time Model Data Structure */
 struct tag_RTM_HP_dyn_dTF_T {
-  const char_T * volatile errorStatus;
+  DW_HP_dyn_dTF_T *dwork;
 };
 
-/* Block states (default storage) */
-extern DW_HP_dyn_dTF_T HP_dyn_dTF_DW;
-
-/* External inputs (root inport signals with default storage) */
-extern ExtU_HP_dyn_dTF_T HP_dyn_dTF_U;
-
-/* External outputs (root outports fed by signals with default storage) */
-extern ExtY_HP_dyn_dTF_T HP_dyn_dTF_Y;
-
 /* Model entry point functions */
-extern void HP_dyn_dTF_initialize(void);
-extern void HP_dyn_dTF_step(void);
-extern void HP_dyn_dTF_terminate(void);
-
-/* Real-time Model object */
-extern RT_MODEL_HP_dyn_dTF_T *const HP_dyn_dTF_M;
+extern void HP_dyn_dTF_initialize(RT_MODEL_HP_dyn_dTF_T *const HP_dyn_dTF_M,
+  ExtU_HP_dyn_dTF_T *HP_dyn_dTF_U, ExtY_HP_dyn_dTF_T *HP_dyn_dTF_Y);
+extern void HP_dyn_dTF_step(RT_MODEL_HP_dyn_dTF_T *const HP_dyn_dTF_M,
+  ExtU_HP_dyn_dTF_T *HP_dyn_dTF_U, ExtY_HP_dyn_dTF_T *HP_dyn_dTF_Y);
+extern void HP_dyn_dTF_terminate(RT_MODEL_HP_dyn_dTF_T *const HP_dyn_dTF_M);
 
 /*-
  * The generated code includes comments that allow you to trace directly

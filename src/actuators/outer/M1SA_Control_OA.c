@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'M1SA_Control_OA'.
  *
- * Model version                  : 5.17
+ * Model version                  : 5.28
  * Simulink Coder version         : 9.4 (R2020b) 29-Jul-2020
- * C/C++ source code generated on : Fri Jan 20 16:36:46 2023
+ * C/C++ source code generated on : Tue Jan 24 16:42:52 2023
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Intel->x86-64 (Linux 64)
@@ -16,22 +16,13 @@
 #include "M1SA_Control_OA.h"
 #include "M1SA_Control_OA_private.h"
 
-/* Block states (default storage) */
-DW_M1SA_Control_OA_T M1SA_Control_OA_DW;
-
-/* External inputs (root inport signals with default storage) */
-ExtU_M1SA_Control_OA_T M1SA_Control_OA_U;
-
-/* External outputs (root outports fed by signals with default storage) */
-ExtY_M1SA_Control_OA_T M1SA_Control_OA_Y;
-
-/* Real-time model */
-static RT_MODEL_M1SA_Control_OA_T M1SA_Control_OA_M_;
-RT_MODEL_M1SA_Control_OA_T *const M1SA_Control_OA_M = &M1SA_Control_OA_M_;
-
 /* Model step function */
-void M1SA_Control_OA_step(void)
+void M1SA_Control_OA_step(RT_MODEL_M1SA_Control_OA_T *const M1SA_Control_OA_M,
+  ExtU_M1SA_Control_OA_T *M1SA_Control_OA_U, ExtY_M1SA_Control_OA_T
+  *M1SA_Control_OA_Y)
 {
+  DW_M1SA_Control_OA_T *M1SA_Control_OA_DW = M1SA_Control_OA_M->dwork;
+
   /* local block i/o variables */
   real_T rtb_Fxcontroller;
   real_T rtb_Fycontroller;
@@ -52,10 +43,10 @@ void M1SA_Control_OA_step(void)
    */
   {
     rtb_Fxcontroller = (-6.8610656930319749)*
-      M1SA_Control_OA_DW.Fxcontroller_DSTATE[0]
-      + (8.7455483888425327)*M1SA_Control_OA_DW.Fxcontroller_DSTATE[1]
-      + (1.8)*M1SA_Control_OA_DW.Fxcontroller_DSTATE[2];
-    rtb_Fxcontroller += 0.024370329855613257*M1SA_Control_OA_U.LC_FxyzMxyz_CG[0];
+      M1SA_Control_OA_DW->Fxcontroller_DSTATE[0]
+      + (8.7455483888425327)*M1SA_Control_OA_DW->Fxcontroller_DSTATE[1]
+      + (1.8)*M1SA_Control_OA_DW->Fxcontroller_DSTATE[2];
+    rtb_Fxcontroller += 0.024370329855613257*M1SA_Control_OA_U->LC_FxyzMxyz_CG[0];
   }
 
   /* DiscreteStateSpace: '<S2>/Fy controller' incorporates:
@@ -63,10 +54,10 @@ void M1SA_Control_OA_step(void)
    */
   {
     rtb_Fycontroller = (-6.8610656930319749)*
-      M1SA_Control_OA_DW.Fycontroller_DSTATE[0]
-      + (8.7455483888425327)*M1SA_Control_OA_DW.Fycontroller_DSTATE[1]
-      + (1.8)*M1SA_Control_OA_DW.Fycontroller_DSTATE[2];
-    rtb_Fycontroller += 0.024370329855613257*M1SA_Control_OA_U.LC_FxyzMxyz_CG[1];
+      M1SA_Control_OA_DW->Fycontroller_DSTATE[0]
+      + (8.7455483888425327)*M1SA_Control_OA_DW->Fycontroller_DSTATE[1]
+      + (1.8)*M1SA_Control_OA_DW->Fycontroller_DSTATE[2];
+    rtb_Fycontroller += 0.024370329855613257*M1SA_Control_OA_U->LC_FxyzMxyz_CG[1];
   }
 
   /* DiscreteStateSpace: '<S2>/Fz controller' incorporates:
@@ -74,10 +65,10 @@ void M1SA_Control_OA_step(void)
    */
   {
     rtb_Fzcontroller = (-11.022867857707155)*
-      M1SA_Control_OA_DW.Fzcontroller_DSTATE[0]
-      + (14.667973716577512)*M1SA_Control_OA_DW.Fzcontroller_DSTATE[1]
-      + (2.4)*M1SA_Control_OA_DW.Fzcontroller_DSTATE[2];
-    rtb_Fzcontroller += 0.025354461628138772*M1SA_Control_OA_U.LC_FxyzMxyz_CG[2];
+      M1SA_Control_OA_DW->Fzcontroller_DSTATE[0]
+      + (14.667973716577512)*M1SA_Control_OA_DW->Fzcontroller_DSTATE[1]
+      + (2.4)*M1SA_Control_OA_DW->Fzcontroller_DSTATE[2];
+    rtb_Fzcontroller += 0.025354461628138772*M1SA_Control_OA_U->LC_FxyzMxyz_CG[2];
   }
 
   /* DiscreteStateSpace: '<S2>/Mx controller' incorporates:
@@ -85,10 +76,10 @@ void M1SA_Control_OA_step(void)
    */
   {
     rtb_Mxcontroller = (-10.04307867717106)*
-      M1SA_Control_OA_DW.Mxcontroller_DSTATE[0]
-      + (10.41998468921483)*M1SA_Control_OA_DW.Mxcontroller_DSTATE[1]
-      + (2.0)*M1SA_Control_OA_DW.Mxcontroller_DSTATE[2];
-    rtb_Mxcontroller += 0.024505707216075836*M1SA_Control_OA_U.LC_FxyzMxyz_CG[3];
+      M1SA_Control_OA_DW->Mxcontroller_DSTATE[0]
+      + (10.41998468921483)*M1SA_Control_OA_DW->Mxcontroller_DSTATE[1]
+      + (2.0)*M1SA_Control_OA_DW->Mxcontroller_DSTATE[2];
+    rtb_Mxcontroller += 0.024505707216075836*M1SA_Control_OA_U->LC_FxyzMxyz_CG[3];
   }
 
   /* DiscreteStateSpace: '<S2>/My controller' incorporates:
@@ -96,10 +87,10 @@ void M1SA_Control_OA_step(void)
    */
   {
     rtb_Mycontroller = (-10.04307867717106)*
-      M1SA_Control_OA_DW.Mycontroller_DSTATE[0]
-      + (10.41998468921483)*M1SA_Control_OA_DW.Mycontroller_DSTATE[1]
-      + (2.0)*M1SA_Control_OA_DW.Mycontroller_DSTATE[2];
-    rtb_Mycontroller += 0.024505707216075836*M1SA_Control_OA_U.LC_FxyzMxyz_CG[4];
+      M1SA_Control_OA_DW->Mycontroller_DSTATE[0]
+      + (10.41998468921483)*M1SA_Control_OA_DW->Mycontroller_DSTATE[1]
+      + (2.0)*M1SA_Control_OA_DW->Mycontroller_DSTATE[2];
+    rtb_Mycontroller += 0.024505707216075836*M1SA_Control_OA_U->LC_FxyzMxyz_CG[4];
   }
 
   /* DiscreteStateSpace: '<S2>/Mz controller' incorporates:
@@ -107,10 +98,10 @@ void M1SA_Control_OA_step(void)
    */
   {
     rtb_Mzcontroller = (-9.4551745922133)*
-      M1SA_Control_OA_DW.Mzcontroller_DSTATE[0]
-      + (11.4653232391471)*M1SA_Control_OA_DW.Mzcontroller_DSTATE[1]
-      + (2.0)*M1SA_Control_OA_DW.Mzcontroller_DSTATE[2];
-    rtb_Mzcontroller += 0.022969235998287648*M1SA_Control_OA_U.LC_FxyzMxyz_CG[5];
+      M1SA_Control_OA_DW->Mzcontroller_DSTATE[0]
+      + (11.4653232391471)*M1SA_Control_OA_DW->Mzcontroller_DSTATE[1]
+      + (2.0)*M1SA_Control_OA_DW->Mzcontroller_DSTATE[2];
+    rtb_Mzcontroller += 0.022969235998287648*M1SA_Control_OA_U->LC_FxyzMxyz_CG[5];
   }
 
   /* SignalConversion generated from: '<S1>/OAseg_Kbal' */
@@ -135,17 +126,17 @@ void M1SA_Control_OA_step(void)
      *  Inport: '<Root>/SA_offsetF_cmd'
      *  Sum: '<S1>/Add'
      */
-    denAccum = (rtb_OA_SA_dyn[i] + M1SA_Control_OA_U.SA_offsetF_cmd[i]) -
-      -0.53348809109110329 * M1SA_Control_OA_DW.OA_SA_dyn_states[i];
+    denAccum = (rtb_OA_SA_dyn[i] + M1SA_Control_OA_U->SA_offsetF_cmd[i]) -
+      -0.53348809109110329 * M1SA_Control_OA_DW->OA_SA_dyn_states[i];
     OA_SA_dyn_tmp[i] = denAccum;
     denAccum *= 0.25752323685913081;
     rtb_OA_SA_dyn[i] = 0.20898867204976596 *
-      M1SA_Control_OA_DW.OA_SA_dyn_states[i] + denAccum;
+      M1SA_Control_OA_DW->OA_SA_dyn_states[i] + denAccum;
 
     /* Outport: '<Root>/Res_Act_F' incorporates:
      *  Gain: '<S1>/OAseg_Kbal'
      */
-    M1SA_Control_OA_Y.Res_Act_F[i] = rtb_OA_SA_dyn[i];
+    M1SA_Control_OA_Y->Res_Act_F[i] = rtb_OA_SA_dyn[i];
   }
 
   /* Update for DiscreteStateSpace: '<S2>/Fx controller' incorporates:
@@ -153,17 +144,17 @@ void M1SA_Control_OA_step(void)
    */
   {
     real_T xnew[3];
-    xnew[0] = (0.569006949265765)*M1SA_Control_OA_DW.Fxcontroller_DSTATE[0]
-      + (-0.010082811221333178)*M1SA_Control_OA_DW.Fxcontroller_DSTATE[1]
-      + (0.10624490391424918)*M1SA_Control_OA_DW.Fxcontroller_DSTATE[2];
-    xnew[0] += (0.0041005206649182965)*M1SA_Control_OA_U.LC_FxyzMxyz_CG[0];
-    xnew[1] = (0.69153586838988734)*M1SA_Control_OA_DW.Fxcontroller_DSTATE[0]
-      + (0.40200245095801357)*M1SA_Control_OA_DW.Fxcontroller_DSTATE[1]
-      + (-0.053834780381561032)*M1SA_Control_OA_DW.Fxcontroller_DSTATE[2];
-    xnew[1] += (-0.0018292791104672012)*M1SA_Control_OA_U.LC_FxyzMxyz_CG[0];
-    xnew[2] = (1.0)*M1SA_Control_OA_DW.Fxcontroller_DSTATE[2];
-    xnew[2] += (0.039999999999999994)*M1SA_Control_OA_U.LC_FxyzMxyz_CG[0];
-    (void) memcpy(&M1SA_Control_OA_DW.Fxcontroller_DSTATE[0], xnew,
+    xnew[0] = (0.569006949265765)*M1SA_Control_OA_DW->Fxcontroller_DSTATE[0]
+      + (-0.010082811221333178)*M1SA_Control_OA_DW->Fxcontroller_DSTATE[1]
+      + (0.10624490391424918)*M1SA_Control_OA_DW->Fxcontroller_DSTATE[2];
+    xnew[0] += (0.0041005206649182965)*M1SA_Control_OA_U->LC_FxyzMxyz_CG[0];
+    xnew[1] = (0.69153586838988734)*M1SA_Control_OA_DW->Fxcontroller_DSTATE[0]
+      + (0.40200245095801357)*M1SA_Control_OA_DW->Fxcontroller_DSTATE[1]
+      + (-0.053834780381561032)*M1SA_Control_OA_DW->Fxcontroller_DSTATE[2];
+    xnew[1] += (-0.0018292791104672012)*M1SA_Control_OA_U->LC_FxyzMxyz_CG[0];
+    xnew[2] = (1.0)*M1SA_Control_OA_DW->Fxcontroller_DSTATE[2];
+    xnew[2] += (0.039999999999999994)*M1SA_Control_OA_U->LC_FxyzMxyz_CG[0];
+    (void) memcpy(&M1SA_Control_OA_DW->Fxcontroller_DSTATE[0], xnew,
                   sizeof(real_T)*3);
   }
 
@@ -172,17 +163,17 @@ void M1SA_Control_OA_step(void)
    */
   {
     real_T xnew[3];
-    xnew[0] = (0.569006949265765)*M1SA_Control_OA_DW.Fycontroller_DSTATE[0]
-      + (-0.010082811221333178)*M1SA_Control_OA_DW.Fycontroller_DSTATE[1]
-      + (0.10624490391424918)*M1SA_Control_OA_DW.Fycontroller_DSTATE[2];
-    xnew[0] += (0.0041005206649182965)*M1SA_Control_OA_U.LC_FxyzMxyz_CG[1];
-    xnew[1] = (0.69153586838988734)*M1SA_Control_OA_DW.Fycontroller_DSTATE[0]
-      + (0.40200245095801357)*M1SA_Control_OA_DW.Fycontroller_DSTATE[1]
-      + (-0.053834780381561032)*M1SA_Control_OA_DW.Fycontroller_DSTATE[2];
-    xnew[1] += (-0.0018292791104672012)*M1SA_Control_OA_U.LC_FxyzMxyz_CG[1];
-    xnew[2] = (1.0)*M1SA_Control_OA_DW.Fycontroller_DSTATE[2];
-    xnew[2] += (0.039999999999999994)*M1SA_Control_OA_U.LC_FxyzMxyz_CG[1];
-    (void) memcpy(&M1SA_Control_OA_DW.Fycontroller_DSTATE[0], xnew,
+    xnew[0] = (0.569006949265765)*M1SA_Control_OA_DW->Fycontroller_DSTATE[0]
+      + (-0.010082811221333178)*M1SA_Control_OA_DW->Fycontroller_DSTATE[1]
+      + (0.10624490391424918)*M1SA_Control_OA_DW->Fycontroller_DSTATE[2];
+    xnew[0] += (0.0041005206649182965)*M1SA_Control_OA_U->LC_FxyzMxyz_CG[1];
+    xnew[1] = (0.69153586838988734)*M1SA_Control_OA_DW->Fycontroller_DSTATE[0]
+      + (0.40200245095801357)*M1SA_Control_OA_DW->Fycontroller_DSTATE[1]
+      + (-0.053834780381561032)*M1SA_Control_OA_DW->Fycontroller_DSTATE[2];
+    xnew[1] += (-0.0018292791104672012)*M1SA_Control_OA_U->LC_FxyzMxyz_CG[1];
+    xnew[2] = (1.0)*M1SA_Control_OA_DW->Fycontroller_DSTATE[2];
+    xnew[2] += (0.039999999999999994)*M1SA_Control_OA_U->LC_FxyzMxyz_CG[1];
+    (void) memcpy(&M1SA_Control_OA_DW->Fycontroller_DSTATE[0], xnew,
                   sizeof(real_T)*3);
   }
 
@@ -191,17 +182,17 @@ void M1SA_Control_OA_step(void)
    */
   {
     real_T xnew[3];
-    xnew[0] = (0.3222450105115563)*M1SA_Control_OA_DW.Fzcontroller_DSTATE[0]
-      + (-0.013311547842537916)*M1SA_Control_OA_DW.Fzcontroller_DSTATE[1]
-      + (0.13664330677325981)*M1SA_Control_OA_DW.Fzcontroller_DSTATE[2];
-    xnew[0] += (0.005170012950170496)*M1SA_Control_OA_U.LC_FxyzMxyz_CG[2];
-    xnew[1] = (0.66124884843011622)*M1SA_Control_OA_DW.Fzcontroller_DSTATE[0]
-      + (0.13460444259831861)*M1SA_Control_OA_DW.Fzcontroller_DSTATE[1]
-      + (-0.0021677560864410178)*M1SA_Control_OA_DW.Fzcontroller_DSTATE[2];
-    xnew[1] += (6.2680779829775045E-5)*M1SA_Control_OA_U.LC_FxyzMxyz_CG[2];
-    xnew[2] = (1.0)*M1SA_Control_OA_DW.Fzcontroller_DSTATE[2];
-    xnew[2] += (0.039999999999999994)*M1SA_Control_OA_U.LC_FxyzMxyz_CG[2];
-    (void) memcpy(&M1SA_Control_OA_DW.Fzcontroller_DSTATE[0], xnew,
+    xnew[0] = (0.3222450105115563)*M1SA_Control_OA_DW->Fzcontroller_DSTATE[0]
+      + (-0.013311547842537916)*M1SA_Control_OA_DW->Fzcontroller_DSTATE[1]
+      + (0.13664330677325981)*M1SA_Control_OA_DW->Fzcontroller_DSTATE[2];
+    xnew[0] += (0.005170012950170496)*M1SA_Control_OA_U->LC_FxyzMxyz_CG[2];
+    xnew[1] = (0.66124884843011622)*M1SA_Control_OA_DW->Fzcontroller_DSTATE[0]
+      + (0.13460444259831861)*M1SA_Control_OA_DW->Fzcontroller_DSTATE[1]
+      + (-0.0021677560864410178)*M1SA_Control_OA_DW->Fzcontroller_DSTATE[2];
+    xnew[1] += (6.2680779829775045E-5)*M1SA_Control_OA_U->LC_FxyzMxyz_CG[2];
+    xnew[2] = (1.0)*M1SA_Control_OA_DW->Fzcontroller_DSTATE[2];
+    xnew[2] += (0.039999999999999994)*M1SA_Control_OA_U->LC_FxyzMxyz_CG[2];
+    (void) memcpy(&M1SA_Control_OA_DW->Fzcontroller_DSTATE[0], xnew,
                   sizeof(real_T)*3);
   }
 
@@ -210,17 +201,18 @@ void M1SA_Control_OA_step(void)
    */
   {
     real_T xnew[3];
-    xnew[0] = (0.29778010884776307)*M1SA_Control_OA_DW.Mxcontroller_DSTATE[0]
-      + (0.71505921377142712)*M1SA_Control_OA_DW.Mxcontroller_DSTATE[1]
-      + (-0.0021601236457374955)*M1SA_Control_OA_DW.Mxcontroller_DSTATE[2];
-    xnew[0] += (-0.0002611760862334543)*M1SA_Control_OA_U.LC_FxyzMxyz_CG[3];
-    xnew[1] = (-0.00024258661738509193)*M1SA_Control_OA_DW.Mxcontroller_DSTATE[0]
-      + (0.27143897782429549)*M1SA_Control_OA_DW.Mxcontroller_DSTATE[1]
-      + (-0.11649383326807114)*M1SA_Control_OA_DW.Mxcontroller_DSTATE[2];
-    xnew[1] += (-0.0043992827840101858)*M1SA_Control_OA_U.LC_FxyzMxyz_CG[3];
-    xnew[2] = (1.0)*M1SA_Control_OA_DW.Mxcontroller_DSTATE[2];
-    xnew[2] += (0.039999999999999994)*M1SA_Control_OA_U.LC_FxyzMxyz_CG[3];
-    (void) memcpy(&M1SA_Control_OA_DW.Mxcontroller_DSTATE[0], xnew,
+    xnew[0] = (0.29778010884776307)*M1SA_Control_OA_DW->Mxcontroller_DSTATE[0]
+      + (0.71505921377142712)*M1SA_Control_OA_DW->Mxcontroller_DSTATE[1]
+      + (-0.0021601236457374955)*M1SA_Control_OA_DW->Mxcontroller_DSTATE[2];
+    xnew[0] += (-0.0002611760862334543)*M1SA_Control_OA_U->LC_FxyzMxyz_CG[3];
+    xnew[1] = (-0.00024258661738509193)*M1SA_Control_OA_DW->Mxcontroller_DSTATE
+      [0]
+      + (0.27143897782429549)*M1SA_Control_OA_DW->Mxcontroller_DSTATE[1]
+      + (-0.11649383326807114)*M1SA_Control_OA_DW->Mxcontroller_DSTATE[2];
+    xnew[1] += (-0.0043992827840101858)*M1SA_Control_OA_U->LC_FxyzMxyz_CG[3];
+    xnew[2] = (1.0)*M1SA_Control_OA_DW->Mxcontroller_DSTATE[2];
+    xnew[2] += (0.039999999999999994)*M1SA_Control_OA_U->LC_FxyzMxyz_CG[3];
+    (void) memcpy(&M1SA_Control_OA_DW->Mxcontroller_DSTATE[0], xnew,
                   sizeof(real_T)*3);
   }
 
@@ -229,17 +221,18 @@ void M1SA_Control_OA_step(void)
    */
   {
     real_T xnew[3];
-    xnew[0] = (0.29778010884776307)*M1SA_Control_OA_DW.Mycontroller_DSTATE[0]
-      + (0.71505921377142712)*M1SA_Control_OA_DW.Mycontroller_DSTATE[1]
-      + (-0.0021601236457374955)*M1SA_Control_OA_DW.Mycontroller_DSTATE[2];
-    xnew[0] += (-0.0002611760862334543)*M1SA_Control_OA_U.LC_FxyzMxyz_CG[4];
-    xnew[1] = (-0.00024258661738509193)*M1SA_Control_OA_DW.Mycontroller_DSTATE[0]
-      + (0.27143897782429549)*M1SA_Control_OA_DW.Mycontroller_DSTATE[1]
-      + (-0.11649383326807114)*M1SA_Control_OA_DW.Mycontroller_DSTATE[2];
-    xnew[1] += (-0.0043992827840101858)*M1SA_Control_OA_U.LC_FxyzMxyz_CG[4];
-    xnew[2] = (1.0)*M1SA_Control_OA_DW.Mycontroller_DSTATE[2];
-    xnew[2] += (0.039999999999999994)*M1SA_Control_OA_U.LC_FxyzMxyz_CG[4];
-    (void) memcpy(&M1SA_Control_OA_DW.Mycontroller_DSTATE[0], xnew,
+    xnew[0] = (0.29778010884776307)*M1SA_Control_OA_DW->Mycontroller_DSTATE[0]
+      + (0.71505921377142712)*M1SA_Control_OA_DW->Mycontroller_DSTATE[1]
+      + (-0.0021601236457374955)*M1SA_Control_OA_DW->Mycontroller_DSTATE[2];
+    xnew[0] += (-0.0002611760862334543)*M1SA_Control_OA_U->LC_FxyzMxyz_CG[4];
+    xnew[1] = (-0.00024258661738509193)*M1SA_Control_OA_DW->Mycontroller_DSTATE
+      [0]
+      + (0.27143897782429549)*M1SA_Control_OA_DW->Mycontroller_DSTATE[1]
+      + (-0.11649383326807114)*M1SA_Control_OA_DW->Mycontroller_DSTATE[2];
+    xnew[1] += (-0.0043992827840101858)*M1SA_Control_OA_U->LC_FxyzMxyz_CG[4];
+    xnew[2] = (1.0)*M1SA_Control_OA_DW->Mycontroller_DSTATE[2];
+    xnew[2] += (0.039999999999999994)*M1SA_Control_OA_U->LC_FxyzMxyz_CG[4];
+    (void) memcpy(&M1SA_Control_OA_DW->Mycontroller_DSTATE[0], xnew,
                   sizeof(real_T)*3);
   }
 
@@ -248,49 +241,52 @@ void M1SA_Control_OA_step(void)
    */
   {
     real_T xnew[3];
-    xnew[0] = (0.38195738947508884)*M1SA_Control_OA_DW.Mzcontroller_DSTATE[0]
-      + (0.72039580968966876)*M1SA_Control_OA_DW.Mzcontroller_DSTATE[1]
-      + (-0.0047245815737020904)*M1SA_Control_OA_DW.Mzcontroller_DSTATE[2];
-    xnew[0] += (-0.0003904936834638426)*M1SA_Control_OA_U.LC_FxyzMxyz_CG[5];
-    xnew[1] = (-0.0066509471364728252)*M1SA_Control_OA_DW.Mzcontroller_DSTATE[0]
-      + (0.24351874678335261)*M1SA_Control_OA_DW.Mzcontroller_DSTATE[1]
-      + (-0.12438032071830714)*M1SA_Control_OA_DW.Mzcontroller_DSTATE[2];
-    xnew[1] += (-0.0046882022587151594)*M1SA_Control_OA_U.LC_FxyzMxyz_CG[5];
-    xnew[2] = (1.0)*M1SA_Control_OA_DW.Mzcontroller_DSTATE[2];
-    xnew[2] += (0.039999999999999994)*M1SA_Control_OA_U.LC_FxyzMxyz_CG[5];
-    (void) memcpy(&M1SA_Control_OA_DW.Mzcontroller_DSTATE[0], xnew,
+    xnew[0] = (0.38195738947508884)*M1SA_Control_OA_DW->Mzcontroller_DSTATE[0]
+      + (0.72039580968966876)*M1SA_Control_OA_DW->Mzcontroller_DSTATE[1]
+      + (-0.0047245815737020904)*M1SA_Control_OA_DW->Mzcontroller_DSTATE[2];
+    xnew[0] += (-0.0003904936834638426)*M1SA_Control_OA_U->LC_FxyzMxyz_CG[5];
+    xnew[1] = (-0.0066509471364728252)*M1SA_Control_OA_DW->Mzcontroller_DSTATE[0]
+      + (0.24351874678335261)*M1SA_Control_OA_DW->Mzcontroller_DSTATE[1]
+      + (-0.12438032071830714)*M1SA_Control_OA_DW->Mzcontroller_DSTATE[2];
+    xnew[1] += (-0.0046882022587151594)*M1SA_Control_OA_U->LC_FxyzMxyz_CG[5];
+    xnew[2] = (1.0)*M1SA_Control_OA_DW->Mzcontroller_DSTATE[2];
+    xnew[2] += (0.039999999999999994)*M1SA_Control_OA_U->LC_FxyzMxyz_CG[5];
+    (void) memcpy(&M1SA_Control_OA_DW->Mzcontroller_DSTATE[0], xnew,
                   sizeof(real_T)*3);
   }
 
   /* Update for DiscreteTransferFcn: '<S1>/OA_SA_dyn' */
-  memcpy(&M1SA_Control_OA_DW.OA_SA_dyn_states[0], &OA_SA_dyn_tmp[0], 335U *
+  memcpy(&M1SA_Control_OA_DW->OA_SA_dyn_states[0], &OA_SA_dyn_tmp[0], 335U *
          sizeof(real_T));
 }
 
 /* Model initialize function */
-void M1SA_Control_OA_initialize(void)
+void M1SA_Control_OA_initialize(RT_MODEL_M1SA_Control_OA_T *const
+  M1SA_Control_OA_M, ExtU_M1SA_Control_OA_T *M1SA_Control_OA_U,
+  ExtY_M1SA_Control_OA_T *M1SA_Control_OA_Y)
 {
+  DW_M1SA_Control_OA_T *M1SA_Control_OA_DW = M1SA_Control_OA_M->dwork;
+
   /* Registration code */
 
-  /* initialize error status */
-  rtmSetErrorStatus(M1SA_Control_OA_M, (NULL));
-
   /* states (dwork) */
-  (void) memset((void *)&M1SA_Control_OA_DW, 0,
+  (void) memset((void *)M1SA_Control_OA_DW, 0,
                 sizeof(DW_M1SA_Control_OA_T));
 
   /* external inputs */
-  (void)memset(&M1SA_Control_OA_U, 0, sizeof(ExtU_M1SA_Control_OA_T));
+  (void)memset(M1SA_Control_OA_U, 0, sizeof(ExtU_M1SA_Control_OA_T));
 
   /* external outputs */
-  (void) memset(&M1SA_Control_OA_Y.Res_Act_F[0], 0,
+  (void) memset(&M1SA_Control_OA_Y->Res_Act_F[0], 0,
                 335U*sizeof(real_T));
 }
 
 /* Model terminate function */
-void M1SA_Control_OA_terminate(void)
+void M1SA_Control_OA_terminate(RT_MODEL_M1SA_Control_OA_T *const
+  M1SA_Control_OA_M)
 {
   /* (no terminate code required) */
+  UNUSED_PARAMETER(M1SA_Control_OA_M);
 }
 
 /*
