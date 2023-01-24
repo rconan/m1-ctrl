@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'M1SA_Control_CS'.
  *
- * Model version                  : 5.17
+ * Model version                  : 5.28
  * Simulink Coder version         : 9.4 (R2020b) 29-Jul-2020
- * C/C++ source code generated on : Fri Jan 20 16:37:55 2023
+ * C/C++ source code generated on : Tue Jan 24 16:48:50 2023
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Intel->x86-64 (Linux 64)
@@ -16,22 +16,15 @@
 #ifndef RTW_HEADER_M1SA_Control_CS_h_
 #define RTW_HEADER_M1SA_Control_CS_h_
 #include <string.h>
-#include <stddef.h>
 #ifndef M1SA_Control_CS_COMMON_INCLUDES_
 #define M1SA_Control_CS_COMMON_INCLUDES_
 #include "rtwtypes.h"
 #endif                                 /* M1SA_Control_CS_COMMON_INCLUDES_ */
 
 #include "M1SA_Control_CS_types.h"
+#include "rt_defines.h"
 
 /* Macros for accessing real-time model data structure */
-#ifndef rtmGetErrorStatus
-#define rtmGetErrorStatus(rtm)         ((rtm)->errorStatus)
-#endif
-
-#ifndef rtmSetErrorStatus
-#define rtmSetErrorStatus(rtm, val)    ((rtm)->errorStatus = (val))
-#endif
 
 /* Block states (default storage) for system '<Root>' */
 typedef struct {
@@ -65,28 +58,21 @@ typedef struct {
 
 /* Real-time Model Data Structure */
 struct tag_RTM_M1SA_Control_CS_T {
-  const char_T * volatile errorStatus;
+  DW_M1SA_Control_CS_T *dwork;
 };
-
-/* Block states (default storage) */
-extern DW_M1SA_Control_CS_T M1SA_Control_CS_DW;
-
-/* External inputs (root inport signals with default storage) */
-extern ExtU_M1SA_Control_CS_T M1SA_Control_CS_U;
-
-/* External outputs (root outports fed by signals with default storage) */
-extern ExtY_M1SA_Control_CS_T M1SA_Control_CS_Y;
 
 /* Constant parameters (default storage) */
 extern const ConstP_M1SA_Control_CS_T M1SA_Control_CS_ConstP;
 
 /* Model entry point functions */
-extern void M1SA_Control_CS_initialize(void);
-extern void M1SA_Control_CS_step(void);
-extern void M1SA_Control_CS_terminate(void);
-
-/* Real-time Model object */
-extern RT_MODEL_M1SA_Control_CS_T *const M1SA_Control_CS_M;
+extern void M1SA_Control_CS_initialize(RT_MODEL_M1SA_Control_CS_T *const
+  M1SA_Control_CS_M, ExtU_M1SA_Control_CS_T *M1SA_Control_CS_U,
+  ExtY_M1SA_Control_CS_T *M1SA_Control_CS_Y);
+extern void M1SA_Control_CS_step(RT_MODEL_M1SA_Control_CS_T *const
+  M1SA_Control_CS_M, ExtU_M1SA_Control_CS_T *M1SA_Control_CS_U,
+  ExtY_M1SA_Control_CS_T *M1SA_Control_CS_Y);
+extern void M1SA_Control_CS_terminate(RT_MODEL_M1SA_Control_CS_T *const
+  M1SA_Control_CS_M);
 
 /*-
  * The generated code includes comments that allow you to trace directly

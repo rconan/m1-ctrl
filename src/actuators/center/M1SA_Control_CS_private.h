@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'M1SA_Control_CS'.
  *
- * Model version                  : 5.17
+ * Model version                  : 5.28
  * Simulink Coder version         : 9.4 (R2020b) 29-Jul-2020
- * C/C++ source code generated on : Fri Jan 20 16:37:55 2023
+ * C/C++ source code generated on : Tue Jan 24 16:48:50 2023
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Intel->x86-64 (Linux 64)
