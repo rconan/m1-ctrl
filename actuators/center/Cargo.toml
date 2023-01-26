@@ -1,5 +1,5 @@
 [package]
-name = "center-actuators"
+name = "gmt_m1-ctrl_center-actuators"
 version = "0.1.0"
 edition = "2021"
 
