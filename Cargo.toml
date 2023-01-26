@@ -11,19 +11,35 @@ readme = "README.md"
 categories = ["science", "simulation"]
 keywords = ["telescope", "astronomy"]
 
-[dependencies]
-bincode = { version = "1.3.3", optional = true }
-dos_actors = { version = "4.1.0", package = "gmt_dos-actors", default-features = false }
-fem = { version = "1.1.1", package = "gmt-fem", default-features = false, optional = true }
-log = "0.4.17"
-nalgebra = { version = "0.31.1", optional = true }
-paste = "1.0.5"
-simulink-binder = "^0.1.0"
-thiserror = "1.0.36"
+[workspace]
+members = ["hardpoints", "actuators", "actuators/center", "actuators/outer"]
 
-[features]
-default = ["fem"]
-nalgebra = ["dep:nalgebra", "bincode"]
-
-[build-dependencies]
+[workspace.dependencies]
+bindgen = "0.63.0"
 cc = "1.0.68"
+matio-rs = "1.1.2"
+dos_actors = { version = "4.1.2", package = "gmt_dos-actors", path = "/media/rconan/projects/dos-actors", default-features = false }
+dos-clients_io = { version = "0.2.0", package = "gmt_dos-clients_io", path = "/media/rconan/projects/dos-actors/clients/io" }
+
+[dependencies]
+dos-clients_io.workspace = true
+dos_actors = { workspace = true, default-features = false }
+hardpoints-dynamics = { version = "0.1.0", path = "hardpoints" }
+actuators = { version = "0.1.0", path = "actuators" }
+nalgebra = "0.32.1"
+# bincode = { version = "1.3.3", optional = true }
+# dos_actors = { version = "4.1.0", package = "gmt_dos-actors", default-features = false }
+# fem = { version = "1.1.1", package = "gmt-fem", default-features = false, optional = true }
+# log = "0.4.17"
+# nalgebra = { version = "0.31.1", optional = true }
+# paste = "1.0.5"
+# simulink-binder = "^0.1.0"
+# thiserror = "1.0.36"
+
+# [features]
+# # default = ["fem"]
+# nalgebra = ["dep:nalgebra", "bincode"]
+
+# [build-dependencies]
+# bindgen = "0.63.0"
+# cc = "1.0.68"

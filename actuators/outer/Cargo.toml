@@ -1,0 +1,8 @@
+[package]
+name = "outer-actuators"
+version = "0.1.0"
+edition = "2021"
+
+[build-dependencies]
+cc.workspace = true
+bindgen.workspace = true

@@ -1,0 +1,13 @@
+[package]
+name = "actuators"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+center = { version = "0.1.0", path = "center", package = "center-actuators" }
+outer = { version = "0.1.0", path = "outer", package = "outer-actuators" }
+dos_actors = { workspace = true, default-features = false }
+dos-clients_io.workspace = true
+
+[dev-dependencies]
+matio-rs.workspace = true
