@@ -6,6 +6,9 @@
 % Jan, 2023: Segment-wise implementation
 % Apr, 2022: Split decoupling matrices
 
+
+update_test_dt = true;
+
 %%
 load('controls_5pt1g1K_z30_llTT_oad.mat','m1sys','fem');
 
@@ -14,6 +17,7 @@ load('controls_5pt1g1K_z30_llTT_oad.mat','m1sys','fem');
 % m1sys{seg}.HPstiff: Hardpoint stiffness
 % m1sys{seg}.LC2CG: HP: F&M convertion matrix
 % m1sys{seg}.ofl.SSdtC{ich}: M1 outer force loop controller
+% m1sys{seg}.HPdtf: M1 HP length closed-loop dynamics
 % m1sys{seg}.Kbal: Load balancing
 % m1sys{seg}.Kred: Matrix to remove lateral force entries for Single SA
 % m1sys{seg}.m1BM2F: matrix to map BM into SA forces
@@ -67,8 +71,8 @@ CS_ofl_SSdtC = m1sys{7}.ofl.SSdtC;
 ModelFName = 'M1DCS_2_rust';
 open(sprintf('%s.slx',ModelFName));
 
-% build_subsys = 'M1_SA';
-build_subsys = 'HP_dyn';
+build_subsys = 'M1_SA';
+% build_subsys = 'HP_dyn';
 
 hplc_label = sprintf('%s/M1_HP_loadcells', ModelFName);
 hp_RBMtoD_label = sprintf('%s/M1RBM_to_HP_relD', ModelFName);
@@ -88,6 +92,19 @@ switch build_subsys
         set_param(hp_stiff_label,'Commented','on');
         set_param(m1SA_C_OA_label,'Commented','off');
         set_param(m1SA_C_CS_label,'Commented','off');
+        % Test data
+        for i1 = 1:numel(m1sys{1}.ofl.SSdtC)
+            OActrl(i1,i1) = m1sys{1}.ofl.SSdtC{i1}; %#ok<*SAGROW>
+            CSctrl(i1,i1) = m1sys{7}.ofl.SSdtC{i1};
+        end
+        OAsys = m1sys{1}.SAdyn*m1sys{1}.Kbal*OActrl;
+        CSsys = m1sys{7}.SAdyn*m1sys{7}.Kbal*CSctrl;
+        [OAact_imp_y,OAact_imp_t] = impulse(OAsys);
+        [CSact_imp_y,CSact_imp_t] = impulse(CSsys);
+
+        if (update_test_dt && ~exist('m1_act_impulse_test','var'))
+            save m1_act_impulse_test OAact_imp_t OAact_imp_y CSact_imp_t CSact_imp_y
+        end
         
     case 'HP_dyn'
         % Solver sampling period
@@ -98,6 +115,12 @@ switch build_subsys
         set_param(hp_stiff_label,'Commented','off');
         set_param(m1SA_C_OA_label,'Commented','on');
         set_param(m1SA_C_CS_label,'Commented','on');
+        
+        % Test data
+        [hp_dyn_step_y,hp_dyn_step_t] = step(m1sys{1}.HPdtf);
+        if (update_test_dt && ~exist('hp_dyn_step_test','var'))
+            save hp_dyn_step_test hp_dyn_step_t hp_dyn_step_y
+        end
 end
 
 
