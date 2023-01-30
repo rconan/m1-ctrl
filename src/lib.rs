@@ -1,8 +1,8 @@
 mod hardpoints;
 
-use actuators::Actuators;
-use dos_actors::{io::Read, Actor, AddOuput, IntoInputs, Task, Update};
+pub use actuators::Actuators;
 use dos_clients_io::gmt_m1::segment;
+use gmt_dos_actors::{io::Read, Actor, AddOuput, IntoInputs, Task, Update};
 pub use hardpoints::{Hardpoints, LoadCell};
 
 type M = nalgebra::Matrix6<f64>;

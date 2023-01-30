@@ -1,11 +1,11 @@
 use std::sync::Arc;
 
 use center::CenterActuatorsController;
-use dos_actors::{
+use dos_clients_io::gmt_m1::segment;
+use gmt_dos_actors::{
     io::{Data, Read, Size, Write},
     Update,
 };
-use dos_clients_io::gmt_m1::segment;
 use outer::OuterActuatorsController;
 
 pub enum ActuatorsController {
