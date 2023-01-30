@@ -5,3 +5,6 @@ Cargo.lock
 m1-simulink-models/HP_dyn_dTF_ert_rtw
 m1-simulink-models/M1SA_Control_CS_ert_rtw
 m1-simulink-models/M1SA_Control_OA_ert_rtw
+*.code-workspace
+*.dot
+*.svg

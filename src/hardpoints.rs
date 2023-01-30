@@ -1,8 +1,8 @@
-use dos_actors::{
+use dos_clients_io::gmt_m1::segment;
+use gmt_dos_actors::{
     io::{Data, Read, Size, Write},
     Update,
 };
-use dos_clients_io::gmt_m1::segment;
 use hardpoints_dynamics::HardpointsDynamics;
 use std::sync::Arc;
 
@@ -33,13 +33,7 @@ impl<const ID: u8> Size<segment::RBM<ID>> for Hardpoints {
     }
 }
 
-impl<const ID: u8> Size<segment::HardpointsMotion<ID>> for Hardpoints {
-    fn len(&self) -> usize {
-        12
-    }
-}
-
-impl Size<segment::BarycentricForce> for Hardpoints {
+impl<const ID: u8> Size<segment::HardpointsForces<ID>> for Hardpoints {
     fn len(&self) -> usize {
         6
     }

@@ -1,8 +1,8 @@
-use dos_actors::{
-    io::{Data, Read, Write},
+use dos_clients_io::gmt_m1::segment;
+use gmt_dos_actors::{
+    io::{Data, Read, Size, Write},
     Update,
 };
-use dos_clients_io::gmt_m1::segment;
 use std::sync::Arc;
 
 type M = nalgebra::Matrix6<f64>;
@@ -30,6 +30,18 @@ impl LoadCell {
     }
 }
 
+impl<const ID: u8> Size<segment::HardpointsMotion<ID>> for LoadCell {
+    fn len(&self) -> usize {
+        12
+    }
+}
+
+impl Size<segment::BarycentricForce> for LoadCell {
+    fn len(&self) -> usize {
+        6
+    }
+}
+
 impl Update for LoadCell {
     fn update(&mut self) {
         self.hp_d_cell
@@ -45,7 +57,10 @@ impl Update for LoadCell {
 }
 
 impl<const ID: u8> Read<segment::HardpointsForces<ID>> for LoadCell {
-    fn read(&mut self, data: std::sync::Arc<dos_actors::io::Data<segment::HardpointsForces<ID>>>) {
+    fn read(
+        &mut self,
+        data: std::sync::Arc<gmt_dos_actors::io::Data<segment::HardpointsForces<ID>>>,
+    ) {
         self.hp_f_cmd = (**data).to_vec();
     }
 }
@@ -53,14 +68,8 @@ impl<const ID: u8> Read<segment::HardpointsForces<ID>> for LoadCell {
 impl<const ID: u8> Read<segment::HardpointsMotion<ID>> for LoadCell {
     fn read(&mut self, data: Arc<Data<segment::HardpointsMotion<ID>>>) {
         let (cell, face) = (**data).as_slice().split_at(6);
-        self.hp_d_cell
-            .iter_mut()
-            .zip(cell)
-            .for_each(|(a, b)| *a = *b);
-        self.hp_d_face
-            .iter_mut()
-            .zip(face)
-            .for_each(|(a, b)| *a = *b);
+        self.hp_d_cell.copy_from_slice(cell);
+        self.hp_d_face.copy_from_slice(face);
     }
 }
 
