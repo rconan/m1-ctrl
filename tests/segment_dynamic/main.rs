@@ -59,7 +59,7 @@ macro_rules! segment_model {
             "RBM",
         )
             .into();
-        let mut hardpoints: Actor<_> = Hardpoints::new(m1_hpk, rbm_2_hp).into();
+        let mut hardpoints: Actor<_> = Hardpoints::new(dbg!(m1_hpk), rbm_2_hp).into();
 
         let mut loadcell: Actor<_, 1, ACTUATOR_RATE> = LoadCell::new(m1_hpk, lc_2_cg).into();
 
