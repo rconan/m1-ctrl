@@ -21,7 +21,7 @@ pub struct Plant {
 }
 impl Plant {
     pub fn new(gain: na::DMatrix<f64>) -> Self {
-        let (n, m) = dbg!(gain.shape());
+        let (n, m) = gain.shape();
         Self {
             gain,
             u: na::DVector::from_element(m, 0f64),
@@ -83,7 +83,6 @@ macro_rules! segment_model {
         println!("{fem}");
 
         let static_gain = fem.reduced_static_gain().unwrap();
-        dbg!(static_gain.shape());
 
         let rbm_2_hp = {
             let rbm_2_hp: Vec<f64> = matfile.var(format!("S{}_M1RBM2HP", $sid))?;
@@ -98,7 +97,7 @@ macro_rules! segment_model {
             na::Matrix6::from_column_slice(lc_2_cg.as_slice())
         };
 
-        let rbm_fun = |i| (-1f64).powi(i as i32) * (i % 3) as f64;
+        let rbm_fun = |i| (-1f64).powi(i as i32) * (1 + (i % 3)) as f64;
         let mut hp_setpoint: Initiator<_> = (
             (0..6).fold(Signals::new(6, n_step), |signals, i| {
                 signals.channel(i, Signal::Constant(rbm_fun(i) * 1e-6))
@@ -106,7 +105,7 @@ macro_rules! segment_model {
             "RBM",
         )
             .into();
-        let mut hardpoints: Actor<_> = Hardpoints::new(dbg!(m1_hpk), rbm_2_hp).into();
+        let mut hardpoints: Actor<_> = Hardpoints::new(m1_hpk, rbm_2_hp).into();
 
         let mut loadcell: Actor<_, 1, ACTUATOR_RATE> = LoadCell::new(m1_hpk, lc_2_cg).into();
 
@@ -216,7 +215,6 @@ macro_rules! segment_model {
             .last()
             .unwrap()
             .iter()
-            .skip(12)
             .enumerate()
             .map(|(i, x)| x * 1e6 - rbm_fun(i))
             .map(|x| x * x)
@@ -224,7 +222,7 @@ macro_rules! segment_model {
             / 6f64)
             .sqrt();
 
-        assert!(rbm_err < 1e-3);
+        assert!(dbg!(rbm_err) < 1e-3);
     };
 }
 
