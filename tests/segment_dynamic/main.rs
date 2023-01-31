@@ -1,14 +1,8 @@
-use std::sync::Arc;
-
 use dos_clients_io::gmt_m1::segment::{
     ActuatorAppliedForces, ActuatorCommandForces, BarycentricForce, HardpointsForces,
     HardpointsMotion, RBM,
 };
-use gmt_dos_actors::{
-    io::{Data, Read, Size, Write},
-    prelude::*,
-    Update,
-};
+use gmt_dos_actors::{io::Size, prelude::*};
 use gmt_fem::{
     dos::{DiscreteModalSolver, ExponentialMatrix},
     fem_io::{M1ActuatorsSegment1, OSSHardpointD, OSSHarpointDeltaF, OSSM1Lcl},
@@ -16,49 +10,6 @@ use gmt_fem::{
 use gmt_m1_ctrl::{Actuators, Hardpoints, LoadCell};
 use matio_rs::MatFile;
 use nalgebra as na;
-
-pub struct Plant {
-    gain: na::DMatrix<f64>,
-    u: na::DVector<f64>,
-    y: na::DVector<f64>,
-}
-impl Plant {
-    pub fn new(gain: na::DMatrix<f64>) -> Self {
-        let (n, m) = dbg!(gain.shape());
-        Self {
-            gain,
-            u: na::DVector::from_element(m, 0f64),
-            y: na::DVector::from_element(n, 0f64),
-        }
-    }
-}
-impl Update for Plant {
-    fn update(&mut self) {
-        self.y = &self.gain * &self.u;
-    }
-}
-impl<const ID: u8> Read<HardpointsForces<ID>> for Plant {
-    fn read(&mut self, data: Arc<Data<HardpointsForces<ID>>>) {
-        let n = self.u.len();
-        self.u.as_mut_slice()[n - 6..].copy_from_slice(&**data);
-    }
-}
-impl<const ID: u8> Read<ActuatorAppliedForces<ID>> for Plant {
-    fn read(&mut self, data: Arc<Data<ActuatorAppliedForces<ID>>>) {
-        let n = self.u.len();
-        self.u.as_mut_slice()[..n - 6].copy_from_slice(&**data);
-    }
-}
-impl<const ID: u8> Write<HardpointsMotion<ID>> for Plant {
-    fn write(&mut self) -> Option<Arc<Data<HardpointsMotion<ID>>>> {
-        Some(Arc::new(Data::new(self.y.as_slice()[..12].to_vec())))
-    }
-}
-impl Write<OSSM1Lcl> for Plant {
-    fn write(&mut self) -> Option<Arc<Data<OSSM1Lcl>>> {
-        Some(Arc::new(Data::new(self.y.as_slice()[12..].to_vec())))
-    }
-}
 
 const ACTUATOR_RATE: usize = 100;
 
