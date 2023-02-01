@@ -6,9 +6,9 @@ use gmt_dos_actors::{io::Size, prelude::*};
 use gmt_fem::{
     dos::{DiscreteModalSolver, ExponentialMatrix},
     fem_io::{M1ActuatorsSegment1, OSSHardpointD, OSSHarpointDeltaF, OSSM1Lcl},
+    FEM,
 };
-use gmt_m1_ctrl::{Actuators, Hardpoints, LoadCell};
-use matio_rs::MatFile;
+use gmt_m1_ctrl::{Actuators, Hardpoints, LoadCells};
 use nalgebra as na;
 
 const ACTUATOR_RATE: usize = 100;
@@ -19,10 +19,57 @@ macro_rules! segment_model {
         let sim_duration = 10_usize; // second
         let n_step = sim_sampling_frequency * sim_duration;
 
-        let matfile = MatFile::load("/home/rconan/projects/m1-ctrl/calib_dt/m1_ctrl_dt.mat")?;
-        let m1_hpk: f64 = matfile.var("m1_HPk")?;
+        let whole_fem = FEM::from_env()?;
+        // Hardpoints stiffness
+        println!("HARDPOINTS STIFFNESS");
+        let mut fem = whole_fem.clone();
+        fem.keep_inputs(&[15]);
+        fem.keep_outputs(&[22]);
+        let gain = fem.reduced_static_gain().unwrap();
+        let mut stiffness = 0f64;
+        for i in 0..7 {
+            let rows = gain.rows(i * 12, 12);
+            let segment = rows.columns(i * 6, 6);
+            let cell = segment.rows(0, 6);
+            let face = segment.rows(6, 6);
+            stiffness += (face - cell).diagonal().map(f64::recip).mean();
+        }
+        stiffness /= 7f64;
 
-        let fem_dss = DiscreteModalSolver::<ExponentialMatrix>::from_env()?
+        // RBM2HP
+        println!("RBM 2 HP");
+        let mut fem = whole_fem.clone();
+        fem.keep_inputs(&[15]);
+        fem.keep_outputs(&[24]);
+        let gain = fem.reduced_static_gain().unwrap();
+        let mut rbm_2_hp = vec![];
+        for i in 0..7 {
+            let rows = gain.rows(i * 6, 6);
+            let segment = rows
+                .columns(i * 6, 6)
+                .try_inverse()
+                .unwrap()
+                .map(|x| x / stiffness);
+            rbm_2_hp.push(na::Matrix6::from_column_slice(segment.as_slice()))
+        }
+
+        // LC2CG (include negative feedback)
+        println!("LC 2 CG");
+        let mut fem = whole_fem.clone();
+        fem.keep_inputs(&[16]);
+        fem.keep_outputs(&[22]);
+        let gain = fem.reduced_static_gain().unwrap();
+        let mut lc_2_cg = vec![];
+        for i in 0..7 {
+            let rows = gain.rows(i * 12, 12);
+            let segment = rows.columns(i * 6, 6);
+            let cell = segment.rows(0, 6);
+            let face = segment.rows(6, 6);
+            let mat = (cell - face).try_inverse().unwrap().map(|x| x / stiffness);
+            lc_2_cg.push(na::Matrix6::from_column_slice(mat.as_slice()));
+        }
+
+        let fem_dss = DiscreteModalSolver::<ExponentialMatrix>::from_fem(whole_fem)
             .sampling(sim_sampling_frequency as f64)
             .proportional_damping(2. / 100.)
             .ins::<OSSHarpointDeltaF>()
@@ -31,19 +78,6 @@ macro_rules! segment_model {
             .outs::<OSSM1Lcl>()
             .use_static_gain_compensation()
             .build()?;
-
-        let rbm_2_hp = {
-            let rbm_2_hp: Vec<f64> = matfile.var(format!("S{}_M1RBM2HP", $sid))?;
-            na::Matrix6::from_column_slice(rbm_2_hp.as_slice())
-        };
-        let lc_2_cg = {
-            let lc_2_cg: na::DMatrix<f64> = if $sid == 7 {
-                matfile.var("CS_LC2CG")
-            } else {
-                matfile.var("OA_LC2CG")
-            }?;
-            na::Matrix6::from_column_slice(lc_2_cg.as_slice())
-        };
 
         let rbm_fun = |i| (-1f64).powi(i as i32) * (1 + (i % 3)) as f64;
         let mut hp_setpoint: Initiator<_> = (
@@ -59,9 +93,11 @@ macro_rules! segment_model {
             "RBM",
         )
             .into();
-        let mut hardpoints: Actor<_> = Hardpoints::new(dbg!(m1_hpk), rbm_2_hp).into();
+        let mut hardpoints: Actor<_> =
+            Hardpoints::new(dbg!(stiffness), rbm_2_hp[$sid as usize - 1]).into();
 
-        let mut loadcell: Actor<_, 1, ACTUATOR_RATE> = LoadCell::new(m1_hpk, lc_2_cg).into();
+        let mut loadcell: Actor<_, 1, ACTUATOR_RATE> =
+            LoadCells::new(stiffness, lc_2_cg[$sid as usize - 1]).into();
 
         let mut actuators: Actor<_, ACTUATOR_RATE, 1> = Actuators::<$sid>::new().into();
         let mut actuators_setpoint: Initiator<_, ACTUATOR_RATE> = (
@@ -187,7 +223,7 @@ async fn segment() -> anyhow::Result<()> {
         const S1: u8 = 1;
         segment_model!(S1);
     }
-    /* {
+    {
         const S2: u8 = 2;
         segment_model!(S2);
     }
@@ -210,7 +246,7 @@ async fn segment() -> anyhow::Result<()> {
     {
         const S7: u8 = 7;
         segment_model!(S7);
-    } */
+    }
 
     Ok(())
 }

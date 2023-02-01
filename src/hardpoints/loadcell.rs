@@ -9,7 +9,7 @@ type M = nalgebra::Matrix6<f64>;
 type V = nalgebra::Vector6<f64>;
 
 #[derive(Debug, Clone)]
-pub struct LoadCell {
+pub struct LoadCells {
     pub(super) hp_f_cmd: Vec<f64>,
     pub(super) hp_d_cell: Vec<f64>,
     pub(super) hp_d_face: Vec<f64>,
@@ -17,7 +17,7 @@ pub struct LoadCell {
     m1_hpk: f64,
     lc_2_cg: M,
 }
-impl LoadCell {
+impl LoadCells {
     pub fn new(m1_hpk: f64, lc_2_cg: M) -> Self {
         Self {
             m1_hpk,
@@ -30,19 +30,19 @@ impl LoadCell {
     }
 }
 
-impl<const ID: u8> Size<segment::HardpointsMotion<ID>> for LoadCell {
+impl<const ID: u8> Size<segment::HardpointsMotion<ID>> for LoadCells {
     fn len(&self) -> usize {
         12
     }
 }
 
-impl Size<segment::BarycentricForce> for LoadCell {
+impl<const ID: u8> Size<segment::BarycentricForce<ID>> for LoadCells {
     fn len(&self) -> usize {
         6
     }
 }
 
-impl Update for LoadCell {
+impl Update for LoadCells {
     fn update(&mut self) {
         self.hp_d_cell
             .iter()
@@ -56,7 +56,7 @@ impl Update for LoadCell {
     }
 }
 
-impl<const ID: u8> Read<segment::HardpointsForces<ID>> for LoadCell {
+impl<const ID: u8> Read<segment::HardpointsForces<ID>> for LoadCells {
     fn read(
         &mut self,
         data: std::sync::Arc<gmt_dos_actors::io::Data<segment::HardpointsForces<ID>>>,
@@ -65,7 +65,7 @@ impl<const ID: u8> Read<segment::HardpointsForces<ID>> for LoadCell {
     }
 }
 
-impl<const ID: u8> Read<segment::HardpointsMotion<ID>> for LoadCell {
+impl<const ID: u8> Read<segment::HardpointsMotion<ID>> for LoadCells {
     fn read(&mut self, data: Arc<Data<segment::HardpointsMotion<ID>>>) {
         let (cell, face) = (**data).as_slice().split_at(6);
         self.hp_d_cell.copy_from_slice(cell);
@@ -73,8 +73,8 @@ impl<const ID: u8> Read<segment::HardpointsMotion<ID>> for LoadCell {
     }
 }
 
-impl Write<segment::BarycentricForce> for LoadCell {
-    fn write(&mut self) -> Option<Arc<Data<segment::BarycentricForce>>> {
+impl<const ID: u8> Write<segment::BarycentricForce<ID>> for LoadCells {
+    fn write(&mut self) -> Option<Arc<Data<segment::BarycentricForce<ID>>>> {
         let cg = self.lc_2_cg * V::from_column_slice(self.hp_f_meas.as_slice());
         Some(Arc::new(Data::new(cg.as_slice().to_vec())))
     }

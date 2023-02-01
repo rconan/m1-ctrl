@@ -8,6 +8,7 @@ use gmt_dos_actors::{
 };
 use outer::OuterActuatorsController;
 
+#[derive(Debug, Clone, Copy)]
 pub enum ActuatorsController {
     Center(CenterActuatorsController),
     Outer(OuterActuatorsController),
@@ -52,7 +53,7 @@ impl<const ID: u8> Actuators<ID> {
     }
 }
 
-impl<const ID: u8> Size<segment::BarycentricForce> for Actuators<ID> {
+impl<const ID: u8> Size<segment::BarycentricForce<ID>> for Actuators<ID> {
     fn len(&self) -> usize {
         6
     }
@@ -80,8 +81,8 @@ impl<const ID: u8> Update for Actuators<ID> {
     }
 }
 
-impl<const ID: u8> Read<segment::BarycentricForce> for Actuators<ID> {
-    fn read(&mut self, data: Arc<Data<segment::BarycentricForce>>) {
+impl<const ID: u8> Read<segment::BarycentricForce<ID>> for Actuators<ID> {
+    fn read(&mut self, data: Arc<Data<segment::BarycentricForce<ID>>>) {
         match &mut self.controller {
             ActuatorsController::Outer(OuterActuatorsController { inputs, .. }) => {
                 inputs.LC_FxyzMxyz_CG = (**data)

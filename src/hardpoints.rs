@@ -1,4 +1,4 @@
-use dos_clients_io::gmt_m1::segment;
+use dos_clients_io::gmt_m1::segment::{HardpointsForces, RBM};
 use gmt_dos_actors::{
     io::{Data, Read, Size, Write},
     Update,
@@ -7,7 +7,7 @@ use hardpoints_dynamics::HardpointsDynamics;
 use std::sync::Arc;
 
 mod loadcell;
-pub use loadcell::LoadCell;
+pub use loadcell::LoadCells;
 
 type M = nalgebra::Matrix6<f64>;
 type V = nalgebra::Vector6<f64>;
@@ -27,20 +27,20 @@ impl Hardpoints {
     }
 }
 
-impl<const ID: u8> Size<segment::RBM<ID>> for Hardpoints {
+impl<const ID: u8> Size<RBM<ID>> for Hardpoints {
     fn len(&self) -> usize {
         6
     }
 }
 
-impl<const ID: u8> Size<segment::HardpointsForces<ID>> for Hardpoints {
+impl<const ID: u8> Size<HardpointsForces<ID>> for Hardpoints {
     fn len(&self) -> usize {
         6
     }
 }
 
-impl<const ID: u8> Read<segment::RBM<ID>> for Hardpoints {
-    fn read(&mut self, data: Arc<Data<segment::RBM<ID>>>) {
+impl<const ID: u8> Read<RBM<ID>> for Hardpoints {
+    fn read(&mut self, data: Arc<Data<RBM<ID>>>) {
         let hp = self.rbm_2_hp * V::from_column_slice(&data);
         self.dynamics.inputs.In1 = hp
             .as_slice()
@@ -55,8 +55,8 @@ impl Update for Hardpoints {
     }
 }
 
-impl<const ID: u8> Write<segment::HardpointsForces<ID>> for Hardpoints {
-    fn write(&mut self) -> Option<Arc<Data<segment::HardpointsForces<ID>>>> {
+impl<const ID: u8> Write<HardpointsForces<ID>> for Hardpoints {
+    fn write(&mut self) -> Option<Arc<Data<HardpointsForces<ID>>>> {
         let data: Vec<f64> = self
             .dynamics
             .outputs

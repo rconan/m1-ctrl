@@ -27,9 +27,9 @@ gmt_dos-actors = { workspace = true, default-features = false }
 hardpoints-dynamics = { version = "0.1.0", path = "hardpoints", package = "gmt_m1-ctrl_hardpoints-dynamics" }
 actuators = { version = "0.1.0", path = "actuators", package = "gmt_m1-ctrl_actuators" }
 nalgebra = "0.31.0"
+gmt-fem = { version = "1.1.1", path = "../fem" }
 
 [dev-dependencies]
 anyhow = "1.0.68"
-gmt-fem = { version = "1.1.1", path = "../fem" }
 matio-rs = { workspace = true, features = ["nalgebra"] }
 tokio = { version = "1.24.2", features = ["test-util", "rt-multi-thread"] }
