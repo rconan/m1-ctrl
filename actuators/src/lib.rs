@@ -1,3 +1,5 @@
+//! # M1 segment actuators controller
+
 use std::sync::Arc;
 
 use center::CenterActuatorsController;
@@ -8,18 +10,24 @@ use gmt_dos_actors::{
 };
 use outer::OuterActuatorsController;
 
+/// Actuators center and outer segment control systems
 #[derive(Debug, Clone, Copy)]
 pub enum ActuatorsController {
+    /// Center segment control system
     Center(CenterActuatorsController),
+    /// Outer segment control system
     Outer(OuterActuatorsController),
 }
 impl ActuatorsController {
+    /// Returns the center segment controller
     pub fn center() -> Self {
         Self::Center(CenterActuatorsController::new())
     }
+    /// Returns the outer segment controller
     pub fn outer() -> Self {
         Self::Outer(OuterActuatorsController::new())
     }
+    /// Steps the controller
     pub fn step(&mut self) {
         match self {
             ActuatorsController::Center(actuators) => actuators.step(),
@@ -28,10 +36,14 @@ impl ActuatorsController {
     }
 }
 
+/// Actuators segment control systems
+///
+/// The segment is identified by its `ID` which has to be in the range [1,7]
 pub struct Actuators<const ID: u8> {
     pub controller: ActuatorsController,
 }
 impl<const ID: u8> Actuators<ID> {
+    /// Creates a new controller
     pub fn new() -> Self {
         assert!(
             ID >= 1 && ID <= 7,
@@ -48,6 +60,7 @@ impl<const ID: u8> Actuators<ID> {
             }
         }
     }
+    /// Steps the controller
     pub fn step(&mut self) {
         self.controller.step()
     }

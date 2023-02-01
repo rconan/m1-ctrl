@@ -1,4 +1,4 @@
-use crate::{Hardpoints, LoadCells};
+use crate::{Hardpoints, LoadCells, SegmentBuilder};
 use actuators::Actuators;
 use dos_clients_io::gmt_m1::segment::{
     ActuatorAppliedForces, ActuatorCommandForces, BarycentricForce, HardpointsForces,
@@ -11,16 +11,6 @@ use gmt_fem::{
 };
 use nalgebra as na;
 
-type M = na::Matrix6<f64>;
-
-#[derive(Debug, Default, Clone)]
-pub struct SegmentBuilder {
-    rbm_inputs: Option<Signals>,
-    actuators_inputs: Option<Signals>,
-    stiffness: Option<f64>,
-    rbm_2_hp: Option<Vec<M>>,
-    lc_2_cg: Option<Vec<M>>,
-}
 impl SegmentBuilder {
     pub fn new() -> Self {
         Default::default()
