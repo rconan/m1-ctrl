@@ -18,19 +18,21 @@ async fn segment() -> anyhow::Result<()> {
 
     let whole_fem = FEM::from_env()?;
 
-    let rbm_fun = |i| (-1f64).powi(i as i32) * (1 + (i % 3)) as f64;
-    let hp_setpoint = (0..6).fold(Signals::new(6, n_step), |signals, i| {
-        signals.channel(
-            i,
-            Signal::Sigmoid {
-                amplitude: rbm_fun(i) * 1e-6,
-                sampling_frequency_hz: sim_sampling_frequency as f64,
-            },
-        )
-    });
-    let segment = SegmentBuilder::new()
-        .rigid_body_motions_inputs(hp_setpoint)
-        .fem_calibration(&whole_fem);
+    let rbm_fun =
+        |i: usize, sid: u8| (-1f64).powi(i as i32) * (1 + (i % 3)) as f64 + sid as f64 / 10_f64;
+    let rbm_signal = |sid: u8| -> Signals {
+        (0..6).fold(Signals::new(6, n_step), |signals, i| {
+            signals.channel(
+                i,
+                Signal::Sigmoid {
+                    amplitude: rbm_fun(i, sid) * 1e-6,
+                    sampling_frequency_hz: sim_sampling_frequency as f64,
+                },
+            )
+        })
+    };
+
+    let segment = SegmentBuilder::new().fem_calibration(&whole_fem);
 
     let fem_dss = DiscreteModalSolver::<ExponentialMatrix>::from_fem(whole_fem)
         .sampling(sim_sampling_frequency as f64)
@@ -54,15 +56,34 @@ async fn segment() -> anyhow::Result<()> {
 
     let m1 = (segment
         .clone()
+        .rigid_body_motions_inputs(rbm_signal(1))
         .build::<1, ACTUATOR_RATE>(&mut plant)
         .name("m1-segment_model")
         .flowchart()
-        + segment.clone().build::<2, ACTUATOR_RATE>(&mut plant)
-        + segment.clone().build::<3, ACTUATOR_RATE>(&mut plant)
-        + segment.clone().build::<4, ACTUATOR_RATE>(&mut plant)
-        + segment.clone().build::<5, ACTUATOR_RATE>(&mut plant)
-        + segment.clone().build::<6, ACTUATOR_RATE>(&mut plant)
-        + segment.clone().build::<7, ACTUATOR_RATE>(&mut plant))
+        + segment
+            .clone()
+            .rigid_body_motions_inputs(rbm_signal(2))
+            .build::<2, ACTUATOR_RATE>(&mut plant)
+        + segment
+            .clone()
+            .rigid_body_motions_inputs(rbm_signal(3))
+            .build::<3, ACTUATOR_RATE>(&mut plant)
+        + segment
+            .clone()
+            .rigid_body_motions_inputs(rbm_signal(4))
+            .build::<4, ACTUATOR_RATE>(&mut plant)
+        + segment
+            .clone()
+            .rigid_body_motions_inputs(rbm_signal(5))
+            .build::<5, ACTUATOR_RATE>(&mut plant)
+        + segment
+            .clone()
+            .rigid_body_motions_inputs(rbm_signal(6))
+            .build::<6, ACTUATOR_RATE>(&mut plant)
+        + segment
+            .clone()
+            .rigid_body_motions_inputs(rbm_signal(7))
+            .build::<7, ACTUATOR_RATE>(&mut plant))
     .name("m1-model")
     .flowchart();
 
@@ -82,25 +103,32 @@ async fn segment() -> anyhow::Result<()> {
         .run()
         .await?;
 
-    println!("Plant HardpointsMotion & M1 S1 RBM");
+    /*     println!("Plant HardpointsMotion & M1 S1 RBM");
     (*plant_logging.lock().await)
         .chunks()
         .enumerate()
         .skip(n_step - 20)
         .map(|(i, x)| (i, x.iter().map(|x| x * 1e6).collect::<Vec<f64>>()))
-        .for_each(|(i, x)| println!("{:4}: {:+.0?}", i, x));
+        .for_each(|(i, x)| println!("{:6}: {:+.1?}", i, x)); */
 
-    let rbm_err = ((*plant_logging.lock().await)
+    let rbm_err = (*plant_logging.lock().await)
         .chunks()
         .last()
         .unwrap()
-        .iter()
+        .chunks(6)
+        .map(|x| x.iter().map(|x| x * 1e6).collect::<Vec<_>>())
         .enumerate()
-        .map(|(i, x)| x * 1e6 - rbm_fun(i % 6))
-        .map(|x| x * x)
+        .inspect(|(i, x)| println!("{:2}: {:+.3?}", i, x))
+        .map(|(i, x)| {
+            x.iter()
+                .enumerate()
+                .map(|(j, x)| x - rbm_fun(j, i as u8 + 1))
+                .map(|x| x * x)
+                .sum::<f64>()
+                / 6f64
+        })
+        .map(|x| x.sqrt())
         .sum::<f64>()
-        / 6f64)
-        .sqrt()
         / 7f64;
 
     assert!(dbg!(rbm_err) < 5e-2);
