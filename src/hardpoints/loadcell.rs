@@ -8,6 +8,7 @@ use std::sync::Arc;
 type M = nalgebra::Matrix6<f64>;
 type V = nalgebra::Vector6<f64>;
 
+/// [gmt_dos_actors](https://docs.rs/gmt_dos-actors) client interface for hardpoints loadcells
 #[derive(Debug, Clone)]
 pub struct LoadCells {
     pub(super) hp_f_cmd: Vec<f64>,
@@ -18,6 +19,10 @@ pub struct LoadCells {
     lc_2_cg: M,
 }
 impl LoadCells {
+    /// Creates a new loadcells client
+    ///
+    /// The hardpoints stiffness and the matrix transformation
+    /// from local to center of gravity coordinates are provided.
     pub fn new(m1_hpk: f64, lc_2_cg: M) -> Self {
         Self {
             m1_hpk,

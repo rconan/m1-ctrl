@@ -12,12 +12,17 @@ pub use loadcell::LoadCells;
 type M = nalgebra::Matrix6<f64>;
 type V = nalgebra::Vector6<f64>;
 
+/// [gmt_dos_actors](https://docs.rs/gmt_dos-actors) client interface for [HardpointsDynamics]
 pub struct Hardpoints {
     dynamics: HardpointsDynamics,
     rbm_2_hp: M,
     m1_hpk: f64,
 }
 impl Hardpoints {
+    /// Creates a new hardpoints client
+    /// 
+    /// The hardpoints stiffness and the matrix transformation
+    /// from rigid body motion to hardpoint motion are provided.
     pub fn new(stiffness: f64, rbm_2_hp: M) -> Self {
         Self {
             dynamics: HardpointsDynamics::new(),
