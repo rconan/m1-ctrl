@@ -1,3 +1,10 @@
+//! # M1 hardpoints controller
+//!
+//! The control system implements the transfer function that models
+//! the hardpoints dynamic behavior.
+//!
+//! This is imported from a Simulink model converted into C code.
+
 #![allow(non_upper_case_globals)]
 #![allow(non_camel_case_types)]
 #![allow(non_snake_case)]
@@ -5,9 +12,12 @@
 
 include!(concat!(env!("OUT_DIR"), "/bindings.rs"));
 
+/// Simulink controller wrapper
 #[derive(Debug, Clone, Copy, Default)]
 pub struct HardpointsDynamics {
+    /// Inputs Simulink structure
     pub inputs: ExtU_HP_dyn_dTF_T,
+    /// Outputs Simulink structure
     pub outputs: ExtY_HP_dyn_dTF_T,
     states: DW_HP_dyn_dTF_T,
 }
@@ -29,9 +39,11 @@ impl Default for DW_HP_dyn_dTF_T {
     }
 }
 impl HardpointsDynamics {
+    /// Creates a new controller
     pub fn new() -> Self {
         Default::default()
     }
+    /// Steps the controller
     pub fn step(&mut self) {
         let mut data: RT_MODEL_HP_dyn_dTF_T = tag_RTM_HP_dyn_dTF_T {
             dwork: &mut self.states as *mut _,

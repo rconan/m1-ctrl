@@ -13,6 +13,7 @@
 
 include!(concat!(env!("OUT_DIR"), "/bindings.rs"));
 
+/// Simulink controller wrapper
 #[derive(Debug, Clone, Copy, Default)]
 pub struct OuterActuatorsController {
     /// Inputs Simulink structure

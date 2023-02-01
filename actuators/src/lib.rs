@@ -38,7 +38,7 @@ impl ActuatorsController {
 
 /// Actuators segment control systems
 ///
-/// The segment is identified by its `ID` which has to be in the range [1,7]
+/// The segment is identified by its `ID` which has to be in the range `[1,7]`
 pub struct Actuators<const ID: u8> {
     pub controller: ActuatorsController,
 }
