@@ -10,53 +10,7 @@
 #![allow(non_snake_case)]
 #![allow(improper_ctypes)]
 
-include!(concat!(env!("OUT_DIR"), "/bindings.rs"));
-
-/// Simulink controller wrapper
-#[derive(Debug, Clone, Copy, Default)]
-pub struct HardpointsDynamics {
-    /// Inputs Simulink structure
-    pub inputs: ExtU_HP_dyn_dTF_T,
-    /// Outputs Simulink structure
-    pub outputs: ExtY_HP_dyn_dTF_T,
-    states: DW_HP_dyn_dTF_T,
-}
-impl Default for ExtU_HP_dyn_dTF_T {
-    fn default() -> Self {
-        ExtU_HP_dyn_dTF_T { In1: [0f64; 6] }
-    }
-}
-impl Default for ExtY_HP_dyn_dTF_T {
-    fn default() -> Self {
-        ExtY_HP_dyn_dTF_T { Out1: [0f64; 6] }
-    }
-}
-impl Default for DW_HP_dyn_dTF_T {
-    fn default() -> Self {
-        DW_HP_dyn_dTF_T {
-            HP_dyn_dTF_states: [0f64; 24],
-        }
-    }
-}
-impl HardpointsDynamics {
-    /// Creates a new controller
-    pub fn new() -> Self {
-        Default::default()
-    }
-    /// Steps the controller
-    pub fn step(&mut self) {
-        let mut data: RT_MODEL_HP_dyn_dTF_T = tag_RTM_HP_dyn_dTF_T {
-            dwork: &mut self.states as *mut _,
-        };
-        unsafe {
-            HP_dyn_dTF_step(
-                &mut data as *mut _,
-                &mut self.inputs as *mut _,
-                &mut self.outputs as &mut _,
-            )
-        }
-    }
-}
+simulink_rs::import! {HardpointsDynamics}
 
 #[cfg(test)]
 mod tests {
