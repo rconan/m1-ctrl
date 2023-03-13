@@ -11,7 +11,9 @@
 #![allow(non_snake_case)]
 #![allow(improper_ctypes)]
 
-simulink_rs::import! { OuterActuatorsController }
+include!(concat!(env!("OUT_DIR"), "/bindings.rs"));
+
+include!(concat!(env!("OUT_DIR"), "/controller.rs"));
 
 #[cfg(test)]
 mod tests {

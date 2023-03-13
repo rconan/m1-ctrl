@@ -11,4 +11,6 @@
 #![allow(non_snake_case)]
 #![allow(improper_ctypes)]
 
-simulink_rs::import! { CenterActuatorsController }
+include!(concat!(env!("OUT_DIR"), "/bindings.rs"));
+
+include!(concat!(env!("OUT_DIR"), "/controller.rs"));
